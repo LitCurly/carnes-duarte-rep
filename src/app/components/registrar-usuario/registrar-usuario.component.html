@@ -1,1 +1,60 @@
-<p>registrar-usuario works!</p>
+<!-- <p>registrar-usuario works!</p> -->
+
+<div class="wrapper">
+    <div class="body">
+        <img class="logo" src="../../../assets/img/logo-duarte-circ.png" alt="logo-duarte-circ">
+        <h1>Registrar Cuenta</h1>
+        <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+            <p>Ingrese sus datos a continuación:</p>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+                <label>Nombre Completo</label>
+                <div *ngIf="registrarUsuario.get('nombre')?.invalid && (registrarUsuario.get('nombre')?.dirty || registrarUsuario.get('nombre')?.touched)">
+                    <div *ngIf="registrarUsuario.get('nombre')?.errors?.['required']"><p>El nombre es requerido</p></div>
+                  </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="tel" class="form-control" formControlName="telefono" placeholder="Telefono" pattern="[0-9]+" title="Ingresa solo números">
+                <label>Teléfono</label>
+                <div *ngIf="registrarUsuario.get('telefono')?.invalid && (registrarUsuario.get('telefono')?.dirty || registrarUsuario.get('telefono')?.touched)">
+                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['required']"><p>El numero de teléfono es requerido</p></div>
+                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['pattern']"><p>Ingrese solo números en la sección de teléfono</p></div>
+                </div>
+              </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" formControlName="direccion" placeholder="Direccion">
+                <label>Dirección</label>
+                <div *ngIf="registrarUsuario.get('direccion')?.invalid && (registrarUsuario.get('direccion')?.dirty || registrarUsuario.get('direccion')?.touched)">
+                    <div *ngIf="registrarUsuario.get('direccion')?.errors?.['required']"><p>La dirección es requerida</p></div>
+                  </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" formControlName="email" placeholder="name@example.com">
+                <label>Email</label>
+                <div *ngIf="registrarUsuario.get('email')?.invalid && (registrarUsuario.get('email')?.dirty || registrarUsuario.get('email')?.touched)">
+                    <div *ngIf="registrarUsuario.get('email')?.errors?.['required']"><p>El email es requerido</p></div>
+                    <div *ngIf="registrarUsuario.get('email')?.errors?.['email']"><p>Ingrese un email válido</p></div>
+                  </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                <label>Contraseña</label>
+                <div *ngIf="registrarUsuario.get('password')?.invalid && (registrarUsuario.get('password')?.dirty || registrarUsuario.get('password')?.touched)">
+                    <div *ngIf="registrarUsuario.get('password')?.errors?.['required']"><p>La contraseña es requerida</p></div>
+                  </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" formControlName="repetirPassword" placeholder="Repetir Password">
+                <label>Repetir Contraseña</label>
+                <div *ngIf="registrarUsuario.get('repetirPassword')?.invalid && (registrarUsuario.get('repetirPassword')?.dirty || registrarUsuario.get('repetirPassword')?.touched)">
+                    <div *ngIf="registrarUsuario.get('repetirPassword')?.errors?.['required']"><p>Debe repetir la contraseña</p></div>
+                    <div *ngIf="registrarUsuario.hasError('passwordMismatch')"><p>Las contraseñas no coinciden</p></div>
+                  </div>
+            </div>
+            <div class="d-grid gap-2 mb-2">
+                <button class="btn btn-primary btn-lg" type="submit">Registrar</button>
+            </div>
+            <p><a routerLink="/login">volver</a></p>
+        </form>
+    </div>
+</div>
