@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -10,7 +11,8 @@ import { debounceTime } from 'rxjs/operators';
 export class RegistrarUsuarioComponent implements OnInit {
   registrarUsuario: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder,
+      private afAuth: AngularFireAuth) {
     this.registrarUsuario = this.fb.group({
       nombre: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]+')]],
@@ -40,7 +42,22 @@ export class RegistrarUsuarioComponent implements OnInit {
     const email = this.registrarUsuario.value.email;
     const password = this.registrarUsuario.value.password;
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
-    console.log(nombre, telefono, direccion, email, password, repetirPassword);
+    
+    this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
+      console.log(user);
+    }).catch((error) => {
+      console.log(error);
+      alert(this.firebaseError(error.code));
+    })
+  }
+  firebaseError (code: string) {
+    switch(code) {
+      case 'auth/email-already-in-use':
+        return 'El usuario ya existe';
+      default:
+        return 'Error desconocido';
+    }
+
   }
 
   // Validador personalizado para verificar si las contraseñas coinciden
