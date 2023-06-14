@@ -4,8 +4,8 @@
     <div class="body">
         <img class="logo" src="../../../assets/img/logo-duarte-circ.png" alt="logo-duarte-circ">
         <h1>Registrar Cuenta</h1>
+        <p>Ingrese sus datos a continuación:</p>
         <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
-            <p>Ingrese sus datos a continuación:</p>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
                 <label>Nombre Completo</label>
@@ -14,11 +14,12 @@
                   </div>
             </div>
             <div class="form-floating mb-3">
-                <input type="tel" class="form-control" formControlName="telefono" placeholder="Telefono" pattern="[0-9]+" title="Ingresa solo números">
+                <input type="tel" class="form-control" formControlName="telefono" placeholder="Telefono" pattern="[0-9]+" title="Telefono">
                 <label>Teléfono</label>
                 <div *ngIf="registrarUsuario.get('telefono')?.invalid && (registrarUsuario.get('telefono')?.dirty || registrarUsuario.get('telefono')?.touched)">
-                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['required']"><p>El numero de teléfono es requerido</p></div>
-                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['pattern']"><p>Ingrese solo números en la sección de teléfono</p></div>
+                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['required']"><p>El número de teléfono es requerido</p></div>
+                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['pattern']"><p>Ingrese solo números</p></div>
+                  <div *ngIf="registrarUsuario.get('telefono')?.errors?.['telefonoInvalido']"><p>El número de teléfono debe poseer 8 dígitos</p></div>
                 </div>
               </div>
             <div class="form-floating mb-3">
@@ -54,6 +55,7 @@
             <div class="d-grid gap-2 mb-2">
                 <button class="btn btn-primary btn-lg" type="submit">Registrar</button>
             </div>
+            <p>¿Necesita recuperar su contraseña?<a routerLink="/recuperar-password">Recuperar</a></p>
             <p><a routerLink="/login">volver</a></p>
         </form>
     </div>
