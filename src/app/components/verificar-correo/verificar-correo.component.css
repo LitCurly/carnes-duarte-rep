@@ -1,0 +1,10 @@
+.btn {
+    background-color: black;
+    border-color: white;
+    --bs-btn-active-bg: #c8343c;
+    --bs-btn-active-border-color: black;
+}
+
+h1, h6{
+    color: black;
+}

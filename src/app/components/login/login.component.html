@@ -1,24 +1,28 @@
 <!-- <p>login works!</p> -->
 
 <div class="wrapper">
-    <div class="body">
+    <div *ngIf="!loading" class="body">
         <img class="logo" src="../../../assets/img/logo-duarte-circ.png" alt="logo-duarte-circ">
         <h1 class="mb-1">Login</h1>
         <p>Ingrese sus datos para iniciar sesión:</p>
-        <form>
+        <form (ngSubmit)="login()" [formGroup]="loginUsuario">
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" placeholder="name@example.com">
+                <input type="email" formControlName="email" class="form-control" placeholder="name@example.com">
                 <label>Email</label>
+                <span *ngIf="loginUsuario.get('email')?.hasError('required') && loginUsuario.get('email')?.touched" class="errorlabel">El <strong>email</strong> es requerido</span>
+                <span *ngIf="loginUsuario.get('email')?.hasError('email') && loginUsuario.get('email')?.touched" class="errorlabel">Ingrese un <strong>email</strong> válido</span>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" formControlName="password" class="form-control" placeholder="Password">
                 <label>Contraseña</label>
+                <span *ngIf="loginUsuario.get('password')?.hasError('required') && loginUsuario.get('password')?.touched" class="errorlabel">La <strong>contraseña</strong> es requerida</span>
             </div>
             <div class="d-grid gap-2 mb-2">
-                <button class="btn btn-primary btn-lg" type="button">Ingresar</button>
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="loginUsuario.invalid">Ingresar</button>
             </div>
-            <p class="mt-3">¿No tienes cuenta? <a routerLink="/registrar-usuario">Registrar</a></p>
-            <p>¿Olvidaste tu contraseña? <a routerLink="/recuperar-password">Recuperar</a></p>
+            <p class="mt-3">¿No posee una cuenta? <a routerLink="/registrar-usuario">Registrar</a></p>
+            <p>¿Olvidó su contraseña? <a routerLink="/recuperar-password">Recuperar</a></p>
         </form>
     </div>
+    <app-spinner *ngIf="loading"></app-spinner>
 </div>

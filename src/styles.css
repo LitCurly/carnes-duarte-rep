@@ -1,14 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+html, body{
     height: 100%;
+    width: 100%;
+    background-color: #bb4a50;
 }
 
-.wrapper {
+header{
+    background-color: whitesmoke;
+}
+
+footer{
+    background-color: whitesmoke;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: #c8343c;
+    background-color: #bb4a50;
+    /* background-color: black; */
 }
 
 .logo {
@@ -27,5 +46,16 @@ html, body {
 p {
     color: white;
     text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
+}
+
+.form-floating {
+    text-align: start;
+    margin-left: 5px;
+}
+
+.errorlabel {
+    color: white;
+    text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
+    margin-left: 5px;
 }
 
