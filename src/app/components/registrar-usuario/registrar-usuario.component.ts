@@ -113,8 +113,8 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.loading = false;
-        this.toastr.success('Su cuenta a sido registrada con exito!', 'Usuario registrado');
+        // this.loading = false;
+        // this.toastr.success('Su cuenta a sido registrada con exito!', 'Usuario registrado');
         // this.router.navigate(['/login']);
          console.log(user);
         this.verificarCorreo();
@@ -131,6 +131,7 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.afAuth.currentUser.then(user => user?.sendEmailVerification())
     .then(() => {
       this.loading = false;
+      this.toastr.success('Su cuenta a sido registrada con exito!', 'Usuario registrado');
       this.toastr.info(
         'Le enviamos un correo electrónico para verificar su cuenta, revise la sección de "Spam" de ser necesario',
         'Verificación Pendiente'
