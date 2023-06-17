@@ -5,6 +5,7 @@
     --bs-btn-active-border-color: black;
 }
 
-h1, h6{
-    color: black;
+h1, h5{
+    color: #19191a;
+    font-weight: bold;
 }

@@ -2,38 +2,35 @@
 html, body{
     height: 100%;
     width: 100%;
-    background-color: #bb4a50;
+    background-color: #bb4a50; 
 }
 
-header{
-    background-color: whitesmoke;
-}
-
-footer{
-    background-color: whitesmoke;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background-color: whitesmoke;
-}
+/* color sugerido= bb4a50 */
 
 .wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: #bb4a50;
+    background-color: #bb4a50; 
     /* background-color: black; */
 }
 
-.logo {
+.logo-duarte-circ {
     height: 130px;
     margin-bottom: 10px;
 }
+
+.logo-duarte-letras {
+    width: 250px; /* Ajusta el ancho según tus necesidades */
+    height: auto; /* La altura se ajustará automáticamente según el ancho especificado */
+    margin-left: 20%;
+}
+
+/* linea superior footer */
+footer {
+    border-top: 1px solid whitesmoke;
+  }
 
 .body {
     width: 100%;
