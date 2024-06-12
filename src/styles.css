@@ -2,22 +2,23 @@
 html, body{
     height: 100%;
     width: 100%;
-    background-color: #bb4a50; 
+    background-color: rgba(206, 0, 25, 0.8); 
 }
 
 /* color sugerido= bb4a50 */
+/* color primario= rgba(206, 0, 25, 0.8) */
+/* color secundario= #ffc55a */
 
 .wrapper{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* centrando elementos en el eje vertical */
+    justify-content: center; /* centrando en el eje horizontal */
     height: 100%;
-    background-color: #bb4a50; 
-    /* background-color: black; */
+    background-color: rgba(206, 0, 25, 0.8); 
 }
 
 .logo-duarte-circ {
-    height: 130px;
+    height: 200px;
     margin-bottom: 10px;
 }
 
@@ -30,13 +31,13 @@ html, body{
 /* linea superior footer */
 footer {
     border-top: 1px solid whitesmoke;
-  }
+}
 
 .body {
     width: 100%;
     max-width: 330px;
-    margin: auto;
-    padding: 15px;
+    margin: 0 auto;
+    padding: 10px;
     text-align: center;
 }
 
@@ -47,7 +48,6 @@ p {
 
 .form-floating {
     text-align: start;
-    margin-left: 5px;
 }
 
 .errorlabel {
@@ -55,4 +55,3 @@ p {
     text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
     margin-left: 5px;
 }
-
