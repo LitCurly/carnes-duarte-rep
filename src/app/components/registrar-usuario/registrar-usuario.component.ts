@@ -158,7 +158,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   //   return null;
   // }
 
-  // Validar telefono
+  // Validador de telefono
   validarTelefono(control: AbstractControl): { [key: string]: any } | null {
     const telefono = control.value;
     if (telefono && telefono.length !== 8) {
