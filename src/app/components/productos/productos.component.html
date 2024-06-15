@@ -1,5 +1,3 @@
-<p>productos works!</p>
-
 <html>
   <header
     class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-0 mb-0 border-bottom"
@@ -17,10 +15,12 @@
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-      <li><a href="#" class="nav-link px-2">Productos</a></li>
-      <li><a href="#" class="nav-link px-2">Mis Pedidos</a></li>
-      <li><a href="#" class="nav-link px-2">Mis Datos</a></li>
+      <li><a href="/inicio" class="nav-link px-2">Inicio</a></li>
+      <li>
+        <a href="/productos" class="nav-link px-2 link-secondary">Productos</a>
+      </li>
+      <li><a href="/mis-pedidos" class="nav-link px-2">Mis Pedidos</a></li>
+      <li><a href="/mis-datos" class="nav-link px-2">Mis Datos</a></li>
       <li>
         <a href="/sobre-nosotros" class="nav-link px-2">Sobre Nosotros</a>
       </li>
@@ -34,20 +34,49 @@
   </header>
   <main>
     <div class="container">
+      <!-- Título: Quiénes Somos -->
       <div class="row">
         <div class="col text-center">
           <h1>Carnes Duarte</h1>
         </div>
       </div>
-      <div class="row mt-4">
-        <div class="col">
-          
+
+      <!-- Título: Tradición Familiar -->
+      <div class="row mt-1">
+        <div class="col text-center">
+          <h2>Tradición Familiar</h2>
         </div>
       </div>
+      <section>
+        <article class="card">
+          <h2>Vacuno</h2>
+          <p>Descripcion</p>
+          <img src="../../../assets/img/img-duarte/vacuno2.png" width="400" />
+          <p>Texto del articulo</p>
+        </article>
+        <article class="card">
+          <h2>Pollo</h2>
+          <p>Descripcion</p>
+          <img src="../../../assets/img/img-duarte/pollo.png" width="400" />
+          <p>Texto del articulo</p>
+        </article>
+        <article class="card">
+          <h2>Cerdo</h2>
+          <p>Descripcion</p>
+          <img src="../../../assets/img/img-duarte/cerdo.png" width="400" />
+          <p>Texto del articulo</p>
+        </article>
+      </section>
+      <img
+        src="../../../assets/img/img-duarte/fondocarne.png"
+        alt="fondocarne"
+        class="img-fluid"
+        style="max-width: 100%; height: auto; display: block; margin: 0 auto"
+      />
     </div>
   </main>
   <footer class="py-5 my-0">
-    <div class="container" style="background-color: rgba(206, 0, 25, 0.8)">
+    <div class="container" style="background-color: rgba(206, 0, 25, 0.6)">
       <div class="row align-items-center">
         <div class="col-md-3 mb-2 mb-md-0">
           <a
@@ -64,20 +93,22 @@
         <div class="col-md-9">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
-              <a href="#" class="nav-link px-2 text-body-secondary">Inicio</a>
+              <a href="/inicio" class="nav-link px-2 text-body-secondary"
+                >Inicio</a
+              >
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link px-2 text-body-secondary"
+              <a href="/productos" class="nav-link px-2 link-secondary"
                 >Productos</a
               >
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link px-2 text-body-secondary"
+              <a href="/mis-pedidos" class="nav-link px-2 text-body-secondary"
                 >Mis Pedidos</a
               >
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link px-2 text-body-secondary"
+              <a href="/mis-datos" class="nav-link px-2 text-body-secondary"
                 >Mis Datos</a
               >
             </li>

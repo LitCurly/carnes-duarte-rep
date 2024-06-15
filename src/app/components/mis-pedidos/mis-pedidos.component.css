@@ -1,0 +1,91 @@
+/* Estilos personalizados para la vista Sobre Nosotros */
+.container {
+    background-color: #fff; /* Fondo claro para el contenedor */
+    padding: 20px;
+    border-radius: 0px;
+    max-width: 1600px;
+}
+
+/* Estilos para el encabezado */
+header, main{
+    background-color: rgba(206, 0, 25, 0.2);
+}
+
+.nav-link {
+    color: whitesmoke;
+    text-shadow: 0px 15px 10px rgba(0,0,0,0.3);
+}
+
+/* textos footer */
+.text-body-secondary {
+    --bs-text-opacity: 1;
+    color: whitesmoke!important;
+}
+
+.btn-outline-primary {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    --bs-btn-hover-bg: #bb4a50;
+    margin-right: 20%;
+    --bs-btn-active-bg: rgb(156, 3, 21);
+    --bs-btn-active-border-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Estilos para el pie de página */
+footer {
+    border-top: 1px solid whitesmoke;
+    background-color: rgba(206, 0, 25, 0.2);
+    color: whitesmoke;
+    text-align: center;
+    padding: 1rem;
+}
+
+footer a {
+    color: whitesmoke;
+    text-decoration: none;
+    margin-right: 0.5rem;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Espacio entre las imágenes y el texto */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.row {
+    margin-bottom: 20px; /* Espacio entre las filas */
+}
+
+h1 {
+    text-shadow: 0px 20px 10px rgba(0,0,0,0.3);
+    font-size: 4rem;
+    color: #343a40;
+}
+h2{
+    text-shadow: 0px 20px 10px rgba(0,0,0,0.3);
+    font-size: 3rem;
+    color: #343a40;
+}
+h3{
+    text-shadow: 0px 20px 10px rgba(0,0,0,0.3);
+    font-size: 2rem;
+}
+h4{
+    text-shadow: 0px 10px 10px rgba(0,0,0,0.3);
+    font-size: 1.5rem;
+}
+
+p{
+    color: #495057;
+    text-shadow: none;
+    font-size: large;
+}
+
+footer p {
+    align-items: center;
+    text-shadow: 0px 13px 10px rgba(0,0,0,0.3);
+}  

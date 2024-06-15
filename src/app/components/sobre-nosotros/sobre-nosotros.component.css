@@ -1,8 +1,9 @@
 /* Estilos personalizados para la vista Sobre Nosotros */
 .container {
-    background-color: #f8f9fa; /* Fondo claro para el contenedor */
+    background-color: #fff; /* Fondo claro para el contenedor */
     padding: 20px;
     border-radius: 0px;
+    max-width: 1600px;
 }
 
 /* Estilos para el encabezado */

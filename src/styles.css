@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'AccordAltExtraBold';
+    src: url('/src/assets/fonts/accord_xb.woff2.ttf') format('truetype'); /* Ajusta el camino si es necesario */
+    font-weight: bold;
+    font-style: normal;
+}
+
 html, body{
     height: 100%;
     width: 100%;
-    background-color: rgba(206, 0, 25, 0.9); 
+    background-color: rgba(206, 0, 25, 0.9);
+    font-family: 'AccordAltExtraBold', sans-serif;
 }
 
 /* color sugerido= bb4a50 */
