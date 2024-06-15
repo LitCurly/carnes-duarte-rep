@@ -5,15 +5,33 @@ import { RegistrarUsuarioComponent } from './components/registrar-usuario/regist
 import { VerificarCorreoComponent } from './components/verificar-correo/verificar-correo.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
+import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
+import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
+import { VerPedidosComponent } from './components/admin/ver-pedidos/ver-pedidos.component';
+import { GestionarProductosComponent } from './components/admin/gestionar-productos/gestionar-productos.component';
+import { GestionarUsuariosComponent } from './components/admin/gestionar-usuarios/gestionar-usuarios.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'inicio', component: InicioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
+  { path: 'productos', component: ProductosComponent },
+  { path: 'carrito', component: CarritoComponent },
+  { path: 'mis-pedidos', component: MisPedidosComponent },
+  { path: 'mis-datos', component: MisDatosComponent },
+  { path: 'sobre-nosotros', component: SobreNosotrosComponent },
+  { path: 'admin/ver-pedidos', component: VerPedidosComponent },
+  { path: 'admin/gestionar-productos', component: GestionarProductosComponent },
+  { path: 'admin/gestionar-usuarios', component: GestionarUsuariosComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 
 @NgModule({

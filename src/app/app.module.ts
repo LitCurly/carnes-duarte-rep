@@ -17,6 +17,15 @@ import { VerificarCorreoComponent } from './components/verificar-correo/verifica
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'src/environments/environment';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { GestionarUsuariosComponent } from './components/admin/gestionar-usuarios/gestionar-usuarios.component';
+import { GestionarProductosComponent } from './components/admin/gestionar-productos/gestionar-productos.component';
+import { VerPedidosComponent } from './components/admin/ver-pedidos/ver-pedidos.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
+import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
+import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +35,16 @@ import { environment } from 'src/environments/environment';
     RegistrarUsuarioComponent,
     VerificarCorreoComponent,
     RecuperarPasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    InicioComponent,
+    GestionarUsuariosComponent,
+    GestionarProductosComponent,
+    VerPedidosComponent,
+    ProductosComponent,
+    CarritoComponent,
+    MisPedidosComponent,
+    MisDatosComponent,
+    SobreNosotrosComponent
   ],
   imports: [
     BrowserModule,
