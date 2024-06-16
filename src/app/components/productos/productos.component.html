@@ -48,31 +48,27 @@
         </div>
       </div>
       <section>
-        <article class="card">
-          <h2>Vacuno</h2>
-          <p>Descripcion</p>
-          <img src="../../../assets/img/img-duarte/vacuno2.png" width="400" />
-          <p>Texto del articulo</p>
-        </article>
-        <article class="card">
-          <h2>Pollo</h2>
-          <p>Descripcion</p>
-          <img src="../../../assets/img/img-duarte/pollo.png" width="400" />
-          <p>Texto del articulo</p>
-        </article>
-        <article class="card">
-          <h2>Cerdo</h2>
-          <p>Descripcion</p>
-          <img src="../../../assets/img/img-duarte/cerdo.png" width="400" />
-          <p>Texto del articulo</p>
-        </article>
+        <div class="articles-container">
+          <article class="card" (click)="navigateTo('productos')">
+            <h2>Vacuno</h2>
+            <p>...</p>
+            <img src="../../../assets/img/img-duarte/vacuno2.png" width="400" />
+            <p>Esto es un vacuno</p>
+          </article>
+          <article class="card" (click)="navigateTo('sobre-nosotros')">
+            <h2>Pollo</h2>
+            <p>...</p>
+            <img src="../../../assets/img/img-duarte/pollo.png" width="400" />
+            <p>Esto es un pollo</p>
+          </article>
+          <article class="card" (click)="navigateTo('inicio')">
+            <h2>Cerdo</h2>
+            <p>...</p>
+            <img src="../../../assets/img/img-duarte/cerdo.png" width="400" />
+            <p>Esto es un cerdo</p>
+          </article>
+        </div>
       </section>
-      <img
-        src="../../../assets/img/img-duarte/fondocarne.png"
-        alt="fondocarne"
-        class="img-fluid"
-        style="max-width: 100%; height: auto; display: block; margin: 0 auto"
-      />
     </div>
   </main>
   <footer class="py-5 my-0">
