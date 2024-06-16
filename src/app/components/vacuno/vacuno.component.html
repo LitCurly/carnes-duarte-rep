@@ -1,5 +1,13 @@
 <!-- src/app/components/vacuno/vacuno.component.html -->
 <h2>Cortes de Vacuno</h2>
-<ul>
-  <li *ngFor="let corte of cortes">{{ corte }}</li>
-</ul>
+<!-- src/app/components/vacuno/vacuno.component.html -->
+<section>
+  <div class="articles-container">
+    <article class="card" *ngFor="let corte of cortes">
+      <h2>Vacuno</h2>
+      <p>{{ corte }}</p>
+      <p>Esto es un corte de vacuno: {{ corte }}</p>
+    </article>
+  </div>
+</section>
+
