@@ -26,6 +26,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
     CarritoComponent,
     MisPedidosComponent,
     MisDatosComponent,
-    SobreNosotrosComponent
+    SobreNosotrosComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
