@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 //Modulos
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire/compat';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { ToastrModule } from 'ngx-toastr';
 
 //Componentes
@@ -26,6 +27,9 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
+import { PolloComponent } from './components/pollo/pollo.component';
+import { CerdoComponent } from './components/cerdo/cerdo.component';
+import { VacunoComponent } from './components/vacuno/vacuno.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +48,17 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
     CarritoComponent,
     MisPedidosComponent,
     MisDatosComponent,
-    SobreNosotrosComponent
+    SobreNosotrosComponent,
+    PolloComponent,
+    CerdoComponent,
+    VacunoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],
