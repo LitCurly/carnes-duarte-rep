@@ -1,6 +1,9 @@
-// src/app/models/carne.ts
 export interface Carne {
-  id?: string;
   tipo: string;
-  cortes: string[];
+  cortes: Corte[];
+}
+
+export interface Corte {
+  nombre: string;
+  preparaciones: string[];
 }

@@ -1,7 +1,7 @@
-// src/app/components/cerdo/cerdo.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CarneService } from '../../services/carne.service';
-import { Carne } from '../../models/carne';
+import { Carne, Corte } from '../../models/carne';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cerdo',
@@ -9,15 +9,32 @@ import { Carne } from '../../models/carne';
   styleUrls: ['./cerdo.component.css']
 })
 export class CerdoComponent implements OnInit {
-  cortes: string[] = [];
+  cortes: Corte[] = [];
+  filteredCortes: Corte[] = [];
+  searchQuery: string = '';
 
-  constructor(private carneService: CarneService) { }
+  constructor(private carneService: CarneService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.carneService.getCarneCortes('cerdo').subscribe((data: Carne) => {
-      if (data.tipo === 'cerdo') {
-        this.cortes = data.cortes;
-      }
+    this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['search'] || '';
+      this.loadCortes();
+    });
+  }
+
+  loadCortes(): void {
+    this.carneService.getCarneCortes('cerdo').subscribe(data => {
+      this.cortes = data.cortes;
+      this.filteredCortes = this.cortes.filter(corte =>
+        corte.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    });
+  }
+
+  onSearch(): void {
+    this.router.navigate([], {
+      queryParams: { search: this.searchQuery },
+      queryParamsHandling: 'merge'
     });
   }
 }
