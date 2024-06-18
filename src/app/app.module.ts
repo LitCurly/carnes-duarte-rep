@@ -28,9 +28,9 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
-import { PolloComponent } from './components/pollo/pollo.component';
-import { CerdoComponent } from './components/cerdo/cerdo.component';
-import { VacunoComponent } from './components/vacuno/vacuno.component';
+import { PolloComponent } from './components/productos/pollo/pollo.component';
+import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
+import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
 
 @NgModule({
   declarations: [

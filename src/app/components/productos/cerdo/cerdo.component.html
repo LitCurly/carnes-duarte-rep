@@ -1,0 +1,31 @@
+<div class="filters">
+  <div class="filter-item">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por nombre de corte...">
+  </div>
+  <div class="filter-item">
+    <select [(ngModel)]="selectedPreparation">
+      <option value="">Mostrar Todo</option>
+      <option value="Cacerola">Cacerola</option>
+      <option value="Horno">Horno</option>
+      <option value="Parrilla">Parrilla</option>
+      <option value="Sarten">Sarten</option>
+    </select>
+  </div>
+  <div class="filter-item">
+    <button (click)="onSearch()">Buscar</button>
+  </div>
+  <div class="filter-item">
+    <button (click)="goBack()">Volver a Productos</button>
+  </div>
+</div>
+
+<section class="articles-container">
+  <article class="card" *ngFor="let corte of filteredCortes">
+    <h2>{{ corte.nombre }}</h2>
+    <p>Preparaciones:</p>
+    <ul>
+      <li *ngFor="let preparacion of corte.preparaciones">{{ preparacion }}</li>
+    </ul>
+    <img *ngIf="corte.imageUrl" [src]="corte.imageUrl" alt="{{ corte.nombre }}">
+  </article>
+</section>
