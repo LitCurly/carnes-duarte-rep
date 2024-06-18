@@ -1,4 +1,3 @@
-// src/app/services/carne.service.ts
 import { Injectable } from '@angular/core';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';

@@ -1,13 +1,15 @@
-<!-- src/app/components/vacuno/vacuno.component.html -->
-<h2>Cortes de Vacuno</h2>
-<!-- src/app/components/vacuno/vacuno.component.html -->
+<div>
+  <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar por nombre de corte...">
+</div>
+
 <section>
   <div class="articles-container">
-    <article class="card" *ngFor="let corte of cortes">
-      <h2>Vacuno</h2>
-      <p>{{ corte }}</p>
-      <p>Esto es un corte de vacuno: {{ corte }}</p>
+    <article class="card" *ngFor="let corte of filteredCortes">
+      <h2>{{ corte.nombre }}</h2>
+      <p>Preparaciones:</p>
+      <ul>
+        <li *ngFor="let preparacion of corte.preparaciones">{{ preparacion }}</li>
+      </ul>
     </article>
   </div>
 </section>
-
