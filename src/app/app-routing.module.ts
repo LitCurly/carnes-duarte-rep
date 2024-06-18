@@ -14,21 +14,21 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
 import { VerPedidosComponent } from './components/admin/ver-pedidos/ver-pedidos.component';
 import { GestionarProductosComponent } from './components/admin/gestionar-productos/gestionar-productos.component';
 import { GestionarUsuariosComponent } from './components/admin/gestionar-usuarios/gestionar-usuarios.component';
-import { PolloComponent } from './components/pollo/pollo.component';
-import { CerdoComponent } from './components/cerdo/cerdo.component';
-import { VacunoComponent } from './components/vacuno/vacuno.component';
+import { PolloComponent } from './components/productos/pollo/pollo.component';
+import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
+import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'pollo', component: PolloComponent },
-  { path: 'cerdo', component: CerdoComponent },
-  { path: 'vacuno', component: VacunoComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
   { path: 'productos', component: ProductosComponent },
+  { path: 'productos/pollo', component: PolloComponent },
+  { path: 'productos/vacuno', component: VacunoComponent },
+  { path: 'productos/cerdo', component: CerdoComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'mis-pedidos', component: MisPedidosComponent },
   { path: 'mis-datos', component: MisDatosComponent },

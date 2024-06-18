@@ -10,6 +10,6 @@ export class ProductosComponent {
   constructor(private router: Router) {} // Inyectar Router
 
   navigateTo(route: string) {
-    this.router.navigate([`${route}`]);
+    this.router.navigate([`/productos/${route}`]);
   }
 }

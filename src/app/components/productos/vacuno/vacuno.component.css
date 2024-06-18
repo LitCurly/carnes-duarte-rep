@@ -1,0 +1,113 @@
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: #f0f0f0; /* Fondo gris claro */
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+}
+
+.filter-item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.filter-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Azul vibrante */
+  color: #fff; /* Texto blanco */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+.back-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #007bff; /* Borde azul */
+  border-radius: 4px;
+  background-color: #fff; /* Fondo blanco */
+  color: #007bff; /* Texto azul */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #007bff; /* Azul de fondo en hover */
+  color: #fff; /* Texto blanco en hover */
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los artículos se posicionen en múltiples líneas */
+  gap: 1rem; /* Espacio entre los artículos */
+}
+
+.card {
+  flex: 1 0 300px; /* Cada tarjeta tiene un ancho mínimo de 300px */
+  padding: 1rem;
+  border: 1px solid #ddd; /* Borde más suave */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Fondo blanco */
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column; /* Alineación vertical de contenido */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Elevación sutil en hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
+}
+
+.card h2,
+.card p {
+  margin: 0;
+  color: #333; /* Texto oscuro */
+}
+
+.card ul {
+  padding-left: 0;
+}
+
+.card li {
+  list-style-type: none;
+}
+
+.card img {
+  max-width: 100%; /* Imagen ajustada al ancho máximo del artículo */
+  height: auto; /* Altura automática para mantener la proporción */
+  margin-bottom: 1rem; /* Espacio inferior para separar la imagen del contenido */
+  border-radius: 8px; /* Bordes redondeados para la imagen */
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-item {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .filter-item:last-child {
+    margin-bottom: 0;
+  }
+}
