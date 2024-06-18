@@ -40,7 +40,7 @@ p {
     align-items: center; /* centrando elementos en el eje vertical */
     justify-content: center; /* centrando en el eje horizontal */
     height: 100%;
-    background-color: rgba(206, 0, 25, 0.9); 
+    background-color: rgba(206, 0, 25, 0.9);
 }
 
 .logo-duarte-circ {
