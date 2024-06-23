@@ -1,31 +1,66 @@
-<div class="filters">
-  <div class="filter-item">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por nombre de corte...">
+<header-component></header-component>
+
+<div class="team-section">
+  <div class="team-header">
+    <h2 class="team-title">Nuestros Cortes</h2>
+    <p class="team-description">Explora nuestra variedad de cortes y sus preparaciones recomendadas.</p>
   </div>
-  <div class="filter-item">
-    <select [(ngModel)]="selectedPreparation">
-      <option value="">Mostrar Todo</option>
-      <option value="Cacerola">Cacerola</option>
-      <option value="Horno">Horno</option>
-      <option value="Parrilla">Parrilla</option>
-      <option value="Sarten">Sarten</option>
-    </select>
+
+  <box className="filters" [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5em' }">
+    <box [styles]="{ display: 'flex', gap: '15px', width: '100%' }">
+      <div class="filter-item">
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por nombre de corte..." class="filter-input">
+      </div>
+      <div class="filter-item">
+        <select [(ngModel)]="selectedPreparation" class="filter-select">
+          <option value="">Mostrar Todo</option>
+          <option value="Cacerola">Cacerola</option>
+          <option value="Horno">Horno</option>
+          <option value="Parrilla">Parrilla</option>
+          <option value="Sarten">Sarten</option>
+        </select>
+      </div>
+      <div  [style]="{ display: 'flex', alignItems: 'end', paddingBottom: '24px' }">
+        <button (click)="onSearch()" class="filter-button search-button primary-button">Buscar</button>
+      </div>
+    </box>
+    <box [styles]="{ display: 'flex', gap: '5px', justifyContent: 'flex-end', marginBlockStart: 'auto' }">
+      <button (click)="goBack()" class="filter-button search-button primary-button">Volver a Productos</button>
+    </box>
+  </box>
+
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table class="user-table">
+        <thead>
+        <tr>
+          <th class="fixed-width-column">Nombre</th>
+          <th>Preparaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let corte of paginatedCortes">
+          <td class="fixed-width-column">{{ corte.nombre }}</td>
+          <td>
+            <div class="preparation-list">
+              <span *ngIf="corte.preparaciones.includes('Cacerola')" class="preparation-item">Cacerola</span>
+              <span *ngIf="corte.preparaciones.includes('Horno')" class="preparation-item">Horno</span>
+              <span *ngIf="corte.preparaciones.includes('Parrilla')" class="preparation-item">Parrilla</span>
+              <span *ngIf="corte.preparaciones.includes('Sarten')" class="preparation-item">Sarten</span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="filter-item">
-    <button (click)="onSearch()">Buscar</button>
-  </div>
-  <div class="filter-item">
-    <button (click)="goBack()">Volver a Productos</button>
+
+  <!-- Paginación -->
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
+    <span>Página {{currentPage}} de {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
   </div>
 </div>
 
-<section class="articles-container">
-  <article class="card" *ngFor="let corte of filteredCortes">
-    <h2>{{ corte.nombre }}</h2>
-    <p>Preparaciones:</p>
-    <ul>
-      <li *ngFor="let preparacion of corte.preparaciones">{{ preparacion }}</li>
-    </ul>
-    <img *ngIf="corte.imageUrl" [src]="corte.imageUrl" alt="{{ corte.nombre }}">
-  </article>
-</section>
+<footer-component></footer-component>

@@ -31,6 +31,9 @@ import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotr
 import { PolloComponent } from './components/productos/pollo/pollo.component';
 import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
 import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
+import { FooterComponentComponent } from './general-components/footer-component/footer-component.component';
+import { HeaderComponentComponent } from './general-components/header-component/header-component.component';
+import { BoxComponent } from './general-components/box/box.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { VacunoComponent } from './components/productos/vacuno/vacuno.component'
     SobreNosotrosComponent,
     PolloComponent,
     CerdoComponent,
-    VacunoComponent
+    VacunoComponent,
+    FooterComponentComponent,
+    HeaderComponentComponent,
+    BoxComponent,
   ],
   imports: [
     BrowserModule,

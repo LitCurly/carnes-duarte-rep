@@ -17,6 +17,8 @@ import { GestionarUsuariosComponent } from './components/admin/gestionar-usuario
 import { PolloComponent } from './components/productos/pollo/pollo.component';
 import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
 import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
+import {FooterComponentComponent} from "./general-components/footer-component/footer-component.component";
+import {HeaderComponentComponent} from "./general-components/header-component/header-component.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -37,6 +39,10 @@ const routes: Routes = [
   { path: 'admin/gestionar-productos', component: GestionarProductosComponent },
   { path: 'admin/gestionar-usuarios', component: GestionarUsuariosComponent },
   { path: 'dashboard', component: DashboardComponent },
+
+  // Componentes Generales
+  { path: 'footer-component', component: FooterComponentComponent },
+  { path: 'header-component', component: HeaderComponentComponent },
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 

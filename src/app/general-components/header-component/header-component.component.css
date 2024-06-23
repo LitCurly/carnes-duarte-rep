@@ -1,0 +1,38 @@
+/* Estilos para el header */
+header {
+  background-color: #ce0019;
+ /*background-color: #1a202c; */
+}
+
+.nav-link {
+  color: whitesmoke;
+  text-shadow: 0px 15px 10px rgba(0,0,0,0.3);
+  transition: color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.nav-link:hover {
+  opacity: 0.7; /* Reducir la opacidad al 70% cuando se pasa el mouse */
+}
+
+.btn-outline-primary {
+  color: whitesmoke;
+  border-color: whitesmoke;
+  --bs-btn-hover-bg: #bb4a50;
+  margin-right: 20%;
+  --bs-btn-active-bg: rgb(156, 3, 21);
+  --bs-btn-active-border-color: rgba(0, 0, 0, 0.9);
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.row {
+  margin-bottom: 20px;
+}
