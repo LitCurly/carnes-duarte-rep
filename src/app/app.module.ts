@@ -34,6 +34,7 @@ import { VacunoComponent } from './components/productos/vacuno/vacuno.component'
 import { FooterComponentComponent } from './general-components/footer-component/footer-component.component';
 import { HeaderComponentComponent } from './general-components/header-component/header-component.component';
 import { BoxComponent } from './general-components/box/box.component';
+import { GestionarMisDatosComponent } from './components/admin/gestionar-mis-datos/gestionar-mis-datos.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { BoxComponent } from './general-components/box/box.component';
     FooterComponentComponent,
     HeaderComponentComponent,
     BoxComponent,
+    GestionarMisDatosComponent,
   ],
   imports: [
     BrowserModule,

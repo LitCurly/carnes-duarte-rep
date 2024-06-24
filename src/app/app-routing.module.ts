@@ -19,6 +19,7 @@ import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
 import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
 import {FooterComponentComponent} from "./general-components/footer-component/footer-component.component";
 import {HeaderComponentComponent} from "./general-components/header-component/header-component.component";
+import {GestionarMisDatosComponent} from "./components/admin/gestionar-mis-datos/gestionar-mis-datos.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'admin/ver-pedidos', component: VerPedidosComponent },
   { path: 'admin/gestionar-productos', component: GestionarProductosComponent },
   { path: 'admin/gestionar-usuarios', component: GestionarUsuariosComponent },
+  { path: 'admin/gestionar-mis-datos', component: GestionarMisDatosComponent },
   { path: 'dashboard', component: DashboardComponent },
 
   // Componentes Generales
