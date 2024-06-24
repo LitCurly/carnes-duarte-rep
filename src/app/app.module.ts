@@ -35,6 +35,8 @@ import { FooterComponentComponent } from './general-components/footer-component/
 import { HeaderComponentComponent } from './general-components/header-component/header-component.component';
 import { BoxComponent } from './general-components/box/box.component';
 import { GestionarMisDatosComponent } from './components/admin/gestionar-mis-datos/gestionar-mis-datos.component';
+import { HeaderAdminComponent } from './general-components/admin/header-admin/header-admin.component';
+import { FooterAdminComponent } from './general-components/admin/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { GestionarMisDatosComponent } from './components/admin/gestionar-mis-dat
     HeaderComponentComponent,
     BoxComponent,
     GestionarMisDatosComponent,
+    HeaderAdminComponent,
+    FooterAdminComponent,
   ],
   imports: [
     BrowserModule,

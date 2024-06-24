@@ -20,6 +20,8 @@ import { VacunoComponent } from './components/productos/vacuno/vacuno.component'
 import {FooterComponentComponent} from "./general-components/footer-component/footer-component.component";
 import {HeaderComponentComponent} from "./general-components/header-component/header-component.component";
 import {GestionarMisDatosComponent} from "./components/admin/gestionar-mis-datos/gestionar-mis-datos.component";
+import {HeaderAdminComponent} from "./general-components/admin/header-admin/header-admin.component";
+import {FooterAdminComponent} from "./general-components/admin/footer-admin/footer-admin.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -45,6 +47,8 @@ const routes: Routes = [
   // Componentes Generales
   { path: 'footer-component', component: FooterComponentComponent },
   { path: 'header-component', component: HeaderComponentComponent },
+  { path: 'header-admin', component: HeaderAdminComponent },
+  { path: 'footer-admin', component: FooterAdminComponent },
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 
