@@ -36,6 +36,9 @@
         <tr>
           <th class="fixed-width-column">Nombre</th>
           <th>Preparaciones</th>
+          <th>Precio por Kilo</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +51,17 @@
               <span *ngIf="corte.preparaciones.includes('Parrilla')" class="preparation-item">Parrilla</span>
               <span *ngIf="corte.preparaciones.includes('Sarten')" class="preparation-item">Sarten</span>
             </div>
+          </td>
+          <td>{{ corte.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
+          <td>
+            <button (click)="decrementQuantity(corte)">-</button>
+            {{ quantities [corte.nombre] }}
+            <button (click)="incrementQuantity(corte)">+</button>
+          </td>
+          <td>
+            <button (click)="addToCart(corte)" [disabled]="corte.stock <= 0" class="add-to-cart-button">
+              Agregar al Carrito
+            </button>
           </td>
         </tr>
         </tbody>

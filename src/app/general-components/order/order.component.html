@@ -1,0 +1,38 @@
+<div class="orders-section">
+  <div class="orders-header">
+    <h2 class="orders-title">Órdenes de Compra</h2>
+    <p class="orders-description">Revisa tus órdenes de compra realizadas.</p>
+  </div>
+
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table class="orders-table">
+        <thead>
+        <tr>
+          <th>Fecha de Emisión</th>
+          <th>Productos</th>
+          <th>Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of paginatedOrders">
+          <td class="fixed-width-column">{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
+          <td>
+            <div class="corte-list" matTooltip="{{ getCorteNames(order) }}">
+              {{ getShortCorteNames(order) }}
+            </div>
+          </td>
+          <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
+  </div>
+</div>
+

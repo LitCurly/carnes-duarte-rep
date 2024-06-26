@@ -1,4 +1,4 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-0 mb-0 border-bottom">
+<header class="d-flex flex-wrap align-items-center justify-content-between py-0 mb-0 border-bottom">
   <div class="col-md-3 mb-2">
     <a href="/dashboard" class="d-inline-flex link-body-emphasis text-decoration-none">
       <img class="logo-duarte-letras" src="../../../assets/img/logo-duarte-letras.png" alt="logo-duarte-letras">
@@ -14,8 +14,15 @@
   </ul>
 
   <div class="col-md-3 text-end">
+    <button type="button" class="btn btn-outline-primary me-2 carrito-button" (click)="openCartModal()">
+      <img src="assets/icons/carrito-de-compras.png" class="icon-png" alt="Carrito de Compra"> <!-- Icono de carrito -->
+    </button>
+
     <button type="button" class="btn btn-outline-primary">
       Cerrar Sesión
     </button>
   </div>
 </header>
+
+<!-- Modal para el carrito -->
+<carrito *ngIf="showCartModal" (closeModal)="closeCartModal()"></carrito>

@@ -150,3 +150,22 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
+.add-to-cart-button {
+  background-color: #cb0303;
+  color: #ffffff;
+  border: none;
+  padding: 0.200rem 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  margin-left: 0.5rem; /* Espaciado a la izquierda del botón */
+}
+
+.add-to-cart-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background-color: #800000;
+}

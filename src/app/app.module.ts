@@ -9,6 +9,8 @@ import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { CartService } from './services/cart.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -24,7 +26,6 @@ import { GestionarUsuariosComponent } from './components/admin/gestionar-usuario
 import { GestionarProductosComponent } from './components/admin/gestionar-productos/gestionar-productos.component';
 import { VerPedidosComponent } from './components/admin/ver-pedidos/ver-pedidos.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { CarritoComponent } from './components/carrito/carrito.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
@@ -34,6 +35,9 @@ import { VacunoComponent } from './components/productos/vacuno/vacuno.component'
 import { FooterComponentComponent } from './general-components/footer-component/footer-component.component';
 import { HeaderComponentComponent } from './general-components/header-component/header-component.component';
 import { BoxComponent } from './general-components/box/box.component';
+import { CartComponent } from './general-components/cart/cart.component';
+import { OrderComponent } from "./general-components/order/order.component";
+import { OrderDetailComponent } from './general-components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,6 @@ import { BoxComponent } from './general-components/box/box.component';
     GestionarProductosComponent,
     VerPedidosComponent,
     ProductosComponent,
-    CarritoComponent,
     MisPedidosComponent,
     MisDatosComponent,
     SobreNosotrosComponent,
@@ -59,6 +62,9 @@ import { BoxComponent } from './general-components/box/box.component';
     FooterComponentComponent,
     HeaderComponentComponent,
     BoxComponent,
+    CartComponent,
+    OrderComponent,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,8 +75,9 @@ import { BoxComponent } from './general-components/box/box.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FormsModule,
+    MatTooltipModule,
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

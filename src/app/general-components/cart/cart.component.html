@@ -1,0 +1,66 @@
+<div class="modal-overlay" *ngIf="modalOpen">
+  <div class="modal-container">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Detalle de Compra</h2>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="cart.items && cart.items.length > 0; else emptyCart">
+          <div class="table-container">
+            <div class="table-wrapper">
+              <table class="user-table">
+                <thead>
+                <tr>
+                  <th class="fixed-width-column">Nombre</th>
+                  <th>Valor</th>
+                  <th>Cantidad</th>
+                  <th class="action-column">Acciones</th>
+                  <th>SubTotal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of cart.items">
+                  <td class="fixed-width-column">{{ item.nombre }}</td>
+                  <td>{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
+                  <td>{{ item.cantidad }}</td>
+                  <td class="action-column">
+                    <div class="action-buttons">
+                      <button (click)="decrementQuantity(item)">-</button>
+                      <span>{{ quantities[item.nombre] }}</span>
+                      <button (click)="incrementQuantity(item)">+</button>
+                      <button (click)="removeFromCart(item)" class="remove-from-cart-button">
+                        <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Delete Item">
+                      </button>
+                    </div>
+                  </td>
+                  <td>{{ item.subtotal | currency:'CLP ':'symbol':'1.0-0' }}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="4" style="text-align: right; font-weight: bold;">Total:</td>
+                  <td>{{ cart.total | currency:'CLP ':'symbol':'1.0-0' }}</td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <ng-template #emptyCart>
+          <div class="empty-cart">
+              <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío">
+            <p>Tu carrito está vacío</p>
+            <button class="modal-button cancel" (click)="cancelAction()">Cerrar</button>
+          </div>
+        </ng-template>
+      </div>
+      <div class="modal-buttons" *ngIf="cart.items && cart.items.length > 0">
+        <button class="modal-button cancel" (click)="cancelAction()">Cancelar</button>
+        <button class="modal-button accept" (click)="createOrder()">Confirmar Compra</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showSpinner" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+</div>
