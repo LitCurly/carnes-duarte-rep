@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CarneService } from '../../../services/carne.service';
-import { Carne, Corte } from '../../../models/carne';
+import { Corte } from '../../../models/carne';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../../../services/cart.service';
+import { CartItem } from '../../../models/cart';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pollo',
@@ -15,14 +18,16 @@ export class PolloComponent implements OnInit {
   searchQuery: string = '';
   selectedPreparation: string = '';
   currentPage: number = 1;
-  itemsPerPage: number = 10; // Mostrar 10 elementos por página
+  itemsPerPage: number = 10;
   totalPages: number = 1;
-  tableHeight: any;
+  quantities: { [corteId: string]: number } = {};
 
   constructor(
     private carneService: CarneService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cartService: CartService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +42,9 @@ export class PolloComponent implements OnInit {
   loadCortes(): void {
     this.carneService.getCarneCortes('pollo').subscribe(data => {
       this.cortes = data.cortes;
+      this.cortes.forEach(corte => {
+        this.quantities[corte.nombre] = 0;
+      });
       this.filterCortes();
     });
   }
@@ -57,6 +65,34 @@ export class PolloComponent implements OnInit {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedCortes = this.filteredCortes.slice(start, end);
+  }
+
+  addToCart(corte: Corte): void {
+    const quantity = this.quantities[corte.nombre];
+    if (quantity === 0) {
+      this.toastr.error('Ingrese una cantidad válida para añadir los productos al carrito', 'Error');
+    } else {
+      const cartItem: CartItem = {
+        nombre: corte.nombre,
+        cantidad: quantity,
+        precioPorKilo: corte.precioPorKilo,
+        tipo: 'pollo',
+        subtotal: quantity * corte.precioPorKilo
+      };
+      this.cartService.addToCart(cartItem);
+      this.toastr.success(`Se han agregado ${quantity} kilos de ${corte.nombre} al carrito`, 'Éxito');
+      this.quantities[corte.nombre] = 0;
+    }
+  }
+
+  incrementQuantity(corte: Corte): void {
+    this.quantities[corte.nombre]++;
+  }
+
+  decrementQuantity(corte: Corte): void {
+    if (this.quantities[corte.nombre] > 0) {
+      this.quantities[corte.nombre]--;
+    }
   }
 
   onSearch(): void {

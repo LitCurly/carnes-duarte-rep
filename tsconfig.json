@@ -22,6 +22,10 @@
     "lib": [
       "ES2022",
       "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings" // Asegúrate de que esta ruta sea la correcta
     ]
   },
   "angularCompilerOptions": {
@@ -29,5 +33,8 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": [
+    "src/typings/**/*.d.ts"
+  ]
 }

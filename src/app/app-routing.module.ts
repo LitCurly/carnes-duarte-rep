@@ -7,7 +7,6 @@ import { RecuperarPasswordComponent } from './components/recuperar-password/recu
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { CarritoComponent } from './components/carrito/carrito.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
 import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
@@ -17,8 +16,12 @@ import { GestionarUsuariosComponent } from './components/admin/gestionar-usuario
 import { PolloComponent } from './components/productos/pollo/pollo.component';
 import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
 import { VacunoComponent } from './components/productos/vacuno/vacuno.component';
-import {FooterComponentComponent} from "./general-components/footer-component/footer-component.component";
-import {HeaderComponentComponent} from "./general-components/header-component/header-component.component";
+import { FooterComponentComponent } from "./general-components/footer-component/footer-component.component";
+import { HeaderComponentComponent } from "./general-components/header-component/header-component.component";
+import { CartComponent } from "./general-components/cart/cart.component";
+import { OrderComponent} from "./general-components/order/order.component";
+import {OrderDetailComponent} from "./general-components/order-detail/order-detail.component";
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -31,8 +34,8 @@ const routes: Routes = [
   { path: 'productos/pollo', component: PolloComponent },
   { path: 'productos/vacuno', component: VacunoComponent },
   { path: 'productos/cerdo', component: CerdoComponent },
-  { path: 'carrito', component: CarritoComponent },
   { path: 'mis-pedidos', component: MisPedidosComponent },
+  { path: 'mis-pedidos/:id/order-detail', component: OrderDetailComponent },
   { path: 'mis-datos', component: MisDatosComponent },
   { path: 'sobre-nosotros', component: SobreNosotrosComponent },
   { path: 'admin/ver-pedidos', component: VerPedidosComponent },
@@ -43,6 +46,10 @@ const routes: Routes = [
   // Componentes Generales
   { path: 'footer-component', component: FooterComponentComponent },
   { path: 'header-component', component: HeaderComponentComponent },
+  { path: 'carrito', component: CartComponent },
+  { path: 'order', component: OrderComponent },
+
+
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 
