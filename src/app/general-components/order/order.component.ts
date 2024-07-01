@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { Order } from '../../models/order';
 
@@ -14,7 +15,10 @@ export class OrderComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
 
-  constructor(private cartService: CartService) { }
+  constructor(
+    private router: Router,
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.loadOrders();
@@ -85,5 +89,9 @@ export class OrderComponent implements OnInit {
 
     // Formatear solo la hora
     return dateTime.toLocaleTimeString('es-ES', options);
+  }
+
+  goToOrderDetail(orderId: string): void {
+    this.router.navigate(['/mis-pedidos', orderId, 'order-detail']);
   }
 }

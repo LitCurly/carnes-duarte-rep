@@ -12,17 +12,21 @@
           <th>Fecha de Emisión</th>
           <th>Productos</th>
           <th>Valor</th>
+          <th>Acciones</th> <!-- Nueva columna para ver detalle -->
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let order of paginatedOrders">
-          <td class="fixed-width-column">{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
+          <td>{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
           <td>
             <div class="corte-list" matTooltip="{{ getCorteNames(order) }}">
               {{ getShortCorteNames(order) }}
             </div>
           </td>
           <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
+          <td>
+            <button class="detail-button" (click)="order.id && goToOrderDetail(order.id)">Ver Detalle</button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -35,4 +39,3 @@
     <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
   </div>
 </div>
-

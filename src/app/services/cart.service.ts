@@ -137,6 +137,25 @@ export class CartService {
     );
   }
 
+  // Método para obtener una orden por su ID
+  getOrderById(orderId: string): Observable<Order | undefined> {
+    const orderDoc = doc(this.firestore, 'ordenes', orderId);
+    return docData(orderDoc).pipe(
+      map((order: any) => {
+        if (order) {
+          return {
+            id: orderId,
+            createdAt: order.createdAt.toDate(), // Asegurarse de convertir el Timestamp a Date
+            items: order.items, // Ajusta según la estructura de tu orden
+            total: order.total // Ajusta según la estructura de tu orden
+          } as Order;
+        } else {
+          return undefined;
+        }
+      })
+    );
+  }
+
   // Método para crear una orden de compra
   async createOrder(order: Order): Promise<void> {
     const ordenesCollectionRef = collection(this.firestore, 'ordenes');

@@ -20,6 +20,7 @@ import { FooterComponentComponent } from "./general-components/footer-component/
 import { HeaderComponentComponent } from "./general-components/header-component/header-component.component";
 import { CartComponent } from "./general-components/cart/cart.component";
 import { OrderComponent} from "./general-components/order/order.component";
+import {OrderDetailComponent} from "./general-components/order-detail/order-detail.component";
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'productos/vacuno', component: VacunoComponent },
   { path: 'productos/cerdo', component: CerdoComponent },
   { path: 'mis-pedidos', component: MisPedidosComponent },
+  { path: 'mis-pedidos/:id/order-detail', component: OrderDetailComponent },
   { path: 'mis-datos', component: MisDatosComponent },
   { path: 'sobre-nosotros', component: SobreNosotrosComponent },
   { path: 'admin/ver-pedidos', component: VerPedidosComponent },

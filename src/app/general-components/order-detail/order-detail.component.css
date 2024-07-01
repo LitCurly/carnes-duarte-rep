@@ -1,0 +1,46 @@
+.order-detail-section {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.order-detail-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.order-detail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.order-detail-description {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.order-detail-content {
+  margin-top: 1rem;
+}
+
+.order-detail-content p {
+  margin-bottom: 0.5rem;
+}
+
+.order-detail-content ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.order-detail-content li {
+  margin-bottom: 1rem;
+}
+
+.order-detail-empty {
+  text-align: center;
+  margin-top: 1rem;
+  color: #6b7280;
+}
