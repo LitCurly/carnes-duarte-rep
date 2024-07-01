@@ -48,4 +48,27 @@ export class OrderDetailComponent implements OnInit {
       });
     }
   }
+
+  sendBoletaWhatsApp() {
+    const boletaElement = document.querySelector('.receipt') as HTMLElement;
+    if (boletaElement) {
+      html2canvas(boletaElement).then(canvas => {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const formData = new FormData();
+            formData.append('file', blob, 'boleta.png');
+
+            const phoneNumber = '+56942274284';  // Reemplaza con el número de teléfono al que deseas enviar el mensaje
+            const message = 'Hola, aquí está tu boleta de compra';  // Mensaje que deseas enviar
+
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // Abre la URL de WhatsApp en una nueva ventana
+            window.open(whatsappUrl, '_blank');
+
+          }
+        }, 'image/png');
+      });
+    }
+  }
 }
