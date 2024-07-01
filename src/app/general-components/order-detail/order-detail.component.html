@@ -1,25 +1,33 @@
-<div class="order-detail-section">
-  <div class="order-detail-header">
-    <h2 class="order-detail-title">Detalles de la Orden</h2>
-    <p class="order-detail-description">Explora los detalles de la orden de compra.</p>
+<header-component></header-component>
+
+<div class="receipt">
+  <div class="receipt-header">
+    <h2 class="receipt-title">Boleta de Compra</h2>
+    <p class="receipt-date">Fecha de Emisión: {{ formatDate(order?.createdAt) }} Hora: {{ formatTime(order?.createdAt) }}</p>
   </div>
 
-  <div *ngIf="order" class="order-detail-content">
-    <p><strong>Fecha de Emisión:</strong> {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</p>
-    <p><strong>Productos:</strong></p>
-    <ul>
-      <li *ngFor="let item of order.items">
-        <p><strong>Nombre:</strong> {{ item.nombre }}</p>
-        <p><strong>Cantidad:</strong> {{ item.cantidad }}</p>
-        <p><strong>Precio por Kilo:</strong> {{ item.precioPorKilo | currency:'CLP':'symbol':'1.0-0' }}</p>
-        <p><strong>Subtotal:</strong> {{ item.subtotal | currency:'CLP':'symbol':'1.0-0' }}</p>
-        <p><strong>Tipo:</strong> {{ item.tipo }}</p>
-      </li>
-    </ul>
-    <p><strong>Total:</strong> {{ order.total | currency:'CLP':'symbol':'1.0-0' }}</p>
+  <div *ngIf="order" class="receipt-content">
+    <div class="receipt-items">
+      <div class="receipt-item" *ngFor="let item of order.items">
+        <div class="item-description">
+          <p><strong>Nombre:</strong> {{ item.nombre }}</p>
+          <p><strong>Tipo:</strong> {{ item.tipo }}</p>
+        </div>
+        <div class="item-quantity-price">
+          <p><strong>Cantidad:</strong> {{ item.cantidad }}</p>
+          <p><strong>Precio por Kilo:</strong> {{ item.precioPorKilo | currency:'CLP':'symbol':'1.0-0' }}</p>
+          <p><strong>Subtotal:</strong> {{ item.subtotal | currency:'CLP':'symbol':'1.0-0' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="receipt-summary">
+      <p><strong>Total:</strong> {{ order.total | currency:'CLP':'symbol':'1.0-0' }}</p>
+    </div>
   </div>
 
-  <div *ngIf="!order" class="order-detail-empty">
+  <div *ngIf="!order" class="receipt-empty">
     <p>No se encontraron detalles para esta orden.</p>
   </div>
 </div>
+
+<footer-component></footer-component>
