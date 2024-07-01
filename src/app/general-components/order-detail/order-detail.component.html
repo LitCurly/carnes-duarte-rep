@@ -25,6 +25,9 @@
     </div>
   </div>
 
+  <button (click)="captureBoleta()">Descargar Boleta en PDF</button>
+  <button (click)="sendBoletaWhatsApp()">Enviar Boleta por WhatsApp</button>
+
   <div *ngIf="!order" class="receipt-empty">
     <p>No se encontraron detalles para esta orden.</p>
   </div>
