@@ -1,18 +1,39 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth'; // Importa AngularFireAuth desde compat/auth
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<firebase.User | null> = new BehaviorSubject<firebase.User | null>(null);
+  user$: Observable<firebase.User | null> = this.userSubject.asObservable();
+  isLoggedIn = false;
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+    this.afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      this.afAuth.authState.subscribe(user => {
+        this.isLoggedIn = !!user;
+        this.userSubject.next(user);
+      });
+    }).catch(error => {
+      console.error('Error setting persistence:', error);
+    });
+  }
+
+  getAuthState(): Observable<firebase.User | null> {
+    return this.afAuth.authState;
+  }
 
   async loginWithEmailAndPassword(email: string, password: string): Promise<void> {
     try {
       await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.isLoggedIn = true;
+      this.router.navigate(['/inicio']);
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       throw error;
@@ -21,11 +42,10 @@ export class AuthService {
 
   async registerWithEmailAndPassword(email: string, password: string, user: User): Promise<void> {
     try {
-      // Registrar usuario en Firebase Authentication
       const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
-
-      // Guardar información adicional en Firestore
       await this.createUserProfile(credential.user?.uid, user);
+      this.isLoggedIn = true;
+      this.router.navigate(['/inicio']);
     } catch (error) {
       console.error('Error al registrar usuario:', error);
       throw error;
@@ -38,12 +58,10 @@ export class AuthService {
     }
 
     try {
-      // Agregar el ID de usuario generado automáticamente por Firestore
       const userData: User = {
         ...user,
       };
 
-      // Guardar perfil de usuario en Firestore
       await firebase.firestore().collection('users').doc(uid).set(userData);
     } catch (error) {
       console.error('Error al crear perfil de usuario en Firestore:', error);
@@ -55,9 +73,20 @@ export class AuthService {
     try {
       await firebase.auth().sendPasswordResetEmail(email);
       console.log('Correo de recuperación enviado correctamente.');
-      // Mostrar mensaje al usuario indicando que se ha enviado un correo para restablecer la contraseña
     } catch (error) {
       console.error('Error al enviar correo de recuperación:', error);
+      throw error;
+    }
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+      this.isLoggedIn = false;
+      this.userSubject.next(null);
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
       throw error;
     }
   }
