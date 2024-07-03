@@ -12,11 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from './services/cart.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';  // Importa HttpClientModule
-import { WhatsappService } from "./services/whatsapp.service";
+import { AngularFireModule } from '@angular/fire/compat'; // se agrego esto
+
 
 //Componentes
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+// import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './general-components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { VerificarCorreoComponent } from './components/verificar-correo/verificar-correo.component';
@@ -40,12 +42,14 @@ import { BoxComponent } from './general-components/box/box.component';
 import { CartComponent } from './general-components/cart/cart.component';
 import { OrderComponent } from "./general-components/order/order.component";
 import { OrderDetailComponent } from './general-components/order-detail/order-detail.component';
+import { RegisterComponent } from './general-components/register/register.component';
+import { ForgotPasswordComponent } from './general-components/forgot-password/forgot-password.component';
+import {AuthService} from "./services/auth-service.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     DashboardComponent,
     RegistrarUsuarioComponent,
     VerificarCorreoComponent,
@@ -68,6 +72,9 @@ import { OrderDetailComponent } from './general-components/order-detail/order-de
     CartComponent,
     OrderComponent,
     OrderDetailComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,13 +82,14 @@ import { OrderDetailComponent } from './general-components/order-detail/order-de
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Inicializa Firebase aquí
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FormsModule,
     MatTooltipModule,
     HttpClientModule  // Añade HttpClientModule a los imports
   ],
-  providers: [CartService, WhatsappService],
+  providers: [CartService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
