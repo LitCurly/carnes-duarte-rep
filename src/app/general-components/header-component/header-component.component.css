@@ -36,3 +36,17 @@ header {
 .row {
   margin-bottom: 20px;
 }
+
+/* Estilos para la imagen del carrito */
+/* Estilos específicos para el botón de carrito */
+.carrito-button {
+  background-color: white; /* Fondo blanco */
+  border-color: transparent; /* Sin borde visible */
+  padding: 6px 10px; /* Ajuste de padding */
+}
+
+/* Estilos para la imagen del carrito */
+.icon-png {
+  max-width: 24px; /* Tamaño máximo de la imagen */
+  height: auto; /* Altura automática */
+}
