@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
 import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { VerificarCorreoComponent } from './components/verificar-correo/verificar-correo.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
@@ -20,13 +19,16 @@ import { FooterComponentComponent } from "./general-components/footer-component/
 import { HeaderComponentComponent } from "./general-components/header-component/header-component.component";
 import { CartComponent } from "./general-components/cart/cart.component";
 import { OrderComponent} from "./general-components/order/order.component";
-import {OrderDetailComponent} from "./general-components/order-detail/order-detail.component";
+import { OrderDetailComponent } from "./general-components/order-detail/order-detail.component";
+import { LoginComponent } from "./general-components/login/login.component";
+import { RegisterComponent } from "./general-components/register/register.component";
+import { ForgotPasswordComponent } from "./general-components/forgot-password/forgot-password.component";
+
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
@@ -48,7 +50,9 @@ const routes: Routes = [
   { path: 'header-component', component: HeaderComponentComponent },
   { path: 'carrito', component: CartComponent },
   { path: 'order', component: OrderComponent },
-
+  { path: 'login', component: LoginComponent },
+  { path: 'registrarse', component: RegisterComponent },
+  { path: 'recuperar-contraseña', component: ForgotPasswordComponent },
 
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
