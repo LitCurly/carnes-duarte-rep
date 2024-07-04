@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Cart, CartItem } from '../../models/cart';
-import { Order } from '../../models/order';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,7 +14,7 @@ export class CartComponent {
 
   cart: Cart = { items: [], total: 0 };
   modalOpen: boolean = true;
-  quantities: { [nombre: string]: number } = {}; // Para manejar las cantidades de los items
+  quantities: { [nombre: string]: number } = {}; // Para manejar las cantidades de los items en el carrito
   showSpinner: boolean = false; // Controla la visibilidad del spinner
 
   constructor(
@@ -25,27 +24,24 @@ export class CartComponent {
   ) {
     this.cartService.getCart().subscribe(cart => {
       this.cart = cart;
+      this.quantities = {}; // Reiniciar quantities para evitar duplicados
       this.cart.items.forEach(item => {
-        this.quantities[item.nombre] = 0; // Inicializar cantidades a 0
+        this.quantities[item.nombre] = 0; // Inicializar con 0 para las acciones de incremento y decremento
       });
     });
   }
 
   incrementQuantity(item: CartItem) {
-    // Obtener la cantidad actual para este ítem en el carrito
-    const currentQuantity = this.quantities[item.nombre];
-
-    // Verificar si la cantidad actual es menor al stock disponible
-    if (currentQuantity < item.cantidad) {
-      // Incrementar la cantidad solo si no excede el stock disponible
+    // Incrementar la cantidad deseada para quitar del carrito
+    if (this.quantities[item.nombre] < item.cantidad) {
       this.quantities[item.nombre]++;
     } else {
-      // Mostrar un mensaje de error si se intenta superar el stock disponible
       this.toastr.warning(`No puedes agregar más ${item.nombre} de los disponibles`, 'Stock máximo alcanzado');
     }
   }
 
   decrementQuantity(item: CartItem) {
+    // Decrementar la cantidad deseada para quitar del carrito
     if (this.quantities[item.nombre] > 0) {
       this.quantities[item.nombre]--;
     }
@@ -53,19 +49,17 @@ export class CartComponent {
 
   removeFromCart(item: CartItem) {
     const quantityToRemove = this.quantities[item.nombre];
-    if (quantityToRemove === 0) {
-      this.toastr.error('Ingrese una cantidad válida para quitar los productos del carrito', 'Error');
-    } else {
+
+    if (quantityToRemove > 0) {
       const itemToRemove: CartItem = {
         nombre: item.nombre,
         cantidad: quantityToRemove,
         precioPorKilo: item.precioPorKilo,
         tipo: item.tipo,
-        subtotal: quantityToRemove * item.precioPorKilo // No se usa realmente en removeFromCart
+        subtotal: item.subtotal
       };
+
       this.cartService.removeFromCart(itemToRemove);
-      this.toastr.success(`Se han quitado ${quantityToRemove} kilos de ${item.nombre} del carrito`, 'Éxito');
-      this.quantities[item.nombre] = 0; // Restablecer la cantidad a cero después de quitar del carrito
     }
   }
 
@@ -73,44 +67,39 @@ export class CartComponent {
     this.cartService.clearCart();
   }
 
-  openModal(): void {
-    this.modalOpen = true;
-  }
-
-  closeModalAndEmit(): void {
+  closeModalDialog() {
     this.modalOpen = false;
     this.closeModal.emit();
   }
 
-  async createOrder() {
-    const total = this.cart.items.reduce((acc, item) => acc + item.subtotal, 0);
-    const order: Order = {
-      items: this.cart.items,
-      total: total, // Asegúrate de incluir el total en la orden
-      createdAt: new Date() // Añadir la propiedad createdAt aquí
-    };
+  async confirmOrder() {
+    // Aplicar los cambios al carrito antes de confirmar la orden
+    this.cart.items.forEach(item => {
+      const quantityToRemove = this.quantities[item.nombre];
+      if (quantityToRemove > 0) {
+        const itemToRemove: CartItem = {
+          nombre: item.nombre,
+          cantidad: quantityToRemove,
+          precioPorKilo: item.precioPorKilo,
+          tipo: item.tipo,
+          subtotal: item.precioPorKilo * quantityToRemove // Calcular subtotal basado en la cantidad a quitar
+        };
+        this.cartService.removeFromCart(itemToRemove);
+      }
+    });
 
+    // Confirmar la orden
     this.showSpinner = true;
-
     try {
-      await this.cartService.createOrder(order);
-
-      // Mostrar el spinner durante 3 segundos antes de proceder
-      setTimeout(async () => {
-        await this.router.navigate(['/mis-pedidos']);
-        this.showSpinner = false;
-        this.toastr.success('La compra se ha realizado exitosamente', 'Éxito');
-        this.cartService.clearCart(); // Vaciar el carrito después de la navegación
-        this.closeModalAndEmit(); // Cerrar el modal después de crear la orden y vaciar el carrito
-      }, 3000);
+      await this.cartService.confirmOrder(this.cart);
+      this.toastr.success('Orden confirmada exitosamente', '¡Felicitaciones!');
+      this.router.navigate(['/mis-pedidos']); // Redireccionar a la página de órdenes después de confirmar
+      this.closeModalDialog(); // Cerrar el modal después de confirmar la orden
     } catch (error) {
+      console.error('Error al confirmar la orden:', error);
+      this.toastr.error('Error al confirmar la orden', '¡Oops!');
+    } finally {
       this.showSpinner = false;
-      this.toastr.error('Hubo un problema al procesar la compra', 'Error');
-      console.error('Error al crear la orden:', error);
     }
-  }
-
-  cancelAction(): void {
-    this.closeModalAndEmit();
   }
 }

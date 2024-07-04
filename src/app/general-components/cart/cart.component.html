@@ -11,17 +11,19 @@
               <table class="user-table">
                 <thead>
                 <tr>
-                  <th class="fixed-width-column">Nombre</th>
-                  <th>Valor</th>
-                  <th>Cantidad</th>
-                  <th class="action-column">Acciones</th>
+                  <th class="fixed-width-column-type">Tipo</th>
+                  <th class="fixed-width-column-name">Nombre</th>
+                  <th class="fixed-width-column-value">Valor</th>
+                  <th class="fixed-width-column-amount">Cantidad</th>
+                  <th class="action-column">Quitar productos</th>
                   <th>SubTotal</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let item of cart.items">
-                  <td class="fixed-width-column">{{ item.nombre }}</td>
-                  <td>{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
+                  <td class="fixed-width-column-type">{{ item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1) }}</td>
+                  <td class="fixed-width-column-name">{{ item.nombre }}</td>
+                  <td class="fixed-width-column-value">{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
                   <td>{{ item.cantidad }}</td>
                   <td class="action-column">
                     <div class="action-buttons">
@@ -29,7 +31,7 @@
                       <span>{{ quantities[item.nombre] }}</span>
                       <button (click)="incrementQuantity(item)">+</button>
                       <button (click)="removeFromCart(item)" class="remove-from-cart-button">
-                        <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Delete Item">
+                        <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem">
                       </button>
                     </div>
                   </td>
@@ -38,7 +40,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <td colspan="4" style="text-align: right; font-weight: bold;">Total:</td>
+                  <td colspan="5" style="text-align: right; font-weight: bold;">Total:</td>
                   <td>{{ cart.total | currency:'CLP ':'symbol':'1.0-0' }}</td>
                 </tr>
                 </tfoot>
@@ -48,15 +50,15 @@
         </div>
         <ng-template #emptyCart>
           <div class="empty-cart">
-              <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío">
+            <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío">
             <p>Tu carrito está vacío</p>
-            <button class="modal-button cancel" (click)="cancelAction()">Cerrar</button>
+            <button class="modal-button cancel" (click)="closeModalDialog()">Cerrar</button>
           </div>
         </ng-template>
       </div>
       <div class="modal-buttons" *ngIf="cart.items && cart.items.length > 0">
-        <button class="modal-button cancel" (click)="cancelAction()">Cancelar</button>
-        <button class="modal-button accept" (click)="createOrder()">Confirmar Compra</button>
+        <button class="modal-button cancel" (click)="closeModalDialog()">Cancelar</button>
+        <button class="modal-button accept" (click)="confirmOrder()">Confirmar Compra</button>
       </div>
     </div>
   </div>

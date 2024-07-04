@@ -1,38 +1,57 @@
-<div class="container">
+<header-component></header-component>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+  <p>Cargando detalle de orden...</p>
+</div>
+
+<div class="container" *ngIf="!loading">
   <div *ngIf="order" class="receipt">
     <div class="receipt-header">
       <h2 class="receipt-title">Boleta de Compra</h2>
       <p class="receipt-date">Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</p>
+      <p class="organization-name">{{ organization.nombre }} R.U.T.:  {{ formatRutOrganization(organization.rut) }}</p>
+      <p class="organization-address">Dirección: {{ organization.direccion }}</p>
+      <p class="organization-phone">Contacto: {{ organization.telefono }}</p>
+      <p class="user-rut" *ngIf="userRut !== undefined">RUT del Cliente: {{ formatRutUserData(userRut) }}</p>
+      <p class="user-rut" *ngIf="userRut === undefined">RUT del Cliente: N/A</p>
     </div>
 
     <div class="receipt-content">
-      <div class="receipt-items">
-        <div class="receipt-item" *ngFor="let item of order.items">
-          <div class="item-description">
-            <p><strong>Nombre:</strong> {{ item.nombre }}</p>
-            <p><strong>Tipo:</strong> {{ item.tipo }}</p>
-          </div>
-          <div class="item-quantity-price">
-            <p><strong>Cantidad:</strong> {{ item.cantidad }}</p>
-            <p><strong>Precio por Kilo:</strong> {{ item.precioPorKilo | currency:'CLP':'symbol':'1.0-0' }}</p>
-            <p><strong>Subtotal:</strong> {{ item.subtotal | currency:'CLP':'symbol':'1.0-0' }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="receipt-summary">
-        <p><strong>Total:</strong> {{ order.total | currency:'CLP':'symbol':'1.0-0' }}</p>
-      </div>
+      <table class="receipt-items">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Precio por Kilo</th>
+          <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of order.items">
+          <td>{{capitalizeFirstLetter(item.tipo) }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.cantidad }}</td>
+          <td>{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
+          <td>{{ item.subtotal | currency:'CLP ':'symbol':'1.0-0' }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4" style="text-align: right; font-weight: bold;"><strong>Total:</strong></td>
+          <td>{{ order.total | currency:'CLP ':'symbol':'1.0-0' }}</td>
+        </tr>
+        </tfoot>
+      </table>
     </div>
 
     <div class="receipt-actions">
-      <button class="btn btn-primary pdf-button" (click)="openPdf()">Enviar Boleta Whats App</button>
-      <div *ngIf="loading" class="spinner-overlay">
-        <div class="spinner"></div>
-      </div>
+      <button class="btn btn-secondary pdf-button" (click)="openPdf()">Enviar Boleta WhatsApp</button>
     </div>
   </div>
-
-  <div *ngIf="!order" class="receipt-empty">
-    <p>No se encontraron detalles para esta orden.</p>
-  </div>
 </div>
+
+<footer-component></footer-component>
