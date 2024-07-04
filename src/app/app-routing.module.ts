@@ -26,6 +26,7 @@ import { ForgotPasswordComponent } from "./general-components/forgot-password/fo
 
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
