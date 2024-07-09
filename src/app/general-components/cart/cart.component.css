@@ -36,9 +36,23 @@
   color: #6b7280;
 }
 
-.user-table .fixed-width-column {
-  width: 200px; /* Ancho fijo para la primera columna */
+.user-table .fixed-width-column-name {
+  width: 150px; /* Ancho fijo para la columna de nombre */
 }
+
+.user-table .fixed-width-column-type {
+  width: 100px; /* Ancho fijo para la columna de tipo */
+}
+
+.user-table .fixed-width-column-value {
+  width: 100px; /* Ancho fijo para la columna de tipo */
+}
+
+.user-table .fixed-width-column-amount {
+  width: 100px; /* Ancho fijo para la columna de tipo */
+}
+
+
 
 .user-table .action-column {
   width: 200px; /* Ancho fijo para la columna de acciones */
@@ -210,20 +224,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Asegurarse de que esté por encima de todo el contenido */
+  z-index: 1000;
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #22a6b3;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #007bff; /* Blue */
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  to {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
     transform: rotate(360deg);
   }
 }

@@ -69,7 +69,7 @@
 
 .table-container {
   margin-top: 2rem;
-  max-height: 550px; /* Tamaño fijo vertical */
+  max-height: 600px; /* Tamaño fijo vertical */
   overflow-y: auto; /* Scroll vertical si necesario */
 }
 
@@ -169,3 +169,11 @@
 .add-to-cart-button:hover:not(:disabled) {
   background-color: #800000;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajusta según sea necesario */
+}
+

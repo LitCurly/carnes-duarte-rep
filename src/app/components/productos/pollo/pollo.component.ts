@@ -21,6 +21,7 @@ export class PolloComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   quantities: { [corteId: string]: number } = {};
+  isLoading = true; // Bandera para controlar la visibilidad del spinner
 
   constructor(
     private carneService: CarneService,
@@ -40,12 +41,14 @@ export class PolloComponent implements OnInit {
   }
 
   loadCortes(): void {
+    this.isLoading = true; // Mostrar spinner al iniciar carga
     this.carneService.getCarneCortes('pollo').subscribe(data => {
       this.cortes = data.cortes;
       this.cortes.forEach(corte => {
         this.quantities[corte.nombre] = 0;
       });
       this.filterCortes();
+      this.isLoading = false; // Ocultar spinner cuando termina la carga
     });
   }
 

@@ -1,18 +1,22 @@
 <div class="orders-section">
   <div class="orders-header">
     <h2 class="orders-title">Órdenes de Compra</h2>
-    <p class="orders-description">Revisa tus órdenes de compra realizadas.</p>
+    <div *ngIf="!isLoggedIn && !isLoading" class="auth-message">
+      <p class="orders-description">Inicia sesión para ver tus órdenes de compra.</p>
+    </div>
+    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">No has realizado ninguna compra aún.</p>
+    <p *ngIf="paginatedOrders.length > 0" class="orders-description">Revisa tus órdenes de compra realizadas.</p>
   </div>
 
-  <div class="table-container">
+  <div class="table-container" *ngIf="isLoggedIn && !isLoading">
     <div class="table-wrapper">
-      <table class="orders-table">
+      <table *ngIf="paginatedOrders.length > 0" class="orders-table">
         <thead>
         <tr>
           <th>Fecha de Emisión</th>
           <th>Productos</th>
           <th>Valor</th>
-          <th>Acciones</th> <!-- Nueva columna para ver detalle -->
+          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -25,17 +29,27 @@
           </td>
           <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
           <td>
-            <button class="detail-button" (click)="order.id && goToOrderDetail(order.id)">Ver Detalle</button>
+            <button class="detail-button" (click)="goToOrderDetail(order.id)">Ver Detalle</button>
           </td>
         </tr>
         </tbody>
       </table>
+      <div class="image-container" *ngIf="paginatedOrders.length === 0">
+        <img src="assets/img/img-duarte/nodata.webp" alt="No Data" class="no-data-image">
+      </div>
     </div>
   </div>
 
-  <div class="pagination-container">
+  <div class="pagination-container" *ngIf="paginatedOrders.length > 0 && !isLoading && isLoggedIn">
     <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
     <span>Página {{ currentPage }} de {{ totalPages }}</span>
     <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
+  </div>
+
+  <div class="spinner-container" *ngIf="isLoading && isLoggedIn">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p>Cargando órdenes...</p>
   </div>
 </div>

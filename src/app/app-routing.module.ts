@@ -24,12 +24,9 @@ import { LoginComponent } from "./general-components/login/login.component";
 import { RegisterComponent } from "./general-components/register/register.component";
 import { ForgotPasswordComponent } from "./general-components/forgot-password/forgot-password.component";
 
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: InicioComponent },
+  { path: 'inicio', component: InicioComponent},
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'verificar-correo', component: VerificarCorreoComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },

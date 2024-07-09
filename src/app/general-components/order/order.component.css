@@ -1,5 +1,5 @@
 .orders-section {
-  background: linear-gradient(to right, #fdfdfd, #575656);
+  background: linear-gradient(to right, #fdfdfd, #ffffff);
   padding: 1.5rem;
 }
 
@@ -9,7 +9,6 @@
   text-align: center;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-bottom: 1.5rem;
 }
 
 .orders-title {
@@ -24,6 +23,10 @@
   font-size: 1.125rem;
   line-height: 1.75rem;
   color: #000000;
+}
+
+.auth-message {
+  margin-bottom: 16.9rem; /* Asegura que este margen solo se aplique cuando el usuario no está autenticado */
 }
 
 .table-container {
@@ -110,4 +113,23 @@
 
 .detail-button:hover {
   background-color: #800000;
+}
+
+.image-container {
+  text-align: center; /* Asegura que la imagen esté centrada */
+  margin-top: 1rem; /* Reducir el margen superior */
+}
+
+.no-data-image {
+  display: block;
+  margin: 0 auto; /* Centrar horizontalmente */
+  max-width: 100%; /* Ajustar el tamaño máximo según sea necesario */
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajusta según sea necesario */
+  margin-bottom: 12.9rem;
 }

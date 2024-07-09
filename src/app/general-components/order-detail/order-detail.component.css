@@ -1,111 +1,81 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .receipt {
   background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 2rem auto;
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .receipt-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .receipt-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #1f2937;
+  font-size: 24px;
+  color: #000000;
 }
 
 .receipt-date {
-  font-size: 1rem;
-  color: #6b7280;
+  font-size: 14px;
+  color: #666666;
+}
+
+.organization-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.organization-rut, .organization-address, .organization-phone, .user-rut {
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .receipt-content {
-  margin-top: 2rem;
+  margin-bottom: 20px;
 }
 
 .receipt-items {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-.receipt-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
-  border-bottom: 1px solid #e5e7eb;
+.receipt-items th, .receipt-items td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #dddddd;
 }
 
-.item-description,
-.item-quantity-price {
-  flex: 1;
+.receipt-items th {
+  background-color: #f2f2f2;
 }
 
-.item-description p,
-.item-quantity-price p {
-  margin: 0.25rem 0;
+.receipt-items td {
+  font-size: 14px;
 }
 
 .receipt-summary {
   text-align: right;
-  margin-top: 2rem;
-  font-size: 1.25rem;
-  font-weight: 700;
+  margin-top: 20px;
 }
 
 .pdf-button {
-  margin-top: 1rem;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  background-color: #25D366
 }
 
-.pdf-button:hover {
-  background-color: #2980b9;
-}
-
-.receipt-empty {
-  text-align: center;
-  margin-top: 2rem;
-  color: #6b7280;
-}
-
-.spinner-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
+.spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-}
-
-.spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  height: 100px; /* Ajusta según sea necesario */
+  margin-bottom: 12.9rem;
 }
