@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa Router
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth-service.service';
 
@@ -11,14 +11,14 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  loading = false; // Variable para manejar el estado de carga
-  incorrectPassword = false; // Variable para controlar mensaje de contraseña incorrecta
+  loading = false;
+  incorrectPassword = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private toastr: ToastrService, // ToastrService inyectado
-    private router: Router // Router inyectado
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,32 +32,28 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
-      this.loading = true; // Activar estado de carga
-      this.incorrectPassword = false; // Reiniciar estado de contraseña incorrecta
+      this.loading = true;
+      this.incorrectPassword = false;
 
       try {
         await this.authService.loginWithEmailAndPassword(email, password);
-        this.toastr.success('Inicio de sesión exitoso', '¡Bienvenido!');
-        // Redirigir al usuario a /inicio después de iniciar sesión exitosamente
-        this.router.navigate(['/inicio']);
+        // No se requiere redirección aquí, se maneja en el servicio AuthService
       } catch (error) {
-        // Manejar diferentes tipos de errores de autenticación
         // @ts-ignore
         if (error.code === 'auth/wrong-password') {
-          this.incorrectPassword = true; // Activar mensaje de contraseña incorrecta
+          this.incorrectPassword = true;
         } else {
           this.toastr.error('Error al iniciar sesión', 'Error');
           console.error('Error al iniciar sesión:', error);
         }
       } finally {
-        this.loading = false; // Desactivar estado de carga
+        this.loading = false;
       }
     } else {
       this.toastr.warning('Por favor completa todos los campos', 'Atención');
     }
   }
 
-  // Método para acceder al control del formulario desde el HTML
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
 }

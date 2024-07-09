@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { VerificarCorreoComponent } from './components/verificar-correo/verificar-correo.component';
 import { RecuperarPasswordComponent } from './components/recuperar-password/recuperar-password.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
@@ -23,6 +22,8 @@ import { OrderDetailComponent } from "./general-components/order-detail/order-de
 import { LoginComponent } from "./general-components/login/login.component";
 import { RegisterComponent } from "./general-components/register/register.component";
 import { ForgotPasswordComponent } from "./general-components/forgot-password/forgot-password.component";
+import {AuthGuard} from "./services/auth.guard";
+import { DashboardComponent } from "./components/admin/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -41,7 +42,6 @@ const routes: Routes = [
   { path: 'admin/ver-pedidos', component: VerPedidosComponent },
   { path: 'admin/gestionar-productos', component: GestionarProductosComponent },
   { path: 'admin/gestionar-usuarios', component: GestionarUsuariosComponent },
-  { path: 'dashboard', component: DashboardComponent },
 
   // Componentes Generales
   { path: 'footer-component', component: FooterComponentComponent },
@@ -51,6 +51,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegisterComponent },
   { path: 'recuperar-contraseña', component: ForgotPasswordComponent },
+
+  // Admin Routes
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
