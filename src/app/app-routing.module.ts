@@ -22,8 +22,9 @@ import { OrderDetailComponent } from "./general-components/order-detail/order-de
 import { LoginComponent } from "./general-components/login/login.component";
 import { RegisterComponent } from "./general-components/register/register.component";
 import { ForgotPasswordComponent } from "./general-components/forgot-password/forgot-password.component";
-import {AuthGuard} from "./services/auth.guard";
+import { AuthGuard } from "./services/auth.guard";
 import { DashboardComponent } from "./components/admin/dashboard/dashboard.component";
+import {HomeComponent} from "./components/admin/home/home.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -53,8 +54,23 @@ const routes: Routes = [
   { path: 'recuperar-contraseña', component: ForgotPasswordComponent },
 
   // Admin Routes
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+        children: [
+          { path: '', redirectTo: 'home', pathMatch: 'full' },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'gestionar-productos', component: GestionarProductosComponent },
+          { path: 'gestionar-usuarios', component: GestionarUsuariosComponent },
+          // Agrega más rutas según las opciones de menú que tengas
+        ]
+      }
+    ]
+  },
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 

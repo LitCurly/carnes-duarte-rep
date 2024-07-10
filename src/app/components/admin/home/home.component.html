@@ -1,0 +1,34 @@
+<div class="sidebar" [style.width.px]="sidebarWidth" [class.closed]="sidebarClosed">
+  <div class="logo-upper" (click)="toggleSidebar()">
+    <img src="./assets/img/logo-duarte-letras.png" alt="CarnesDuarteUpper">
+  </div>
+
+  <ul class="menu">
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.closed]="sidebarClosed">
+      <a routerLink="/admin/home/dashboard" *ngIf="!sidebarClosed">Dashboard</a>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/dashboard">D</span>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.closed]="sidebarClosed">
+      <a routerLink="/admin/home/gestionar-productos" *ngIf="!sidebarClosed">Productos</a>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-productos">P</span>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.closed]="sidebarClosed">
+      <a routerLink="/admin/home/gestionar-usuarios" *ngIf="!sidebarClosed">Usuarios</a>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-usuarios">U</span>
+    </li>
+    <!-- Repite para otros elementos del menú -->
+  </ul>
+  <div class="separator"></div>
+  <button class="logout-button">
+    <span *ngIf="!sidebarClosed" (click)="logout()">Cerrar sesión</span>
+    <img *ngIf="sidebarClosed" (click)="logout()" src="./assets/img/logout.png" alt="LogOut">
+  </button>
+  <div class="logo-lower">
+    <img src="./assets/img/logo-duarte-circ.png" alt="CarnesDuarteLower">
+  </div>
+</div>
+
+
+<div class="content" [class.closed]="sidebarClosed">
+  <router-outlet></router-outlet> <!-- Outlet para el contenido dinámico -->
+</div>

@@ -1,0 +1,183 @@
+/* Estilos para el sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Ocupa el 100% del alto vertical */
+  width: 200px; /* Ancho inicial del sidebar */
+  background-color: #000000; /* Color de fondo oscuro */
+  color: #ffffff; /* Color de texto blanco */
+  transition: width 0.3s ease;
+  z-index: 1000;
+  display: flex; /* Usa flexbox para alinear verticalmente */
+  flex-direction: column; /* Alinea los elementos verticalmente */
+}
+
+.sidebar.closed {
+  width: 100px; /* Ancho reducido cuando está cerrado */
+}
+
+.logo-upper {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  transition: width 0.3s ease; /* Transición para el cambio de tamaño */
+}
+
+.logo-upper:hover {
+  transform: scale(1.3); /* Escala ligeramente el logo al hacer hover */
+  transition: transform 0.9s ease; /* Añade una transición suave */
+  cursor: pointer;
+}
+
+.logo-upper img {
+  width: 150px; /* Tamaño inicial del logo */
+}
+
+.sidebar.closed .logo-upper img {
+  width: 60px; /* Tamaño del logo cuando el sidebar está cerrado */
+
+  margin-bottom: 44px;
+}
+
+.menu {
+  list-style-type: none;
+  text-align: left;
+  padding: 0;
+  margin-top: 20px; /* Margen superior para separar del logo-upper */
+}
+
+.menu li {
+  padding: 10px 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px;
+}
+
+/* Marca las rutas que no están activadas */
+.menu li a,
+.menu li span {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu li span {
+  cursor: pointer;
+  display: block;
+}
+
+.menu li.closed {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.content {
+  margin-left: 240px; /* Ajusta el margen izquierdo para dejar más espacio para el sidebar */
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+  position: relative; /* Añade posición relativa para manejar z-index */
+  z-index: 1100; /* Asegura que el contenido esté por encima del sidebar */
+}
+
+.content.closed {
+  margin-left: 75px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
+}
+
+.menu li.active a,
+.menu li.active span {
+  color: #ffffff; /* Color de texto cuando está activo */
+}
+
+.menu li:hover a,
+.menu li span:hover {
+  color: #ffffff; /* Color de texto al hacer hover */
+}
+
+/* Marca las rutas que están activadas */
+.menu li.active,
+.menu li.closed.active {
+  background-color: #fb0808; /* Color de fondo cuando está activo */
+  border-left: 3px #ffffff solid;
+  border-radius: 6px;
+}
+
+/* Estilos para el hover */
+.menu li:hover {
+  background-color: rgba(251, 8, 8, 0.11); /* Color de fondo al hacer hover */
+  border-radius: 6px;
+}
+
+.menu li.active:hover {
+  background-color: #fb0808; /* Color de fondo cuando está activo */
+  border-left: 3px #ffffff solid;
+  border-radius: 6px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.separator::before {
+  margin-right: 0.5em;
+}
+
+.separator::after {
+  margin-left: 0.5em;
+}
+
+/* LogOut */
+.logout-button {
+  position: absolute;
+  bottom: 70px; /* Ajusta la posición para que esté más arriba que el logo-lower */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  z-index: 1100; /* Asegura que el botón esté por encima del contenido */
+}
+
+.logout-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar.closed .logout-button img {
+  display: inline-block; /* Muestra la imagen cuando el sidebar está cerrado */
+  margin-left: 5px; /* Ajusta el espacio entre la imagen y el texto */
+}
+
+.logo-lower {
+  position: absolute;
+  bottom: 10px; /* Ajusta la posición para que esté debajo del botón de cerrar sesión */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  transition: width 0.3s ease; /* Transición para el cambio de tamaño */
+  z-index: 1000; /* Asegura que esté por debajo del botón de Cerrar sesión */
+}
+
+.logo-lower img {
+  width: 65px; /* Tamaño inicial del logo */
+}
+
+.sidebar.closed .logo-lower img {
+  width: 65px; /* Tamaño del logo cuando el sidebar está cerrado */
+}

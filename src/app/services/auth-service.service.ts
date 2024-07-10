@@ -95,7 +95,7 @@ export class AuthService {
           const role = await this.getUserRole(); // Obtener el rol del usuario
           console.log('Rol después de iniciar sesión:', role); // Agregar este mensaje de consola
           if (role === 'administrador') {
-            this.router.navigate(['/dashboard']); // Redirigir a /dashboard si es administrador
+            this.router.navigate(['/admin/home/dashboard']); // Redirigir a /dashboard si es administrador
           } else {
             this.router.navigate(['/inicio']); // Redirigir a /inicio para otros roles
           }

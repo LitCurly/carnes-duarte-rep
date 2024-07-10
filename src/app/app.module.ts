@@ -44,6 +44,7 @@ import { OrderDetailComponent } from './general-components/order-detail/order-de
 import { RegisterComponent } from './general-components/register/register.component';
 import { ForgotPasswordComponent } from './general-components/forgot-password/forgot-password.component';
 import { DashboardComponent } from "./components/admin/dashboard/dashboard.component";
+import { HomeComponent } from './components/admin/home/home.component';
 
 
 
@@ -75,6 +76,7 @@ import { DashboardComponent } from "./components/admin/dashboard/dashboard.compo
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
