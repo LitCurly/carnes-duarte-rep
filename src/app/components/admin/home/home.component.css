@@ -5,7 +5,7 @@
   left: 0;
   height: 100vh; /* Ocupa el 100% del alto vertical */
   width: 200px; /* Ancho inicial del sidebar */
-  z-index: 1000;
+  z-index: 1100; /* Asegura que esté por encima del header */
   display: flex; /* Usa flexbox para alinear verticalmente */
   flex-direction: column; /* Alinea los elementos verticalmente */
   overflow: hidden; /* Evitar que la imagen de fondo afecte el contenido */
@@ -55,6 +55,36 @@
   margin-left: 75px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
 }
 
+.header {
+  height: 60px; /* Altura de la barra superior */
+  background-color: rgba(0, 0, 0, 0.7); /* Color de fondo similar al del sidebar */
+  background-image: url('../../../../assets/img/sideBar.webp'); /* Imagen de fondo del sidebar */
+  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita repetición de la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Asegura que esté posicionado correctamente */
+  z-index: 1000; /* Asegura que esté por debajo del sidebar */
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Capa negra con transparencia del 70% */
+  z-index: 1; /* Coloca la capa negra encima del fondo y la imagen */
+}
+
+.header img {
+  width: 150px; /* Ajusta el tamaño del logo si es necesario */
+}
+
+
 .logo-upper {
   text-align: center;
   margin-top: 20px;
@@ -70,11 +100,6 @@
 .sidebar.closed .logo-upper img {
   width: 60px; /* Tamaño del logo cuando el sidebar está cerrado */
   margin-bottom: 44px;
-}
-
-
-.logo-upper img {
-  width: 150px; /* Tamaño inicial del logo */
 }
 
 .menu {
@@ -202,9 +227,10 @@
 }
 
 .logo-lower img {
-  width: 65px; /* Tamaño inicial del logo */
+  width: 80px; /* Tamaño inicial del logo */
+  transition: width 0.3s ease; /* Transición para el cambio de tamaño */
 }
 
 .sidebar.closed .logo-lower img {
-  width: 65px; /* Tamaño del logo cuando el sidebar está cerrado */
+  width: 30px; /* Tamaño del logo cuando el sidebar está cerrado */
 }

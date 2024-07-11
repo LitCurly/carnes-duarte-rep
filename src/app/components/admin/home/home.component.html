@@ -1,3 +1,11 @@
+<div class="header">
+  <!-- Contenido del encabezado -->
+  <div class="user-info">
+    <!-- Aquí puedes mostrar información del usuario si es necesario -->
+  </div>
+  <!-- Otros elementos del encabezado, como botones, iconos, etc. -->
+</div>
+
 <div class="sidebar" [style.width.px]="sidebarWidth" [class.closed]="sidebarClosed">
   <div class="logo-upper" (click)="toggleSidebar()">
     <img src="./assets/img/logo-duarte-letras.png" alt="CarnesDuarteUpper">
@@ -27,7 +35,6 @@
     <img src="./assets/img/logo-duarte-circ.png" alt="CarnesDuarteLower">
   </div>
 </div>
-
 
 <div class="content" [class.closed]="sidebarClosed">
   <router-outlet></router-outlet> <!-- Outlet para el contenido dinámico -->
