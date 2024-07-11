@@ -52,7 +52,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegisterComponent },
   { path: 'recuperar-contraseña', component: ForgotPasswordComponent },
-
+  { path: 'dashboard', component: DashboardComponent },
   // Admin Routes
   {
     path: 'admin',
@@ -63,7 +63,7 @@ const routes: Routes = [
         component: HomeComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
-          { path: 'dashboard', component: DashboardComponent },
+
           { path: 'gestionar-productos', component: GestionarProductosComponent },
           { path: 'gestionar-usuarios', component: GestionarUsuariosComponent },
           // Agrega más rutas según las opciones de menú que tengas
