@@ -5,16 +5,54 @@
   left: 0;
   height: 100vh; /* Ocupa el 100% del alto vertical */
   width: 200px; /* Ancho inicial del sidebar */
-  background-color: #000000; /* Color de fondo oscuro */
-  color: #ffffff; /* Color de texto blanco */
-  transition: width 0.3s ease;
   z-index: 1000;
   display: flex; /* Usa flexbox para alinear verticalmente */
   flex-direction: column; /* Alinea los elementos verticalmente */
+  overflow: hidden; /* Evitar que la imagen de fondo afecte el contenido */
+
+  /* Capa de color negro transparente */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Color negro con transparencia del 70% */
+    z-index: 1; /* Colocar encima de la imagen de fondo */
+  }
+
+  /* Establecer la imagen de fondo */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../assets/img/sideBar.webp');
+    background-size: cover; /* Ajustar la imagen al tamaño del contenedor */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* Evitar repetición de la imagen */
+    z-index: 0; /* Colocar detrás de todo el contenido */
+  }
+
+  /* Estilos para el texto y otros elementos */
+  color: #ffffff; /* Color de texto blanco */
+  transition: width 0.3s ease;
 }
 
-.sidebar.closed {
-  width: 100px; /* Ancho reducido cuando está cerrado */
+/* Establecer z-index para el contenido */
+.content {
+  margin-left: 240px; /* Ajusta el margen izquierdo para dejar más espacio para el sidebar */
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+  position: relative; /* Añade posición relativa para manejar z-index */
+  z-index: 1100; /* Asegura que el contenido esté por encima del sidebar */
+}
+
+.sidebar.closed .content {
+  margin-left: 75px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
 }
 
 .logo-upper {
@@ -22,12 +60,7 @@
   margin-top: 20px;
   margin-bottom: 50px;
   transition: width 0.3s ease; /* Transición para el cambio de tamaño */
-}
-
-.logo-upper:hover {
-  transform: scale(1.3); /* Escala ligeramente el logo al hacer hover */
-  transition: transform 0.9s ease; /* Añade una transición suave */
-  cursor: pointer;
+  z-index: 3;
 }
 
 .logo-upper img {
@@ -36,8 +69,12 @@
 
 .sidebar.closed .logo-upper img {
   width: 60px; /* Tamaño del logo cuando el sidebar está cerrado */
-
   margin-bottom: 44px;
+}
+
+
+.logo-upper img {
+  width: 150px; /* Tamaño inicial del logo */
 }
 
 .menu {
@@ -45,6 +82,8 @@
   text-align: left;
   padding: 0;
   margin-top: 20px; /* Margen superior para separar del logo-upper */
+  position: relative; /* Asegurar que los elementos de la lista estén posicionados correctamente */
+  z-index: 2; /* Colocar por encima de la capa de fondo */
 }
 
 .menu li {
@@ -70,18 +109,6 @@
 .menu li.closed {
   overflow: visible;
   text-overflow: clip;
-}
-
-.content {
-  margin-left: 240px; /* Ajusta el margen izquierdo para dejar más espacio para el sidebar */
-  padding: 20px;
-  transition: margin-left 0.3s ease;
-  position: relative; /* Añade posición relativa para manejar z-index */
-  z-index: 1100; /* Asegura que el contenido esté por encima del sidebar */
-}
-
-.content.closed {
-  margin-left: 75px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
 }
 
 .menu li.active a,

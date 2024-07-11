@@ -207,7 +207,7 @@ export class DashboardComponent implements AfterViewInit {
         title: 'Mes',
         slantedText: true,
         slantedTextAngle: 45,
-        // Rotar etiquetas del eje horizontal
+        // Ajustar el margen y el tamaño del área del gráfico para mostrar los meses verticalmente
         textStyle: {
           fontSize: 12,
           bold: true,
@@ -215,8 +215,11 @@ export class DashboardComponent implements AfterViewInit {
           color: '#4d4d4d',
           auraColor: 'none'
         },
-        // Muestra los nombres de los meses verticalmente
-        ticks: months.map(month => ({v: `${month} ${currentYear}`, f: month}))
+        // Usar un margen y tamaño de área de gráfico mayores para ajustar la orientación vertical de los meses
+        chartArea: {
+          left: 80, // Ajustar el margen izquierdo para espacio adicional
+          width: '50%', // Reducir el ancho del área del gráfico para acomodar etiquetas verticales
+        }
       },
       vAxis: {
         title: 'Cantidad de Órdenes',
@@ -230,6 +233,7 @@ export class DashboardComponent implements AfterViewInit {
     const chart = new google.visualization.ColumnChart(document.getElementById(chartId));
     chart.draw(dataTable, options);
   }
+
 
 
 }

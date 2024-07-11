@@ -4,19 +4,19 @@
 
 .charts-container {
   display: flex;
-  justify-content: center; /* Centrar las tarjetas horizontalmente */
-  margin-top: 20px;
+  justify-content: space-around; /* Espacio entre las tarjetas */
+
 }
 
 .card {
-  width: 30%; /* Ajustar el ancho de cada tarjeta */
+  width: 30%; /* Ancho de cada tarjeta */
   margin-right: 10px; /* Espacio entre las tarjetas */
   margin-bottom: 20px; /* Espacio entre las tarjetas */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra de la tarjeta */
 }
 
 .large-card {
-  width: 60%; /* Ancho mayor para la tarjeta del gráfico de barras */
+  width: 48%; /* Ancho para las tarjetas grandes */
 }
 
 .chart {
