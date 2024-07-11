@@ -112,8 +112,12 @@ export class DashboardComponent implements AfterViewInit {
       title: title,
       legend: { position: 'none' },
       bars: 'vertical',
-      height: 400,
-      colors: ['#4285F4'],
+      height: 300, // Reducir la altura del gráfico
+      colors: ['#cb0101'],
+      chartArea: {
+        width: '60%', // Reducir el ancho del área del gráfico
+        height: '70%' // Reducir la altura del área del gráfico
+      },
       hAxis: {
         title: 'Fecha',
         slantedText: true,
@@ -123,7 +127,6 @@ export class DashboardComponent implements AfterViewInit {
         title: 'Cantidad de Órdenes',
       },
     };
-
     const chart = new google.visualization.ColumnChart(document.getElementById(chartId));
     chart.draw(dataTable, options);
   }
