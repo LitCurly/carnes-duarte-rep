@@ -1,5 +1,5 @@
 .footer-component {
-  background-color: #ce0019;
+  background-color: #09090b;
   padding: 4rem 1.5rem 2rem;
   color: #ffffff;
 }
@@ -42,7 +42,7 @@
   transition: color 0.3s;
 }
 .footer-link:hover {
-  color: #a0aec0;
+  color: #b20808;
 }
 
 .footer-text {
@@ -78,7 +78,7 @@
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #b20808;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -93,7 +93,7 @@
   transition: color 0.3s;
 }
 .social-link:hover {
-  color: #a0aec0;
+  color: #b20808;
 }
 .social-icon {
   height: 1.5rem;
