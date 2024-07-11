@@ -18,7 +18,7 @@ header {
   color: whitesmoke;
   border-color: whitesmoke;
   --bs-btn-hover-bg: #bb4a50;
-  margin-right: 20%;
+  margin-right: 10%;
   --bs-btn-active-bg: rgb(156, 3, 21);
   --bs-btn-active-border-color: rgba(0, 0, 0, 0.9);
 }
@@ -54,5 +54,4 @@ header {
 .logo-duarte-letras {
   width: 250px; /* Ajusta el ancho según tus necesidades */
   height: auto; /* La altura se ajustará automáticamente según el ancho especificado */
-  margin-left: 5%;
 }
