@@ -1,11 +1,25 @@
+.dashboard {
+  background: #e5e5e5;
+}
+
 .charts-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center; /* Centrar las tarjetas horizontalmente */
   margin-top: 20px;
 }
 
+.card {
+  width: 30%; /* Ajustar el ancho de cada tarjeta */
+  margin-right: 10px; /* Espacio entre las tarjetas */
+  margin-bottom: 20px; /* Espacio entre las tarjetas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra de la tarjeta */
+}
+
+.large-card {
+  width: 50%; /* Ancho mayor para la tarjeta del gráfico de barras */
+}
+
 .chart {
-  width: 400px;
-  height: 300px;
+  width: 100%; /* Ajustar el ancho del gráfico dentro de la tarjeta */
+  height: 300px; /* Ajustar la altura del gráfico dentro de la tarjeta */
 }

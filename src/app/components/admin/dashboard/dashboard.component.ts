@@ -112,11 +112,15 @@ export class DashboardComponent implements AfterViewInit {
       title: title,
       legend: { position: 'none' },
       bars: 'vertical',
-      height: 300, // Reducir la altura del gráfico
+      height: 250, // Reducir la altura del gráfico aún más si es necesario
       colors: ['#cb0101'],
+      bar: {
+        groupWidth: '30%', // Ajustar el ancho del grupo de barras
+      },
       chartArea: {
-        width: '60%', // Reducir el ancho del área del gráfico
-        height: '70%' // Reducir la altura del área del gráfico
+        width: '40%', // Ajustar el ancho del área del gráfico
+        height: '70%', // Ajustar la altura del área del gráfico
+        left: 60, // Ajustar el margen izquierdo del área del gráfico
       },
       hAxis: {
         title: 'Fecha',
@@ -125,8 +129,13 @@ export class DashboardComponent implements AfterViewInit {
       },
       vAxis: {
         title: 'Cantidad de Órdenes',
+        textStyle: {
+          fontSize: 12 // Ajustar el tamaño de la fuente del eje vertical si es necesario
+        },
       },
     };
+
+
     const chart = new google.visualization.ColumnChart(document.getElementById(chartId));
     chart.draw(dataTable, options);
   }
