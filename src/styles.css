@@ -6,13 +6,9 @@
   font-style: normal;
 }
 
-html, body{
-  font-family: 'AccordAltExtraBold', sans-serif;
-}
-
 /* color sugerido= bb4a50 */
 /* color primario= rgba(206, 0, 25, 0.8) */
 /* color secundario= #ffc55a */
 
-html, body { height: 100%; }
+html, body { height: 100%; width: 100%; font-family: 'AccordAltExtraBold', sans-serif;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
