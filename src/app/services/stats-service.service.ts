@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CarneService } from './carne.service';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, collectionGroup, getDocs, DocumentData } from '@angular/fire/firestore';
+import { Firestore, collectionGroup, getDocs, DocumentData, Timestamp } from '@angular/fire/firestore'; // Asegúrate de importar Timestamp
 import { Order } from "../models/order";
 import { CartItem } from "../models/cart";
 import { Corte } from "../models/carne";
@@ -28,15 +28,26 @@ export class StatsService {
       map((querySnapshot: any) => {
         return querySnapshot.docs.map((doc: any) => {
           const data = doc.data();
+          let createdAt: Date | Timestamp;
+
+          if (data.createdAt instanceof Timestamp) {
+            createdAt = data.createdAt.toDate();
+          } else if (data.createdAt instanceof Date) {
+            createdAt = data.createdAt;
+          } else {
+            console.error('Invalid createdAt data:', data.createdAt);
+            return null; // O maneja el caso de error de alguna otra manera
+          }
+
           return {
             id: doc.id,
             items: data.items as CartItem[],
-            createdAt: data.createdAt.toDate(), // Asegúrate de que 'createdAt' sea un Timestamp en Firestore
+            createdAt: createdAt,
             total: data.total || 0,
             boletaURL: data.boletaURL || null
             // Agrega otros campos según sea necesario
           } as Order;
-        });
+        }).filter((order: Order | null) => order !== null); // Filtra los elementos nulos por errores
       })
     );
   }

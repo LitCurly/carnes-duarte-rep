@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Observable, of } from 'rxjs'; // Importa 'of' desde rxjs
+import { Observable } from 'rxjs';
 import { StatsService } from '../../../services/stats-service.service';
 import { Corte } from '../../../models/carne';
 import { Order } from '../../../models/order';
@@ -28,16 +28,48 @@ export class DashboardComponent implements AfterViewInit {
       this.drawChart('pollo', this.statsService.getCarneCortes('pollo'), this.titles.pollo);
       this.drawChart('vacuno', this.statsService.getCarneCortes('vacuno'), this.titles.vacuno);
       this.drawChart('cerdo', this.statsService.getCarneCortes('cerdo'), this.titles.cerdo);
+
       this.statsService.getAllOrders().subscribe(
         (orders: Order[]) => {
-          const totalOrders = orders.length; // Obtener el número total de órdenes
-          this.drawTotalOrdersChart('totalOrders', of(totalOrders), this.titles.totalOrders); // Usar 'of' en lugar de Observable.of
+          this.drawTotalOrdersChart('totalOrders', orders, this.titles.totalOrders);
         },
         (error) => {
           console.error('Error al obtener todas las órdenes:', error);
         }
       );
     });
+  }
+
+  private prepareChartData(orders: Order[]): [string, number][] {
+    const groupedData = new Map<string, number>();
+
+    orders.forEach(order => {
+      let createdAt: string;
+
+      if (order.createdAt instanceof Date) {
+        createdAt = order.createdAt.toISOString().split('T')[0];
+      } else {
+        console.error('Error: Invalid createdAt value:', order.createdAt);
+        return;
+      }
+
+      if (groupedData.has(createdAt)) {
+        groupedData.set(createdAt, groupedData.get(createdAt)! + 1);
+      } else {
+        groupedData.set(createdAt, 1);
+      }
+    });
+
+    const chartData: [string, number][] = [];
+    groupedData.forEach((value, key) => {
+      chartData.push([key, value]);
+    });
+
+    chartData.sort((a, b) => {
+      return new Date(a[0]).getTime() - new Date(b[0]).getTime();
+    });
+
+    return chartData;
   }
 
   private drawChart(chartId: string, dataObservable: Observable<Corte[]>, title: string) {
@@ -65,25 +97,34 @@ export class DashboardComponent implements AfterViewInit {
     );
   }
 
-  private drawTotalOrdersChart(chartId: string, dataObservable: Observable<number>, title: string) {
-    dataObservable.subscribe(
-      (totalOrders: number) => {
-        const dataTable = new google.visualization.DataTable();
-        dataTable.addColumn('string', 'Descripción');
-        dataTable.addColumn('number', 'Cantidad');
-        dataTable.addRow(['Total de Órdenes', totalOrders]);
+  private drawTotalOrdersChart(chartId: string, orders: Order[], title: string) {
+    const chartData = this.prepareChartData(orders);
 
-        const options = {
-          title: title,
-          pieHole: 0.4,
-        };
+    const dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Fecha');
+    dataTable.addColumn('number', 'Cantidad de Órdenes');
 
-        const chart = new google.visualization.PieChart(document.getElementById(chartId));
-        chart.draw(dataTable, options);
+    chartData.forEach(dataPoint => {
+      dataTable.addRow(dataPoint);
+    });
+
+    const options = {
+      title: title,
+      legend: { position: 'none' },
+      bars: 'vertical',
+      height: 400,
+      colors: ['#4285F4'],
+      hAxis: {
+        title: 'Fecha',
+        slantedText: true,
+        slantedTextAngle: 45,
       },
-      (error) => {
-        console.error(`Error al obtener datos para el gráfico ${title}:`, error);
-      }
-    );
+      vAxis: {
+        title: 'Cantidad de Órdenes',
+      },
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById(chartId));
+    chart.draw(dataTable, options);
   }
 }
