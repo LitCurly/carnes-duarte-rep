@@ -51,3 +51,8 @@ header {
   height: auto; /* Altura automática */
 }
 
+.logo-duarte-letras {
+  width: 250px; /* Ajusta el ancho según tus necesidades */
+  height: auto; /* La altura se ajustará automáticamente según el ancho especificado */
+  margin-left: 5%;
+}

@@ -1,7 +1,7 @@
 .footer-component {
-  background-color: #1a202c;
+  background-color: #ce0019;
   padding: 4rem 1.5rem 2rem;
-  color: #a0aec0;
+  color: #ffffff;
 }
 .footer-container {
   max-width: 112rem;
@@ -13,7 +13,7 @@
   gap: 2rem;
 }
 .logo {
-  height: 1.75rem;
+  height: 10rem;
 }
 .footer-links-grid {
   display: grid;
@@ -26,10 +26,10 @@
   gap: 2rem;
 }
 .footer-heading {
-  font-size: 0.875rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
 }
 .footer-links {
   list-style: none;
@@ -37,17 +37,17 @@
 }
 .footer-link {
   font-size: 0.875rem;
-  color: #a0aec0;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s;
 }
 .footer-link:hover {
-  color: #ffffff;
+  color: #a0aec0;
 }
 
 .footer-text {
   font-size: 0.875rem;
-  color: #a0aec0;
+  color: #ffffff;
 }
 .subscribe-form {
   display: flex;
@@ -78,21 +78,22 @@
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #ffffff;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 .social-links {
+  margin-left: 7.5rem;
   display: flex;
   gap: 1.5rem;
 }
 .social-link {
-  color: #a0aec0;
+  color: #ffffff;
   transition: color 0.3s;
 }
 .social-link:hover {
-  color: #4a5568;
+  color: #a0aec0;
 }
 .social-icon {
   height: 1.5rem;
