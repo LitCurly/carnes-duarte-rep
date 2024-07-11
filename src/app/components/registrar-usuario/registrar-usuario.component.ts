@@ -43,10 +43,8 @@ export class RegistrarUsuarioComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         repetirPassword: ['', Validators.required],
       },
-      //{ validator: this.passwordMatchValidator }
     );
 
-    // Suscribirse a los cambios en el formulario
     this.registrarUsuario.valueChanges.pipe(debounceTime(300)).subscribe(() => {
       this.registrarUsuario.updateValueAndValidity();
     });
@@ -62,9 +60,6 @@ export class RegistrarUsuarioComponent implements OnInit {
     const password = this.registrarUsuario.value.password;
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
 
-    console.log(this.registrarUsuario);
-
-    //Validaciones
     if (nombre.length == 0) {
       this.toastr.error('Es necesario que introduzca su nombre', 'Error');
       return;
@@ -84,7 +79,7 @@ export class RegistrarUsuarioComponent implements OnInit {
         }
       }
     }
-    
+
     if (direccion.length == 0) {
       this.toastr.error('Es necesario que introduzca su dirección', 'Error');
       return;
@@ -109,14 +104,10 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
 
     this.loading = true;
-      
+
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        // this.loading = false;
-        // this.toastr.success('Su cuenta a sido registrada con exito!', 'Usuario registrado');
-        // this.router.navigate(['/login']);
-         console.log(user);
         this.verificarCorreo();
       })
       .catch((error) => {
@@ -126,7 +117,6 @@ export class RegistrarUsuarioComponent implements OnInit {
       });
   }
 
-  //Verificar correo
   verificarCorreo(){
     this.afAuth.currentUser.then(user => user?.sendEmailVerification())
     .then(() => {
@@ -140,25 +130,6 @@ export class RegistrarUsuarioComponent implements OnInit {
     });
   }
 
-  // Validador personalizado para verificar si las contraseñas coinciden
-  // passwordMatchValidator(
-  //   control: AbstractControl
-  // ): { [key: string]: any } | null {
-  //   const password = control.get('password');
-  //   const repetirPassword = control.get('repetirPassword');
-
-  //   if (
-  //     password &&
-  //     repetirPassword &&
-  //     password.value !== repetirPassword.value
-  //   ) {
-  //     return { passwordMismatch: true };
-  //   }
-
-  //   return null;
-  // }
-
-  // Validador de telefono
   validarTelefono(control: AbstractControl): { [key: string]: any } | null {
     const telefono = control.value;
     if (telefono && telefono.length !== 8) {

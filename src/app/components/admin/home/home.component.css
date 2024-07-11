@@ -44,19 +44,20 @@
 
 /* Establecer z-index para el contenido */
 .content {
-  margin-left: 240px; /* Ajusta el margen izquierdo para dejar más espacio para el sidebar */
-  padding: 20px;
+  margin-left: 240px; /* Ajusta el margen izquierdo para el sidebar abierto */
+  padding: 15px 15px 15px 25px;
   transition: margin-left 0.3s ease;
   position: relative; /* Añade posición relativa para manejar z-index */
-  z-index: 1100; /* Asegura que el contenido esté por encima del sidebar */
+  z-index: 5; /* Asegura que el contenido esté por encima del sidebar */
 }
 
-.sidebar.closed .content {
-  margin-left: 75px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
+.content.closed {
+  margin-left: 60px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
 }
+
 
 .header {
-  height: 60px; /* Altura de la barra superior */
+  height: 70px; /* Altura de la barra superior */
   background-color: rgba(0, 0, 0, 0.7); /* Color de fondo similar al del sidebar */
   background-image: url('../../../../assets/img/sideBar.webp'); /* Imagen de fondo del sidebar */
   background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
@@ -91,6 +92,7 @@
   margin-bottom: 50px;
   transition: width 0.3s ease; /* Transición para el cambio de tamaño */
   z-index: 3;
+  cursor: pointer;
 }
 
 .logo-upper img {
@@ -188,7 +190,20 @@
   margin-left: 0.5em;
 }
 
-/* LogOut */
+.logo-lower {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Alinea al final del contenedor */
+  margin-bottom: 10px; /* Ajusta el margen inferior si es necesario */
+  height: 100%;
+  position: relative; /* Asegurar que esté posicionado correctamente */
+  z-index: 2; /* Colocar por encima de la capa de fondo */
+}
+
+.logo-lower img {
+  width: 40px;
+}
+
 .logout-button {
   position: absolute;
   bottom: 70px; /* Ajusta la posición para que esté más arriba que el logo-lower */
@@ -216,21 +231,99 @@
   margin-left: 5px; /* Ajusta el espacio entre la imagen y el texto */
 }
 
-.logo-lower {
+.sidebar.closed .logout-button {
+  margin: auto;
+}
+
+.sidebar.closed .logout-button span {
+  display: none;
+}
+
+.sidebar.closed .logout-button img {
+  display: block;
+  margin: 0 auto; /* Centra el ícono cuando el sidebar está cerrado */
+}
+
+/* Estilos para el botón de administrador */
+.admin-button {
+  background-color: #171a1c;
+  width: 100%;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
   position: absolute;
-  bottom: 10px; /* Ajusta la posición para que esté debajo del botón de cerrar sesión */
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  transition: width 0.3s ease; /* Transición para el cambio de tamaño */
-  z-index: 1000; /* Asegura que esté por debajo del botón de Cerrar sesión */
+  cursor: pointer; /* Cambiado a pointer para indicar que es interactivo */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding-right: 30px;
 }
 
-.logo-lower img {
-  width: 80px; /* Tamaño inicial del logo */
-  transition: width 0.3s ease; /* Transición para el cambio de tamaño */
+.admin-text {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  margin-right: 10px; /* Espacio entre el texto y la imagen */
 }
 
-.sidebar.closed .logo-lower img {
-  width: 30px; /* Tamaño del logo cuando el sidebar está cerrado */
+.admin-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.admin-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para el dropdown */
+.admin-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  background-color: #171a1c;
+  border-radius: 3px;
+  z-index: 1200; /* Asegura que esté por encima del contenido */
+  width: 150px;
+  display: none; /* Inicialmente oculto */
+}
+
+.admin-button.active .admin-dropdown {
+  display: flex;
+  padding-right: 30px;
+}
+
+
+.admin-button.active .admin-dropdown {
+  display: flex;
+  padding-right: 30px;
+}
+
+.admin-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-dropdown ul li {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.admin-dropdown ul li:hover {
+  background-color: #2b2e31;
+}
+
+.admin-dropdown ul li a {
+  text-decoration: none; /* Quitar subrayado del enlace */
+  color: white; /* Color del texto */
+  display: block; /* Convertir en bloque para ocupar todo el ancho disponible */
+}
+
+.admin-dropdown ul li a:hover {
+  background-color: #2b2e31; /* Color de fondo al hacer hover */
 }

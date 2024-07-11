@@ -5,8 +5,9 @@ export interface Carne {
 
 export interface Corte {
   nombre: string;
-  preparaciones: string[];
+  preparaciones?: string[];
   precioPorKilo: number;
   stock: number;
   imageUrl?: string;
+  createdAt?: Date;
 }

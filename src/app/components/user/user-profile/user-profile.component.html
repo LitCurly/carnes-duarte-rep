@@ -1,0 +1,56 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h3>Mi Perfil</h3>
+    </div>
+    <div class="nav-route">
+      <a class="nav-button" routerLink="/home/perfil/editar">Editar perfil</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="custom-container">
+        <div class="custom-header">
+          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
+          <div>
+            <h3 class="custom-title">Información del usuario</h3>
+            <p class="custom-description">Datos personales</p>
+          </div>
+        </div>
+        <div class="custom-content">
+          <div class="custom-row">
+            <div class="custom-column">
+              <span class="custom-label">Nombre</span>
+              <span class="custom-value">{{ capitalizeFirstLetter(userName) }} {{ capitalizeFirstLetter(userSecondName) }} {{ capitalizeFirstLetter(userLastName) }} {{ capitalizeFirstLetter(userSecondLastName) }}</span>
+            </div>
+          </div>
+          <div class="custom-row">
+            <div class="custom-column">
+              <span class="custom-label">Rut</span>
+              <span class="custom-value">{{ formatRutUserData(rut) }}</span>
+            </div>
+          </div>
+          <div class="custom-row">
+            <div class="custom-column">
+              <span class="custom-label">Teléfono</span>
+              <span class="custom-value">{{ phone }}</span>
+            </div>
+          </div>
+          <div class="custom-row">
+            <div class="custom-column">
+              <span class="custom-label">Correo</span>
+              <span class="custom-value">{{ email }}</span>
+            </div>
+          </div>
+          <div class="custom-row">
+            <div class="custom-column">
+              <span class="custom-label">Rol</span>
+              <span class="custom-value">{{ capitalizeFirstLetter(role) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,10 @@
-<header-component></header-component>
-
 <div class="team-section">
   <div class="team-header">
-    <h2 class="team-title">Nuestros Cortes</h2>
-    <p class="team-description">Explora nuestra variedad de cortes y sus preparaciones recomendadas.</p>
+    <h1 class="team-title">Nuestros Cortes de Cerdo</h1>
+    <p class="team-description">Explore nuestra variedad de cortes de Cerdo y sus preparaciones recomendadas.</p>
   </div>
 
-  <box className="filters" [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5em' }">
+  <box className="filters" [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5rem' }">
     <box [styles]="{ display: 'flex', gap: '15px', width: '100%' }">
       <div class="filter-item">
         <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por nombre de corte..." class="filter-input">
@@ -25,11 +23,9 @@
       </div>
     </box>
     <box [styles]="{ display: 'flex', gap: '5px', justifyContent: 'flex-end', marginBlockStart: 'auto' }">
-      <button (click)="goBack()" class="filter-button search-button primary-button">Volver a Productos</button>
+      <button (click)="goBack()" class="filter-button search-button primary-button">Volver a los Productos</button>
     </box>
   </box>
-
-  <!-- Spinner y Contenido de la Tabla -->
   <div class="table-container" *ngIf="!isLoading">
     <div class="table-wrapper">
       <table class="user-table">
@@ -47,10 +43,10 @@
           <td class="fixed-width-column">{{ corte.nombre }}</td>
           <td>
             <div class="preparation-list">
-              <span *ngIf="corte.preparaciones.includes('Cacerola')" class="preparation-item">Cacerola</span>
-              <span *ngIf="corte.preparaciones.includes('Horno')" class="preparation-item">Horno</span>
-              <span *ngIf="corte.preparaciones.includes('Parrilla')" class="preparation-item">Parrilla</span>
-              <span *ngIf="corte.preparaciones.includes('Sarten')" class="preparation-item">Sarten</span>
+              <span *ngIf="corte.preparaciones && corte.preparaciones.includes('Cacerola')" class="preparation-item">Cacerola</span>
+              <span *ngIf="corte.preparaciones && corte.preparaciones.includes('Horno')" class="preparation-item">Horno</span>
+              <span *ngIf="corte.preparaciones && corte.preparaciones.includes('Parrilla')" class="preparation-item">Parrilla</span>
+              <span *ngIf="corte.preparaciones && corte.preparaciones.includes('Sarten')" class="preparation-item">Sarten</span>
             </div>
           </td>
           <td>{{ corte.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
@@ -60,7 +56,7 @@
             <button (click)="incrementQuantity(corte)">+</button>
           </td>
           <td>
-            <button (click)="addToCart(corte)" [disabled]="corte.stock <= 0" class="add-to-cart-button">
+            <button (click)="addToCart(corte)" [disabled]="corte.stock " class="add-to-cart-button">
               Agregar al Carrito
             </button>
           </td>
@@ -69,7 +65,6 @@
       </table>
     </div>
 
-    <!-- Paginación -->
     <div class="pagination-container">
       <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
@@ -77,7 +72,6 @@
     </div>
   </div>
 
-  <!-- Spinner de Carga -->
   <div class="spinner-container" *ngIf="isLoading">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Cargando...</span>
@@ -85,5 +79,3 @@
     <p>Cargando productos...</p>
   </div>
 </div>
-
-<footer-component></footer-component>

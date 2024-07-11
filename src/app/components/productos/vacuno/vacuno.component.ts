@@ -56,13 +56,14 @@ export class VacunoComponent implements OnInit {
     this.filteredCortes = this.cortes.filter(corte => {
       const matchesName = corte.nombre.toLowerCase().includes(this.searchQuery.toLowerCase());
       const matchesPreparation = this.selectedPreparation
-        ? corte.preparaciones.includes(this.selectedPreparation)
+        ? corte.preparaciones && corte.preparaciones.includes(this.selectedPreparation)
         : true;
       return matchesName && matchesPreparation;
     });
     this.totalPages = Math.ceil(this.filteredCortes.length / this.itemsPerPage);
     this.paginateCortes();
   }
+
 
   paginateCortes(): void {
     const start = (this.currentPage - 1) * this.itemsPerPage;

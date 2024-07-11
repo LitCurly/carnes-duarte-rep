@@ -73,7 +73,7 @@ export class CartComponent {
   }
 
   async confirmOrder() {
-    // Aplicar los cambios al carrito antes de confirmar la orden
+
     this.cart.items.forEach(item => {
       const quantityToRemove = this.quantities[item.nombre];
       if (quantityToRemove > 0) {
@@ -82,21 +82,19 @@ export class CartComponent {
           cantidad: quantityToRemove,
           precioPorKilo: item.precioPorKilo,
           tipo: item.tipo,
-          subtotal: item.precioPorKilo * quantityToRemove // Calcular subtotal basado en la cantidad a quitar
+          subtotal: item.precioPorKilo * quantityToRemove
         };
         this.cartService.removeFromCart(itemToRemove);
       }
     });
 
-    // Confirmar la orden
     this.showSpinner = true;
     try {
       await this.cartService.confirmOrder(this.cart);
       this.toastr.success('Orden confirmada exitosamente', '¡Felicitaciones!');
-      this.router.navigate(['/mis-pedidos']); // Redireccionar a la página de órdenes después de confirmar
-      this.closeModalDialog(); // Cerrar el modal después de confirmar la orden
+      this.router.navigate(['/mis-pedidos']);
+      this.closeModalDialog();
     } catch (error) {
-      console.error('Error al confirmar la orden:', error);
       this.toastr.error('Error al confirmar la orden', '¡Oops!');
     } finally {
       this.showSpinner = false;

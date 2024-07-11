@@ -1,11 +1,12 @@
 export interface User {
   nombre: string;
-  segundoNombre?: string; // Opcional
+  segundoNombre?: string;
   apellido: string;
-  segundoApellido?: string; // Opcional
+  segundoApellido?: string;
   rut: string;
   telefono: string;
-  direccion?: string; //Opciona
-  email: string; // Correo electrónico del usuario
-  rol: 'administrador' | 'usuario';
+  direccion?: string;
+  email: string;
+  rol: 'administrador' | 'usuario' | 'superAdmin';
+  avatarImg? : string;
 }

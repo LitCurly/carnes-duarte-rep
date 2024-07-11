@@ -30,7 +30,6 @@ import { GestionarProductosComponent } from './components/admin/gestionar-produc
 import { VerPedidosComponent } from './components/admin/ver-pedidos/ver-pedidos.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { MisPedidosComponent } from './components/mis-pedidos/mis-pedidos.component';
-import { MisDatosComponent } from './components/mis-datos/mis-datos.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { PolloComponent } from './components/productos/pollo/pollo.component';
 import { CerdoComponent } from './components/productos/cerdo/cerdo.component';
@@ -45,8 +44,13 @@ import { RegisterComponent } from './general-components/register/register.compon
 import { ForgotPasswordComponent } from './general-components/forgot-password/forgot-password.component';
 import { DashboardComponent } from "./components/admin/dashboard/dashboard.component";
 import { HomeComponent } from './components/admin/home/home.component';
-
-
+import { ProfileComponent } from './components/admin/profile/profile.component';
+import { EditComponent } from './components/admin/profile/edit/edit.component';
+import { ChangePasswordComponent } from './general-components/change-password/change-password.component';
+import { AgregarProductosComponent } from './general-components/agregar-productos/agregar-productos.component';
+import { HomeUserComponent } from './components/user/home-user/home-user.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +66,6 @@ import { HomeComponent } from './components/admin/home/home.component';
     VerPedidosComponent,
     ProductosComponent,
     MisPedidosComponent,
-    MisDatosComponent,
     SobreNosotrosComponent,
     PolloComponent,
     CerdoComponent,
@@ -77,6 +80,13 @@ import { HomeComponent } from './components/admin/home/home.component';
     RegisterComponent,
     ForgotPasswordComponent,
     HomeComponent,
+    ProfileComponent,
+    EditComponent,
+    ChangePasswordComponent,
+    AgregarProductosComponent,
+    HomeUserComponent,
+    UserProfileComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,

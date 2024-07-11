@@ -1,43 +1,42 @@
-
-<header-component></header-component>
-
-  <div class="container">
-    <!-- Título: Quiénes Somos -->
-    <div class="row">
+<div class="container">
+    <div class="row mb-0">
       <div class="col text-center">
-        <h1>Carnes Duarte</h1>
+        <h1>Catálogo de Productos</h1>
       </div>
     </div>
-    <!-- Título: Tradición Familiar -->
-    <div class="row mt-1">
+    <div class="row mt-2">
       <div class="col text-center">
-        <h2>Tradición Familiar</h2>
+        <h2>Disfrute nuestra variada selección de cortes de:</h2>
       </div>
     </div>
     <section>
       <div class="articles-container">
         <article class="card" (click)="navigateTo('vacuno')">
           <h2>Vacuno</h2>
-          <p>...</p>
+          <p>Revise nuestros cortes de Vacuno...</p>
           <img src="../../../assets/img/img-duarte/vacuno2.png" width="400"/>
-          <p>Esto es un vacuno</p>
+          <p class="mb-0">Nuestros cortes de novillo de categoría V</p>
+          <p class="mt-0 mb-0">ofrecen una carne de alta calidad,</p>
+          <p class="mt-0 mb-0">conocida por su terneza y jugosidad.</p>
         </article>
         <article class="card" (click)="navigateTo('pollo')">
           <h2>Pollo</h2>
-          <p>...</p>
+          <p>Revise nuestros cortes de Pollo...</p>
           <img src="../../../assets/img/img-duarte/pollo.png" width="400"/>
-          <p>Esto es un pollo</p>
+          <p class="mb-0">El Pollo es una opción versátil y saludable,</p>
+          <p class="mt-0 mb-0">con un sabor suave que se adapta a</p>
+          <p class="mt-0 mb-0">diversas preparaciones.</p>
         </article>
         <article class="card" (click)="navigateTo('cerdo')">
           <h2>Cerdo</h2>
-          <p>...</p>
+          <p>Revise nuestros cortes de Cerdo...</p>
           <img src="../../../assets/img/img-duarte/cerdo.png" width="400"/>
-          <p>Esto es un cerdo</p>
+          <p class="mb-0">La carne de Cerdo es una delicia culinaria,</p>
+          <p class="mt-0 mb-0">muy conocida por su sabor suculento y</p>
+          <p class="mt-0 mb-0"> versatilidad.</p>
         </article>
       </div>
     </section>
     <router-outlet></router-outlet>
   </div>
-
-<footer-component></footer-component>
 

@@ -14,17 +14,17 @@ export class AuthGuard implements CanActivate {
     return this.authService.getUserRole().then(role => {
       console.log('Rol obtenido en AuthGuard:', role); // Mensaje de consola agregado
 
-      if (this.authService.isAuthenticated() && role === 'administrador') {
+      if (this.authService.isAuthenticated() && role === 'administrador' || this.authService.isAuthenticated() && role === 'superAdmin') {
         console.log('Acceso permitido a ruta protegida.');
-        return true; // Permitir la navegación si está autenticado y es administrador
+        return true;
       } else {
         console.warn('Acceso denegado a ruta protegida.');
-        this.router.navigate(['/inicio']); // Redirigir a /inicio si no cumple los requisitos
+        this.router.navigate(['/inicio']);
         return false;
       }
     }).catch((error) => {
-      console.error('Error en AuthGuard al obtener rol:', error); // Mensaje de consola agregado
-      this.router.navigate(['/login']); // Redirigir al login si hay un error al obtener el rol
+      console.error('Error en AuthGuard al obtener rol:', error);
+      this.router.navigate(['/login']);
       return false;
     });
   }

@@ -1,1 +1,46 @@
-<p>gestionar-usuarios works!</p>
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h3>Gestionar Usuarios</h3>
+    </div>
+  </div>
+  <div class="card">
+    <div class="dashboard-content">
+      <table>
+        <thead>
+        <tr>
+          <th style="width: 15%">Nombre</th>
+          <th style="width: 15%">Apellido</th>
+          <th style="width: 15%">Rut</th>
+          <th style="width: 20%">Email</th>
+          <th style="width: 10%">Teléfono</th>
+          <th style="width: 10%">Rol</th>
+          <th>Habilitar como administrador</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>{{ capitalizeFirstLetter(user.nombre) }}</td>
+          <td>{{ capitalizeFirstLetter(user.apellido) }}</td>
+          <td>{{ formatRutUserData(user.rut) }}</td>
+          <td>{{ capitalizeFirstLetter(user.email) }}</td>
+          <td>{{ user.telefono }}</td>
+          <td>{{ capitalizeFirstLetter(user.rol) }}</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [checked]="user.rol === 'administrador'" (change)="toggleAdmin(user)">
+              <span class="slider round"></span>
+            </label>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+        <p>Página {{ currentPage }} de {{ totalPages }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
