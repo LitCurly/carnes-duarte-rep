@@ -7,9 +7,6 @@ import { Router } from '@angular/router'; // Importar Router
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent {
-  constructor(private router: Router) {} // Inyectar Router
 
-  navigateTo(route: string) {
-    this.router.navigate([`/productos/${route}`]);
-  }
+
 }

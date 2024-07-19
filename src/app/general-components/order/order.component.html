@@ -29,7 +29,7 @@
           </td>
           <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
           <td>
-            <button class="detail-button" (click)="goToOrderDetail(order.id)">Ver Detalle</button>
+            <button routerLink="/home/mis-pedidos/:id/order-detail" class="detail-button" (click)="goToOrderDetail(order.id)">Ver Detalle</button>
           </td>
         </tr>
         </tbody>
