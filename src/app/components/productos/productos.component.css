@@ -45,6 +45,7 @@ section article {
 
 section article:hover {
     box-shadow: 0 0.1rem 2rem rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
 section article h2, section article p {
