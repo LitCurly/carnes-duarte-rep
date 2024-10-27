@@ -17,10 +17,11 @@
     <ng-container *ngIf="isLoggedIn">
       <div class="d-flex align-items-center">
         <div class="d-flex align-items-center me-3">
-          <a routerLink="/home/perfil" class="nav-link px-2">
+
+          <a [routerLink]="['/home/perfil']" class="admin-link">
             <span class="admin-text">{{ userName }} {{ userLastName }}</span>
           </a>
-          <a routerLink="/home/perfil" class="nav-link px-2">
+          <a [routerLink]="['/home/perfil']" class="admin-link">
             <div class="admin-image">
               <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
             </div>

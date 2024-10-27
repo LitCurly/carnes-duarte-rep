@@ -1,7 +1,7 @@
 <div class="team-section">
   <div class="team-header">
-    <h1 class="team-title">Nuestros Cortes de Cerdo</h1>
-    <p class="team-description">Explore nuestra variedad de cortes de Cerdo y sus preparaciones recomendadas.</p>
+    <h1 class="team-title">Nuestros Cortes de Pollo</h1>
+    <p class="team-description">Explore nuestra variedad de cortes de Pollo y sus preparaciones recomendadas.</p>
   </div>
 
   <box className="filters" [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5rem' }">
@@ -57,7 +57,7 @@
             <button (click)="incrementQuantity(corte)">+</button>
           </td>
           <td>
-            <button (click)="addToCart(corte)" [disabled]="corte.stock <= 0" class="add-to-cart-button">
+            <button (click)="addToCart(corte)"  class="add-to-cart-button">
               Agregar al Carrito
             </button>
           </td>

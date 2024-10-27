@@ -10,7 +10,7 @@
 <div class="container" *ngIf="!loading">
   <div *ngIf="order" class="receipt">
     <div class="receipt-header">
-      <h2 class="receipt-title">Boleta de Compra</h2>
+      <h2 class="receipt-title">Comprobante de pedido</h2>
       <p class="receipt-date">Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</p>
       <p class="organization-name">{{ organization.nombre }} R.U.T.:  {{ formatRutOrganization(organization.rut) }}</p>
       <p class="organization-address">Dirección: {{ organization.direccion }}</p>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="receipt-actions">
-      <button class="btn btn-secondary pdf-button" (click)="openPdf()">Enviar Boleta WhatsApp</button>
+      <button class="btn btn-secondary pdf-button" (click)="openPdf()">Enviar comprobante WhatsApp</button>
     </div>
   </div>
 </div>

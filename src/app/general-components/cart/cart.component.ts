@@ -36,7 +36,7 @@ export class CartComponent {
     if (this.quantities[item.nombre] < item.cantidad) {
       this.quantities[item.nombre]++;
     } else {
-      this.toastr.warning(`No puedes agregar más ${item.nombre} de los disponibles`, 'Stock máximo alcanzado');
+      this.toastr.warning(`No puedes quitar más productos de los agregados.`, 'Cantidad máxima alcanzada');
     }
   }
 

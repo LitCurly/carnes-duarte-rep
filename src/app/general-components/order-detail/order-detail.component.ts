@@ -195,7 +195,7 @@ export class OrderDetailComponent implements OnInit {
             body: [
               [
                 {
-                  text: 'Boleta de Compra',
+                  text: 'Comprobante de pedido',
                   fontSize: 18,
                   bold: true,
                   color: '#ffffff',
@@ -384,13 +384,13 @@ export class OrderDetailComponent implements OnInit {
         const downloadURL = await fileRef.getDownloadURL();
 
         // Construir el enlace de WhatsApp
-        const whatsappLink = `https://wa.me/?text=Descarga%20tu%20boleta%20aquí:%20${encodeURIComponent(downloadURL)}`;
+        const whatsappLink = `https://wa.me/?text=Descarga%20tu%20comprobante%20aquí:%20${encodeURIComponent(downloadURL)}`;
 
         // Abrir enlace de WhatsApp
         window.open(whatsappLink, '_blank');
 
         // Mostrar mensaje de éxito
-        this.toastr.success('Boleta generada y enviada por WhatsApp correctamente.');
+        this.toastr.success('Comprobante generadado y enviado por WhatsApp correctamente.');
 
         this.loading = false; // Ocultar spinner
       }
