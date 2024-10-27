@@ -236,3 +236,22 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.filter-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter-input {
+  width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle; /* Esto asegura que el contenido también se alinee verticalmente al centro */
+}
+

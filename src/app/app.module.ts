@@ -51,6 +51,8 @@ import { AgregarProductosComponent } from './general-components/agregar-producto
 import { HomeUserComponent } from './components/user/home-user/home-user.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { CarouselComponentComponent } from "./general-components/carousel-component/carousel-component.component";
+import { EditarProductosComponent } from "./general-components/editar-productos/editar-productos.component";
 
 @NgModule({
   declarations: [
@@ -84,9 +86,11 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
     EditComponent,
     ChangePasswordComponent,
     AgregarProductosComponent,
+    EditarProductosComponent,
     HomeUserComponent,
     UserProfileComponent,
     UserEditComponent,
+    CarouselComponentComponent
   ],
   imports: [
     BrowserModule,

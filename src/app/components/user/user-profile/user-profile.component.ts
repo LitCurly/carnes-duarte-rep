@@ -11,6 +11,7 @@ import { AuthService } from "../../../services/auth-service.service";
 })
 export class UserProfileComponent implements OnInit {
   isLoggedIn = false;
+  isLoading = true;
   userName?: string;
   userSecondName?: string;
   userLastName?: string;
@@ -27,7 +28,13 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserObservable().subscribe(user => {
       this.isLoggedIn = !!user;
+      if (this.isLoggedIn) {
+        this.loadUserNameAndLastName();
+      } else {
+        this.isLoading = false; // Ocultar spinner si no está autenticado
+      }
     });
+
     this.userService.userData$.subscribe(userData => {
       if (userData) {
         this.userName = userData.nombre;

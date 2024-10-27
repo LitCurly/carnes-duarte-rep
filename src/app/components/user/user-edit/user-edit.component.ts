@@ -5,6 +5,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import { AuthService } from "../../../services/auth-service.service";
 import { UserService } from "../../../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-edit',
@@ -12,6 +13,8 @@ import { UserService } from "../../../services/user.service";
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
+  isLoggedIn = false;
+  isLoading = true;
   nombre?: string;
   segundoNombre?: string;
   apellido?: string;
@@ -29,17 +32,21 @@ export class UserEditComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.authService.getUserObservable().subscribe(user => {
-      if (user) {
-        this.userId = user.uid; // Guarda el UID del usuario autenticado
+      this.isLoggedIn = !!user;
+      if (this.isLoggedIn) {
+        this.userId = user?.uid;
         this.loadDataUser();
       } else {
-        console.error('Usuario no autenticado.');
+        // Redirigir al perfil si no está autenticado
+        this.router.navigate(['/home/perfil']);
       }
+      this.isLoading = false; // Ocultar el spinner después de verificar autenticación
     });
   }
 

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
 import { CartItem } from '../../../models/cart';
 import { ToastrService } from 'ngx-toastr';
+import {AuthService} from "../../../services/auth-service.service";
 
 @Component({
   selector: 'app-pollo',
@@ -21,17 +22,31 @@ export class PolloComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   quantities: { [corteId: string]: number } = {};
-  isLoading = true; // Bandera para controlar la visibilidad del spinner
+  isLoading = true;
+  isLoggedIn = false;
+
+  columnWidths = {
+    nombre: 25,
+    preparaciones: 30,
+    precioPorKilo: 15,
+    cantidad: 15,
+    acciones: 15
+  };
 
   constructor(
     private carneService: CarneService,
     private route: ActivatedRoute,
     private router: Router,
     private cartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.getAuthState().subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
+
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params['search'] || '';
       this.selectedPreparation = params['preparation'] || '';

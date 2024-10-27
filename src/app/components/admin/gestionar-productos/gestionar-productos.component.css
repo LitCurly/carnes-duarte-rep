@@ -182,3 +182,20 @@ tbody tr:nth-child(even) {
   width: 16px;
   height: 16px;
 }
+
+.detail-button {
+  position: relative;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.modal {
+  z-index: 1000; /* Asegúrate de que el modal esté encima de otros elementos */
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle; /* Esto asegura que el contenido también se alinee verticalmente al centro */
+}
+
+

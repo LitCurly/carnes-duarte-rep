@@ -1,5 +1,15 @@
 <div class="dashboard">
-  <div class="dashboard-header">
+  <div  *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
+    <h2 class="profileHeader">Inicia sesión para acceder a tu perfil.</h2>
+    <div  class="auth-message">
+      <p class="profileDescription">
+        ¿No posee una cuenta?
+        <a routerLink="/registrarse" class="register-link">Regístrese aquí</a>
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoggedIn"class="dashboard-header">
     <div>
       <h3>Mi Perfil</h3>
     </div>
@@ -8,7 +18,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div *ngIf="isLoggedIn"class="card">
     <div class="card-body">
       <div class="custom-container">
         <div class="custom-header">
@@ -18,6 +28,9 @@
             <p class="custom-description">Datos personales</p>
           </div>
         </div>
+
+
+
         <div class="custom-content">
           <div class="custom-row">
             <div class="custom-column">
@@ -39,14 +52,14 @@
           </div>
           <div class="custom-row">
             <div class="custom-column">
-              <span class="custom-label">Correo</span>
-              <span class="custom-value">{{ email }}</span>
+              <span class="custom-label">Dirección</span>
+              <span class="custom-value">{{ capitalizeFirstLetter(address) }}</span>
             </div>
           </div>
           <div class="custom-row">
             <div class="custom-column">
-              <span class="custom-label">Rol</span>
-              <span class="custom-value">{{ capitalizeFirstLetter(role) }}</span>
+              <span class="custom-label">Correo</span>
+              <span class="custom-value">{{ email }}</span>
             </div>
           </div>
         </div>

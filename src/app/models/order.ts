@@ -1,9 +1,15 @@
 import { CartItem } from './cart';
 
+export enum StatusEnum {
+  Finalizada = "Finalizada",
+  Pendiente = "Pendiente"
+}
+
 export interface Order {
-  id?: string; // El ID puede ser opcional
+  id?: string;
   items: CartItem[];
   createdAt: Date;
   total?: number;
-  boletaURL?: string; // Nuevo campo para almacenar la URL de la boleta
+  boletaURL?: string;
+  status?: StatusEnum;
 }

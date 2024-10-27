@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Firestore, doc, docData, getDoc, collection, addDoc, collectionData, setDoc } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
-import { Cart, CartItem } from '../models/cart';
-import { map } from 'rxjs/operators';
-import { Order } from "../models/order";
-import { AuthService } from "./auth-service.service";
+import {Injectable} from '@angular/core';
+import {addDoc, collection, collectionData, doc, docData, Firestore, getDoc, setDoc,} from '@angular/fire/firestore';
+import {from, Observable} from 'rxjs';
+import {Cart, CartItem} from '../models/cart';
+import {map} from 'rxjs/operators';
+import {Order, StatusEnum} from "../models/order";
+import {AuthService} from "./auth-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,6 @@ export class CartService {
 
   constructor(private firestore: Firestore, private authService: AuthService) { }
 
-  // Método para obtener el carrito actual desde Firestore
   getCart(): Observable<Cart> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -31,7 +30,6 @@ export class CartService {
     );
   }
 
-  // Método para agregar un producto al carrito
   async addToCart(item: CartItem): Promise<void> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -77,7 +75,6 @@ export class CartService {
     }
   }
 
-  // Método para quitar una cantidad específica de un producto del carrito
   async removeFromCart(item: CartItem): Promise<void> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -122,17 +119,6 @@ export class CartService {
     }
   }
 
-  // Método para vaciar el carrito
-  async clearCart(): Promise<void> {
-    const userId = this.authService.getUserId();
-    if (!userId) {
-      throw new Error('Usuario no autenticado');
-    }
-    const cartDocRef = doc(this.firestore, `carritos/${userId}`);
-    await setDoc(cartDocRef, { items: [], total: 0 });
-  }
-
-  // Método para obtener todas las órdenes desde Firestore
   getAllOrders(): Observable<Order[]> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -145,16 +131,14 @@ export class CartService {
       map((orders: any[]) => {
         return orders.map(order => ({
           id: order.id,
-          createdAt: order.createdAt.toDate(), // Convertir a Date
-          total: order.total || 0, // Asegurarse de tener un valor por defecto si es necesario
-          items: order.items || [] // Asegurarse de tener un arreglo vacío si es necesario
-          // Agrega otros campos según la estructura de tu modelo Order
+          createdAt: order.createdAt.toDate(),
+          total: order.total || 0,
+          items: order.items || []
         })) as Order[];
       })
     );
   }
 
-  // Método para obtener una orden por su ID
   getOrderById(orderId: string): Observable<Order | undefined> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -167,13 +151,13 @@ export class CartService {
     return from(orderDocPromise).pipe(
       map(snapshot => {
         if (snapshot.exists()) {
-          const data = snapshot.data() as Order; // Castear a la interfaz Order
+          const data = snapshot.data() as Order;
           return {
             id: orderId,
-            items: data['items'], // Acceder usando corchetes
-            createdAt: (data['createdAt'] as any).toDate(), // Acceder usando corchetes
-            total: data['total'], // Acceder usando corchetes
-            boletaURL: data['boletaURL'], // Acceder usando corchetes
+            items: data['items'],
+            createdAt: (data['createdAt'] as any).toDate(),
+            total: data['total'],
+            boletaURL: data['boletaURL'],
           };
         } else {
           return undefined;
@@ -182,7 +166,15 @@ export class CartService {
     );
   }
 
-// Método para confirmar una orden de compra
+  async clearCart(): Promise<void> {
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      throw new Error('Usuario no autenticado');
+    }
+    const cartDocRef = doc(this.firestore, `carritos/${userId}`);
+    await setDoc(cartDocRef, { items: [], total: 0 });
+  }
+
   async confirmOrder(cart: Cart): Promise<void> {
     const userId = this.authService.getUserId();
     if (!userId) {
@@ -193,17 +185,17 @@ export class CartService {
     const orderData: Order = {
       items: cart.items,
       createdAt: new Date(),
-      total: this.calculateTotal(cart.items)  // Calcular el total usando el método calculateTotal
+      total: this.calculateTotal(cart.items),
+      status: StatusEnum.Pendiente
     };
 
     try {
       const docRef = await addDoc(ordersCollection, orderData);
-      const orderId = docRef.id; // Obtener el ID generado por Firestore
+      const orderId = docRef.id;
 
-      // Guardar el ID dentro de los datos de la orden
       await setDoc(doc(this.firestore, `ordenes/${userId}/orders/${orderId}`), {
         ...orderData,
-        id: orderId // Guardar el ID dentro de los datos de la orden
+        id: orderId
       });
 
       await this.clearCart();
@@ -212,7 +204,6 @@ export class CartService {
     }
   }
 
-// Método para calcular el total del carrito
   private calculateTotal(items: CartItem[]): number {
     return items.reduce((acc, item) => acc + item.subtotal, 0);
   }

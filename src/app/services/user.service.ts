@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Firestore, collectionData, collection, doc, deleteDoc, updateDoc} from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {AuthService} from "./auth-service.service";
+import {BehaviorSubject, from, Observable, tap} from 'rxjs';
+import {StatusEnum} from "../models/order";
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,6 @@ export class UserService {
 
   constructor(
     private firestore: Firestore,
-    private afAuth: AngularFireAuth,
-
-    private authService: AuthService
   ) { }
 
   setUserData(userData: any): void {
@@ -26,6 +23,24 @@ export class UserService {
   getUsers(): Observable<any[]> {
     const usersCollection = collection(this.firestore, 'users');
     return collectionData(usersCollection, { idField: 'id' }) as Observable<any[]>;
+  }
+
+  getOrdersByUser(userId: string): Observable<any[]> {
+    const ordersCollection = collection(this.firestore, `ordenes/${userId}/orders`);
+    return collectionData(ordersCollection, { idField: 'id' }).pipe(
+      tap(orders => {
+        console.log(`Órdenes obtenidas para el usuario ${userId}:`, orders);
+        if (orders.length === 0) {
+          console.warn(`El usuario ${userId} no tiene órdenes.`);
+        }
+      })
+    ) as Observable<any[]>;
+  }
+
+  updateOrderStatus(userId: string, orderId: string, newStatus: StatusEnum): Observable<void> {
+    const orderRef = doc(this.firestore, `ordenes/${userId}/orders/${orderId}`);
+    console.log(`Actualizando orden: userId=${userId}, orderId=${orderId}, newStatus=${newStatus}`);
+    return from(updateDoc(orderRef, { status: newStatus }));
   }
 
   updateUserRole(userId: string, newRole: string): Observable<void> {

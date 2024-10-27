@@ -14,34 +14,33 @@ export class CartComponent {
 
   cart: Cart = { items: [], total: 0 };
   modalOpen: boolean = true;
-  quantities: { [nombre: string]: number } = {}; // Para manejar las cantidades de los items en el carrito
-  showSpinner: boolean = false; // Controla la visibilidad del spinner
+  quantities: { [nombre: string]: number } = {};
+  showSpinner: boolean = false;
 
   constructor(
     private cartService: CartService,
     private toastr: ToastrService,
-    private router: Router // Inyecta el servicio Router
+    private router: Router
   ) {
     this.cartService.getCart().subscribe(cart => {
       this.cart = cart;
-      this.quantities = {}; // Reiniciar quantities para evitar duplicados
-      this.cart.items.forEach(item => {
-        this.quantities[item.nombre] = 0; // Inicializar con 0 para las acciones de incremento y decremento
+      cart.items.forEach(item => {
+        if (this.quantities[item.nombre] === undefined) {
+          this.quantities[item.nombre] = 0;
+        }
       });
     });
   }
 
   incrementQuantity(item: CartItem) {
-    // Incrementar la cantidad deseada para quitar del carrito
     if (this.quantities[item.nombre] < item.cantidad) {
       this.quantities[item.nombre]++;
     } else {
-      this.toastr.warning(`No puedes agregar más ${item.nombre} de los disponibles`, 'Stock máximo alcanzado');
+      this.toastr.warning(`No puedes quitar más productos de los agregados.`, 'Cantidad máxima alcanzada');
     }
   }
 
   decrementQuantity(item: CartItem) {
-    // Decrementar la cantidad deseada para quitar del carrito
     if (this.quantities[item.nombre] > 0) {
       this.quantities[item.nombre]--;
     }
@@ -60,6 +59,8 @@ export class CartComponent {
       };
 
       this.cartService.removeFromCart(itemToRemove);
+
+      this.quantities[item.nombre] = 0;
     }
   }
 
@@ -73,7 +74,6 @@ export class CartComponent {
   }
 
   async confirmOrder() {
-
     this.cart.items.forEach(item => {
       const quantityToRemove = this.quantities[item.nombre];
       if (quantityToRemove > 0) {
@@ -92,7 +92,7 @@ export class CartComponent {
     try {
       await this.cartService.confirmOrder(this.cart);
       this.toastr.success('Orden confirmada exitosamente', '¡Felicitaciones!');
-      this.router.navigate(['/mis-pedidos']);
+      this.router.navigate(['/home/mis-pedidos']);
       this.closeModalDialog();
     } catch (error) {
       this.toastr.error('Error al confirmar la orden', '¡Oops!');

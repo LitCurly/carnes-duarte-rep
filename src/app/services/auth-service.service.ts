@@ -171,4 +171,8 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
+  getCurrentUser(): firebase.User | null {
+    return this.userSubject.value;
+  }
+
 }

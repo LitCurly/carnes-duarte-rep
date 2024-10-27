@@ -1,7 +1,6 @@
 .dashboard {
   background: #f1efef;
   padding: 20px;
-  height: calc(100vh - 100px);
 }
 
 .dashboard-header {

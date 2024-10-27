@@ -7,7 +7,7 @@ import {
   updateDoc,
   arrayUnion,
   collectionData,
-  collection, arrayRemove, DocumentData
+  collection, arrayRemove, DocumentData, getDocs
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Carne, Corte } from '../models/carne';
@@ -104,5 +104,35 @@ export class CarneService {
     }
   }
 
+  async actualizarCorte(tipoCarne: string, corteId: string, corteActualizado: Corte): Promise<void> {
+    try {
+      // Obtén la referencia al documento de Firestore para el tipo de carne
+      const carneRef = doc(this.firestore, `carnes/${tipoCarne}`);
+      const carneSnap = await getDoc(carneRef);
 
+      if (carneSnap.exists()) {
+        const data = carneSnap.data();
+        const cortes = data?.['cortes'] || [];
+
+        // Encuentra el índice del corte en el array `cortes`
+        const corteIndex = cortes.findIndex((corte: Corte) => corte.nombre === corteId);
+        if (corteIndex !== -1) {
+          // Actualiza el corte en la posición correcta
+          cortes[corteIndex] = { ...corteActualizado };
+
+          // Actualiza el documento en Firestore
+          await updateDoc(carneRef, { cortes });
+        } else {
+          throw new Error('Corte no encontrado');
+        }
+      } else {
+        throw new Error('Documento de carne no encontrado');
+      }
+    } catch (error) {
+      console.error('Error actualizando el corte:', error);
+      throw error;
+    }
+  }
 }
+
+

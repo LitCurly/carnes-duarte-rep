@@ -107,13 +107,4 @@ export class OrderComponent implements OnInit {
     };
     return dateTime.toLocaleTimeString('es-ES', options);
   }
-
-  goToOrderDetail(orderId: string | undefined): void {
-    if (orderId) {
-      this.router.navigate(['/mis-pedidos', orderId, 'order-detail']);
-    } else {
-      console.error('Order ID is undefined or null');
-      // Puedes manejar el caso donde orderId es undefined o null de alguna manera adecuada.
-    }
-  }
 }

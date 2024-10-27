@@ -1,5 +1,3 @@
-<header-component></header-component>
-
 <div class="spinner-container" *ngIf="isLoading">
   <div class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Cargando...</span>
@@ -10,13 +8,15 @@
 <div class="container" *ngIf="!loading">
   <div *ngIf="order" class="receipt">
     <div class="receipt-header">
-      <h2 class="receipt-title">Boleta de Compra</h2>
+      <h2 class="receipt-title">Detalle de pedido</h2>
       <p class="receipt-date">Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</p>
-      <p class="organization-name">{{ organization.nombre }} R.U.T.:  {{ formatRutOrganization(organization.rut) }}</p>
-      <p class="organization-address">Dirección: {{ organization.direccion }}</p>
-      <p class="organization-phone">Contacto: {{ organization.telefono }}</p>
-      <p class="user-rut" *ngIf="userRut !== undefined">RUT del Cliente: {{ formatRutUserData(userRut) }}</p>
-      <p class="user-rut" *ngIf="userRut === undefined">RUT del Cliente: N/A</p>
+      <p class="organization-name">{{ organization.nombre }}</p>
+      <p class="userData" *ngIf="userRut !== undefined">Cliente: {{ nombre }} {{ apellido }}</p>
+      <p class="userData">Dirección: {{ direccion }}</p>
+      <p class="userData">Contacto: {{ telefono }}</p>
+      <p class="userData">Correo: {{ email }}</p>
+      <p class="userData" *ngIf="userRut !== undefined">RUT: {{ formatRutUserData(userRut) }}</p>
+      <p class="userData" *ngIf="userRut === undefined">RUT: N/A</p>
     </div>
 
     <div class="receipt-content">
@@ -49,9 +49,9 @@
     </div>
 
     <div class="receipt-actions">
-      <button class="btn btn-secondary pdf-button" (click)="openPdf()">Enviar Boleta WhatsApp</button>
+      <button class="btn btn-secondary pdf-button" (click)="openPdf()">Enviar detalle por Whatsapp</button>
+      <button class="btn btn-secondary pdf-email-button" (click)="openPdfEmail()">Enviar detalle por correo</button>
     </div>
   </div>
 </div>
 
-<footer-component></footer-component>

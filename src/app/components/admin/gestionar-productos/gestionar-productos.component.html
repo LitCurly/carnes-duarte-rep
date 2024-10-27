@@ -1,7 +1,7 @@
 <div class="dashboard">
   <div class="dashboard-header">
     <div>
-      <h3>Mi Perfil</h3>
+      <h3>Lista de Productos</h3>
     </div>
     <div class="nav-route">
       <a class="nav-button" (click)="openModal()">Agregar Productos</a>
@@ -30,6 +30,7 @@
       <table class="props-table">
         <thead>
         <tr>
+          <th class="center">#</th>
           <th style="width: 30%;">Nombre</th>
           <th style="width: 15%;">Tipo de Carne</th>
           <th style="width: 15%;">Precio por Kilo</th>
@@ -39,8 +40,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let corte of paginatedCortes">
-          <td>{{ corte.nombre }}</td>
+        <tr *ngFor="let corte of paginatedCortes; let i = index">
+          <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>
+            <a class="detail-button" (click)="editarCorte(corte)">
+              {{ corte.nombre }}
+            </a>
+          </td>
           <td>{{ capitalizeFirstLetter(corte.carne) }}</td>
           <td>{{ corte.precioPorKilo | currency :'$ ':'symbol':'1.0-0' }}</td>
 <!--          <td>{{ corte.stock }}</td>-->
@@ -50,6 +56,7 @@
               <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem">
             </button>
           </td>
+
         </tr>
         </tbody>
       </table>
@@ -64,3 +71,4 @@
 </div>
 
 <agregar-productos *ngIf="showModal" (closeModal)="closeModal()"></agregar-productos>
+

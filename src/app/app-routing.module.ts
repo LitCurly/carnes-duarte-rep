@@ -28,6 +28,7 @@ import { AgregarProductosComponent } from "./general-components/agregar-producto
 import { HomeUserComponent } from "./components/user/home-user/home-user.component";
 import {UserProfileComponent} from "./components/user/user-profile/user-profile.component";
 import {UserEditComponent} from "./components/user/user-edit/user-edit.component";
+import {EditarProductosComponent} from "./general-components/editar-productos/editar-productos.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home/inicio', pathMatch: 'full' },
@@ -55,7 +56,7 @@ const routes: Routes = [
       { path: 'productos/pollo', component: PolloComponent },
       { path: 'productos/vacuno', component: VacunoComponent },
       { path: 'productos/cerdo', component: CerdoComponent },
-      { path: 'mis-pedidos', component: MisPedidosComponent, children: [] },
+      { path: 'mis-pedidos', component: MisPedidosComponent},
       { path: 'mis-pedidos/:id/order-detail', component: OrderDetailComponent },
       { path: 'sobre-nosotros', component: SobreNosotrosComponent },
       { path: 'perfil', component: UserProfileComponent },
@@ -76,7 +77,9 @@ const routes: Routes = [
           { path: 'gestionar-productos', component: GestionarProductosComponent, children: [
               { path: 'agregar-productos', component: AgregarProductosComponent },
             ] },
+          { path: 'gestionar-productos/:tipoCarne/:corteId/editar-productos', component: EditarProductosComponent },
           { path: 'gestionar-usuarios', component: GestionarUsuariosComponent},
+          { path: 'revisar-ordenes-de-compra', component: VerPedidosComponent },
           { path: 'profile', component: ProfileComponent },
           { path: 'profile/edit', component: EditComponent },
 

@@ -1,9 +1,11 @@
+/* Contenedor principal con un ancho máximo y centrado */
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* Estilo general para el recibo */
 .receipt {
   background-color: #ffffff;
   padding: 20px;
@@ -12,36 +14,43 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el encabezado del recibo */
 .receipt-header {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Título del recibo */
 .receipt-title {
   font-size: 24px;
   color: #000000;
 }
 
+/* Fecha del recibo */
 .receipt-date {
   font-size: 14px;
   color: #666666;
 }
 
+/* Nombre de la organización */
 .organization-name {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.organization-rut, .organization-address, .organization-phone, .user-rut {
+/* Datos del usuario */
+.userData {
   font-size: 14px;
   margin-bottom: 5px;
 }
 
+/* Contenido del recibo */
 .receipt-content {
   margin-bottom: 20px;
 }
 
+/* Estilo para la tabla de los elementos del recibo */
 .receipt-items {
   width: 100%;
   border-collapse: collapse;
@@ -62,20 +71,58 @@
   font-size: 14px;
 }
 
+/* Resumen de la compra */
 .receipt-summary {
   text-align: right;
   margin-top: 20px;
 }
 
-.pdf-button {
-  margin-top: 10px;
-  background-color: #25D366
-}
-
+/* Estilo para el contenedor del spinner de carga */
 .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px; /* Ajusta según sea necesario */
   margin-bottom: 12.9rem;
+}
+
+/* Establecer que los botones estén en línea y separados */
+.receipt-actions {
+  display: flex;
+  justify-content: space-between;  /* Espacio entre los botones */
+  gap: 10px; /* Espacio entre los botones (puedes ajustar este valor) */
+}
+
+/* Estilos para el botón de "Enviar detalle" */
+.pdf-button {
+  margin-top: 10px;
+  background-color: #25D366; /* Color verde para el botón de detalle */
+  color: white;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambia el color cuando el mouse está sobre el botón de detalle */
+.pdf-button:hover {
+  background-color: #1c9b56; /* Cambia a un verde más oscuro */
+}
+
+/* Estilos para el botón de "Enviar detalle por correo" */
+.pdf-email-button {
+  background-color: #007bff; /* Color azul para el botón de correo */
+  color: #ffffff; /* Texto blanco */
+  border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Relleno */
+  font-size: 16px; /* Tamaño de la fuente */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Efecto suave */
+}
+
+/* Estilo cuando el usuario pasa el mouse sobre el botón de correo */
+.pdf-email-button:hover {
+  background-color: #0056b3; /* Cambia el color al pasar el mouse */
 }

@@ -57,6 +57,7 @@
         </ng-template>
       </div>
       <div class="modal-buttons" *ngIf="cart.items && cart.items.length > 0">
+        <button class="modal-button deleteAll" (click)="clearCart()">Limpiar carrito</button>
         <button class="modal-button cancel" (click)="closeModalDialog()">Cancelar</button>
         <button class="modal-button accept" (click)="confirmOrder()">Confirmar Compra</button>
       </div>

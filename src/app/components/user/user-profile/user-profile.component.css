@@ -1,7 +1,6 @@
 .dashboard {
   background: #f1efef;
   padding: 20px;
-  height: calc(100vh - 500px);
 }
 
 .dashboard-header {
@@ -185,4 +184,35 @@
   background-position: center;
   width: 100%;
   height: 100%; /* Match the container height */
+}
+
+.orders-section {
+  background: linear-gradient(to right, #fdfdfd, #ffffff);
+  padding: 1.5rem;
+}
+
+.notLoginProfile{
+  max-width: 112rem;
+  margin: 0 auto;
+  text-align: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.profileHeader {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #000000;
+  line-height: 2.25rem;
+}
+
+.profileDescription {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #000000;
+}
+
+.auth-message {
+  margin-bottom: 16.9rem; /* Asegura que este margen solo se aplique cuando el usuario no está autenticado */
 }

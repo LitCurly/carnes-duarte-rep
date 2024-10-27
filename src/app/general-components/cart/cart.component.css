@@ -144,6 +144,20 @@
   transition: background-color 0.3s ease;
 }
 
+.modal-button.deleteAll {
+  background-color: #5e3636;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.modal-button.deleteAll:hover {
+  background-color: #3d2323;
+}
+
 .modal-button.cancel {
   background-color: #dc3545;
   color: white;
@@ -157,6 +171,7 @@
 .modal-button.cancel:hover {
   background-color: #bd2130;
 }
+
 
 .modal-button.accept {
   background-color: #007bff;

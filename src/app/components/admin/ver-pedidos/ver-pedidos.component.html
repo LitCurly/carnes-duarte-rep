@@ -1,1 +1,80 @@
-<p>ver-pedidos works!</p>
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h3>Lista de pedidos</h3>
+    </div>
+  </div>
+  <div class="card">
+    <div class="dashboard-content">
+      <div class="filter-container">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Buscar por nombre de usuario..."
+          class="filter-input"
+          (input)="onSearch()"
+        />
+
+        <select [(ngModel)]="selectedStatus" (change)="onStatusChange()" class="filter-input">
+          <option value="">Mostrar todos</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Finalizada">Finalizada</option>
+        </select>
+      </div>
+
+      <table *ngIf="paginatedUsers.length > 0">
+        <thead>
+        <tr>
+          <th class="center">#</th>
+          <th>Cliente</th>
+          <th>Datos de la compra</th>
+          <th>Estado del pedido</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let userOrder of paginatedUsers; let i = index">
+          <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ capitalizeFirstLetter(userOrder.nombre) }} {{ capitalizeFirstLetter(userOrder.apellido) }}</td>
+          <td>
+            <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
+            <strong>Productos:</strong>
+            <ul>
+              <li *ngFor="let item of userOrder.order.items">
+                {{ capitalizeFirstLetter(item.nombre) }} ({{ capitalizeFirstLetter(item.tipo) }}):
+                {{ item.cantidad }} x {{ item.precioPorKilo | currency: '$' : 'symbol' : '1.0-0' }} =
+                {{ item.subtotal | currency: '$' : 'symbol' : '1.0-0' }}
+              </li>
+            </ul>
+            <strong>Monto total:</strong> {{ userOrder.order.total | currency: '$' : 'symbol' : '1.0-0' }}
+          </td>
+          <td>
+            <div class="switch-container">
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  [checked]="userOrder.order.status === 'Finalizada'"
+                  (change)="toggleOrderStatus(userOrder)"
+                />
+                <span class="slider round"></span>
+              </label>
+              <span class="status-text">
+                {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
+               </span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="paginatedUsers.length === 0" class="no-orders-message">
+        <p>Aún no existen pedidos realizados</p>
+      </div>
+
+      <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+        <p>Página {{ currentPage }} de {{ totalPages }}</p>
+      </div>
+    </div>
+  </div>
+</div>
