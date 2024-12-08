@@ -38,8 +38,8 @@
       <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-usuarios">U</span>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" [class.closed]="sidebarClosed">
-      <a routerLink="/admin/home/revisar-ordenes-de-compra" *ngIf="!sidebarClosed">Órdenes</a>
-      <span *ngIf="sidebarClosed" routerLink="/admin/home/revisar-ordenes-de-compra">O</span>
+      <a routerLink="/admin/home/revisar-pedidos" *ngIf="!sidebarClosed">Órdenes</a>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/revisar-pedidos">O</span>
     </li>
 
   </ul>

@@ -292,3 +292,19 @@ input:checked + .slider:before {
   text-align: center;
   vertical-align: middle; /* Esto asegura que el contenido también se alinee verticalmente al centro */
 }
+
+.detail-button {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.detail-button:hover {
+  background-color: #0056b3;
+}

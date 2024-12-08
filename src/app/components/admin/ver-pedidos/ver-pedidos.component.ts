@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
-import {StatusEnum} from "../../../models/order";
+import {Order, StatusEnum} from "../../../models/order";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class VerPedidosComponent implements OnInit {
   usersWithOrders: any[] = [];
   paginatedUsers: any[] = [];
+  paginatedOrders: Order[] = [];
   currentPage = 1;
   itemsPerPage = 5;
   totalPages = 1;
@@ -58,6 +59,9 @@ export class VerPedidosComponent implements OnInit {
                 userId: user.id,
                 nombre: user.nombre,
                 apellido: user.apellido,
+                email: user.email,
+                telefono: user.telefono,
+                direccion: user.direccion,
                 order
               });
             }
@@ -137,7 +141,7 @@ export class VerPedidosComponent implements OnInit {
 
   onSearch(): void {
     this.currentPage = 1;
-    let url = `/admin/home/revisar-ordenes-de-compra?page=${this.currentPage}`;
+    let url = `/admin/home/revisar-pedidos?page=${this.currentPage}`;
 
     if (this.searchQuery.trim()) {
       url += `&search=${this.searchQuery}`;
@@ -149,7 +153,7 @@ export class VerPedidosComponent implements OnInit {
 
   onStatusChange(): void {
     this.currentPage = 1;
-    let url = `/admin/home/revisar-ordenes-de-compra?page=${this.currentPage}`;
+    let url = `/admin/home/revisar-pedidos?page=${this.currentPage}`;
 
 
     if (this.selectedStatus.trim()) {

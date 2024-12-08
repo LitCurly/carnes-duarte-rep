@@ -79,7 +79,7 @@ const routes: Routes = [
             ] },
           { path: 'gestionar-productos/:tipoCarne/:corteId/editar-productos', component: EditarProductosComponent },
           { path: 'gestionar-usuarios', component: GestionarUsuariosComponent},
-          { path: 'revisar-ordenes-de-compra', component: VerPedidosComponent },
+          { path: 'revisar-pedidos', component: VerPedidosComponent },
           { path: 'profile', component: ProfileComponent },
           { path: 'profile/edit', component: EditComponent },
 

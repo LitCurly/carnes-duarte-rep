@@ -27,6 +27,9 @@
         <tr>
           <th class="center">#</th>
           <th>Cliente</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
           <th>Datos de la compra</th>
           <th>Estado del pedido</th>
         </tr>
@@ -35,6 +38,9 @@
         <tr *ngFor="let userOrder of paginatedUsers; let i = index">
           <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
           <td>{{ capitalizeFirstLetter(userOrder.nombre) }} {{ capitalizeFirstLetter(userOrder.apellido) }}</td>
+          <td>{{ capitalizeFirstLetter(userOrder.email) }} </td>
+          <td>{{ capitalizeFirstLetter(userOrder.telefono) }} </td>
+          <td>{{ capitalizeFirstLetter(userOrder.direccion) }} </td>
           <td>
             <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
             <strong>Productos:</strong>

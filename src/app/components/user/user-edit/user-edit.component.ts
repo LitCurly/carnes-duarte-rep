@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit {
         this.loadDataUser();
       } else {
         // Redirigir al perfil si no está autenticado
-        this.router.navigate(['/home/perfil']);
+        this.router.navigate(['/login']);
       }
       this.isLoading = false; // Ocultar el spinner después de verificar autenticación
     });

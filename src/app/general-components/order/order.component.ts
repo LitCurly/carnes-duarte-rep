@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { Order } from '../../models/order';
 import { AuthService } from "../../services/auth-service.service";
-import { map } from 'rxjs/operators'; // Importa el operador map
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'order',
@@ -17,10 +17,9 @@ export class OrderComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   isLoggedIn = false;
-  isLoading = true; // Bandera para controlar la visibilidad del spinner
+  isLoading = true;
 
   constructor(
-    private router: Router,
     private cartService: CartService,
     private authService: AuthService
   ) {}
@@ -31,17 +30,17 @@ export class OrderComponent implements OnInit {
       if (this.isLoggedIn) {
         this.loadOrders();
       } else {
-        this.isLoading = false; // Ocultar spinner si no está autenticado
+        this.isLoading = false;
       }
     });
   }
 
   loadOrders(): void {
-    this.isLoading = true; // Mostrar spinner al cargar
+    this.isLoading = true;
     this.cartService.getAllOrders().pipe(
       map((orders: Order[]) => {
         return orders.sort((a, b) => {
-          return b.createdAt.getTime() - a.createdAt.getTime(); // Orden descendente por fecha de emisión
+          return b.createdAt.getTime() - a.createdAt.getTime();
         });
       })
     ).subscribe(
@@ -49,11 +48,11 @@ export class OrderComponent implements OnInit {
         this.orders = sortedOrders;
         this.totalPages = Math.ceil(this.orders.length / this.itemsPerPage);
         this.paginateOrders();
-        this.isLoading = false; // Ocultar spinner cuando termina la carga
+        this.isLoading = false;
       },
       error => {
         console.error('Error loading orders:', error);
-        this.isLoading = false; // Asegúrate de ocultar el spinner en caso de error también
+        this.isLoading = false;
       }
     );
   }
