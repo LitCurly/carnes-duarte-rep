@@ -32,6 +32,7 @@
           <th>Dirección</th>
           <th>Datos de la compra</th>
           <th>Estado del pedido</th>
+          <th>Url del Pedido PDF</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +69,18 @@
                </span>
             </div>
           </td>
+          <td>
+            <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
+              <a [href]="userOrder.order.boletaURL" target="_blank">
+                {{ userOrder.order.boletaURL | truncate:15 }}
+              </a>
+            </ng-container>
+            <ng-template #noBoleta>
+              <span>No existe pdf para este pedido</span>
+            </ng-template>
+          </td>
+
+
         </tr>
         </tbody>
       </table>

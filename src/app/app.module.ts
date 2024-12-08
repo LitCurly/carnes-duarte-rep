@@ -14,6 +14,7 @@ import { AuthService } from "./services/auth-service.service";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 
 //Componentes
@@ -90,7 +91,8 @@ import { EditarProductosComponent } from "./general-components/editar-productos/
     HomeUserComponent,
     UserProfileComponent,
     UserEditComponent,
-    CarouselComponentComponent
+    CarouselComponentComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

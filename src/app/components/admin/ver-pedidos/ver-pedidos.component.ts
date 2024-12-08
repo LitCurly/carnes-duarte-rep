@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 export class VerPedidosComponent implements OnInit {
   usersWithOrders: any[] = [];
   paginatedUsers: any[] = [];
-  paginatedOrders: Order[] = [];
   currentPage = 1;
   itemsPerPage = 5;
   totalPages = 1;
