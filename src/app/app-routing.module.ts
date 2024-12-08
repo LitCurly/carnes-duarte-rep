@@ -57,7 +57,7 @@ const routes: Routes = [
       { path: 'productos/vacuno', component: VacunoComponent },
       { path: 'productos/cerdo', component: CerdoComponent },
       { path: 'mis-pedidos', component: MisPedidosComponent},
-      { path: 'mis-pedidos/:id/order-detail', component: OrderDetailComponent },
+      { path: 'mis-pedidos/:id/detalle-del-pedido', component: OrderDetailComponent },
       { path: 'sobre-nosotros', component: SobreNosotrosComponent },
       { path: 'perfil', component: UserProfileComponent },
       { path: 'perfil/editar', component: UserEditComponent },

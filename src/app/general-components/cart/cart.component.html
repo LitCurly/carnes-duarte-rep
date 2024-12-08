@@ -2,7 +2,7 @@
   <div class="modal-container">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title">Detalle de Compra</h2>
+        <h2 class="modal-title">Detalle de Pedido</h2>
       </div>
       <div class="modal-body">
         <div *ngIf="cart.items && cart.items.length > 0; else emptyCart">
@@ -59,7 +59,7 @@
       <div class="modal-buttons" *ngIf="cart.items && cart.items.length > 0">
         <button class="modal-button deleteAll" (click)="clearCart()">Limpiar carrito</button>
         <button class="modal-button cancel" (click)="closeModalDialog()">Cancelar</button>
-        <button class="modal-button accept" (click)="confirmOrder()">Confirmar Compra</button>
+        <button class="modal-button accept" (click)="confirmOrder()">Confirmar Pedido</button>
       </div>
     </div>
   </div>

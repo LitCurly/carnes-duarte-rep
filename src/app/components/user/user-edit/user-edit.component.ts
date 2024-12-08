@@ -152,6 +152,9 @@ export class UserEditComponent implements OnInit {
           avatarImg: this.avatarImg
         };
         this.userService.setUserData(userData);
+
+        // Redirigir al perfil
+        this.router.navigate(['/home/perfil']);
       })
       .catch((error) => {
         console.error('Error al actualizar la información del usuario:', error);
@@ -161,6 +164,7 @@ export class UserEditComponent implements OnInit {
         this.savingData = false;
       });
   }
+
 
   openFileInput(): void {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;

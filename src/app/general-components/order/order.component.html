@@ -1,11 +1,11 @@
 <div class="orders-section">
   <div class="orders-header">
-    <h2 class="orders-title">Órdenes de Compra</h2>
+    <h2 class="orders-title">Lista de Pedidos</h2>
     <div *ngIf="!isLoggedIn && !isLoading" class="auth-message">
-      <p class="orders-description">Inicia sesión para ver tus órdenes de compra.</p>
+      <p class="orders-description">Inicia sesión para ver tus pedidos realizados.</p>
     </div>
-    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">No has realizado ninguna compra aún.</p>
-    <p *ngIf="paginatedOrders.length > 0" class="orders-description">Revisa tus órdenes de compra realizadas.</p>
+    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">No has realizado ningún pedido aún.</p>
+    <p *ngIf="paginatedOrders.length > 0" class="orders-description">Revisa tus pedidos realizados.</p>
   </div>
 
   <div class="table-container" *ngIf="isLoggedIn && !isLoading">
@@ -29,7 +29,7 @@
           </td>
           <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
           <td>
-            <a [routerLink]="'/home/mis-pedidos/' + order.id + '/order-detail'" class="detail-button">
+            <a [routerLink]="'/home/mis-pedidos/' + order.id + '/detalle-del-pedido'" class="detail-button">
               Ver Detalle
             </a>
           </td>

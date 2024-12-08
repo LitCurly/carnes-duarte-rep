@@ -5,6 +5,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import { AuthService } from "../../../../services/auth-service.service";
 import { UserService } from "../../../../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit',
@@ -29,7 +30,8 @@ export class EditComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -132,19 +134,8 @@ export class EditComponent implements OnInit {
       .then(() => {
         this.toastr.success('Información del usuario actualizada con éxito.');
 
-        const userData = {
-          nombre: this.nombre,
-          segundoNombre: this.segundoNombre,
-          apellido: this.apellido,
-          segundoApellido: this.segundoApellido,
-          rut: this.rut,
-          telefono: this.telefono,
-          direccion: this.direccion,
-          email: this.email,
-          rol: this.rol,
-          avatarImg: this.avatarImg
-        };
-        this.userService.setUserData(userData);
+        this.router.navigate(['/admin/home/profile']);
+
       })
       .catch((error) => {
         console.error('Error al actualizar la información del usuario:', error);
@@ -154,6 +145,7 @@ export class EditComponent implements OnInit {
         this.savingData = false;
       });
   }
+
 
   openFileInput(): void {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;

@@ -148,6 +148,6 @@ export class VacunoComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/productos']);
+    this.router.navigate(['/home/productos/']);
   }
 }
