@@ -34,7 +34,6 @@
           <th style="width: 30%;">Nombre</th>
           <th style="width: 15%;">Tipo de Carne</th>
           <th style="width: 15%;">Precio por Kilo</th>
-<!--          <th style="width: 5%;">Stock</th>-->
           <th style="width: 30%;">Preparaciones</th>
           <th style="width: 5%;"></th>
         </tr>
@@ -43,13 +42,13 @@
         <tr *ngFor="let corte of paginatedCortes; let i = index">
           <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
           <td>
-            <a class="detail-button" (click)="editarCorte(corte)">
+            <a class="detail-button" (click)="editarCorte(corte)" title="Editar este corte">
               {{ corte.nombre }}
             </a>
           </td>
+
           <td>{{ capitalizeFirstLetter(corte.carne) }}</td>
           <td>{{ corte.precioPorKilo | currency :'$ ':'symbol':'1.0-0' }}</td>
-<!--          <td>{{ corte.stock }}</td>-->
           <td>{{ corte.preparaciones ? corte.preparaciones.join(', ') : '-' }}</td>
           <td style="text-align: center">
             <button class="remove-button" (click)="eliminarCorte(corte)">
