@@ -27,19 +27,19 @@
   <ul class="menu">
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" [class.closed]="sidebarClosed">
       <a routerLink="/admin/home/dashboard" *ngIf="!sidebarClosed">Dashboard</a>
-      <span *ngIf="sidebarClosed" routerLink="/admin/home/dashboard">D</span>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/dashboard">D..</span>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" [class.closed]="sidebarClosed">
       <a routerLink="/admin/home/gestionar-productos" *ngIf="!sidebarClosed">Productos</a>
-      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-productos">P</span>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-productos">P..</span>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" [class.closed]="sidebarClosed">
       <a routerLink="/admin/home/gestionar-usuarios" *ngIf="!sidebarClosed">Usuarios</a>
-      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-usuarios">U</span>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/gestionar-usuarios">U..</span>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" [class.closed]="sidebarClosed">
-      <a routerLink="/admin/home/revisar-pedidos" *ngIf="!sidebarClosed">Órdenes</a>
-      <span *ngIf="sidebarClosed" routerLink="/admin/home/revisar-pedidos">O</span>
+      <a routerLink="/admin/home/revisar-pedidos" *ngIf="!sidebarClosed">Pedidos</a>
+      <span *ngIf="sidebarClosed" routerLink="/admin/home/revisar-pedidos">P..</span>
     </li>
 
   </ul>

@@ -34,8 +34,8 @@
         <tr>
           <th [style.width.%]="columnWidths.nombre">Nombre</th>
           <th [style.width.%]="columnWidths.preparaciones">Preparaciones</th>
-          <th [style.width.%]="columnWidths.precioPorKilo">Precio por Kilo</th>
-          <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">Cantidad</th>
+          <th [style.width.%]="columnWidths.precioPorKilo">Precio por kg</th>
+          <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">Cantidad (kg)</th>
           <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">Acciones</th>
         </tr>
         </thead>
@@ -47,7 +47,7 @@
               <span *ngIf="corte.preparaciones?.includes('Cacerola')" class="preparation-item">Cacerola</span>
               <span *ngIf="corte.preparaciones?.includes('Horno')" class="preparation-item">Horno</span>
               <span *ngIf="corte.preparaciones?.includes('Parrilla')" class="preparation-item">Parrilla</span>
-              <span *ngIf="corte.preparaciones?.includes('Sarten')" class="preparation-item">Sarten</span>
+              <span *ngIf="corte.preparaciones?.includes('Sartén')" class="preparation-item">Sartén</span>
             </div>
           </td>
           <td [style.width.%]="columnWidths.precioPorKilo">{{ corte.precioPorKilo | currency: 'CLP ':'symbol':'1.0-0' }}</td>
