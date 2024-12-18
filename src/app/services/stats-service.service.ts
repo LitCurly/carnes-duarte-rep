@@ -51,4 +51,39 @@ export class StatsService {
       })
     );
   }
+
+  getMostPurchasedMeat(orders: Order[]): { [key: string]: number } {
+    const meatCounts: { [key: string]: number } = {};
+
+    orders.forEach(order => {
+      order.items.forEach(item => {
+        if (meatCounts[item.nombre]) {
+          meatCounts[item.nombre] += item.cantidad;
+        } else {
+          meatCounts[item.nombre] = item.cantidad;
+        }
+      });
+    });
+
+    return meatCounts;
+  }
+
+  getMostPurchasedCuts(orders: Order[]): { [key: string]: number } {
+    const meatTypeCounts: { [key: string]: number } = {};
+
+    orders.forEach(order => {
+      order.items.forEach(item => {
+        const tipo = item.tipo; // Asumimos que `item.tipo` contiene "pollo", "cerdo", "vacuno", etc.
+        if (meatTypeCounts[tipo]) {
+          meatTypeCounts[tipo] += item.cantidad;
+        } else {
+          meatTypeCounts[tipo] = item.cantidad;
+        }
+      });
+    });
+
+    return meatTypeCounts;
+  }
+
+
 }

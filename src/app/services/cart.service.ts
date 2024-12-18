@@ -327,7 +327,7 @@ export class CartService {
                   style: 'tableTitle',
                 },
                 {
-                  text: `${this.capitalizeFirstLetter(userData['nombre'])}`,
+                  text: `${this.capitalizeFirstLetter(userData['nombre']) } ${this.capitalizeFirstLetter(userData['apellido']) }`,
                   style: 'tableValue',
                 },
               ],

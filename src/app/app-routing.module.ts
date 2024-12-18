@@ -44,7 +44,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegisterComponent },
   { path: 'recuperar-contraseña', component: ForgotPasswordComponent },
-  { path: 'change-password', component: ChangePasswordComponent },
 
   {
     path: 'home',

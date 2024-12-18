@@ -17,8 +17,8 @@ export class DashboardComponent implements AfterViewInit {
     pollo: 'Gráfico de Cortes de Pollo',
     vacuno: 'Gráfico de Cortes de Vacuno',
     cerdo: 'Gráfico de Cortes de Cerdo',
-    totalOrders: 'Gráfico del Número Total de Órdenes',
-    ordersByMonth: 'Órdenes por Mes'
+    totalOrders: 'Gráfico del Número Total de Pedidos',
+    ordersByMonth: 'Pedidos por Mes'
   };
 
   constructor(private statsService: StatsService) { }
@@ -34,6 +34,8 @@ export class DashboardComponent implements AfterViewInit {
         (orders: Order[]) => {
           this.drawTotalOrdersChart('totalOrders', orders, this.titles.totalOrders);
           this.drawOrdersByMonthChart('ordersByMonth', orders, this.titles.ordersByMonth);
+          this.drawMostPurchasedMeatChart('mostPurchasedMeatChart', orders, 'Cortes de carne más comprados');
+          this.drawMostPurchasedCutsChart('mostPurchasedCutsChart', orders, 'Tipos de cortes más comprados');
         },
         (error) => {
           console.error('Error al obtener todas las órdenes:', error);
@@ -234,6 +236,51 @@ export class DashboardComponent implements AfterViewInit {
     chart.draw(dataTable, options);
   }
 
+  private drawMostPurchasedMeatChart(chartId: string, orders: Order[], title: string) {
+    const meatCounts = this.statsService.getMostPurchasedMeat(orders);
+    const chartData: [string, number][] = Object.entries(meatCounts);
 
+    const dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Corte de Carne');
+    dataTable.addColumn('number', 'Cantidad');
 
+    chartData.forEach(([nombre, cantidad]) => {
+      dataTable.addRow([nombre, cantidad]);
+    });
+
+    const options = {
+      title: title,
+      pieHole: 0.4,
+      is3D: false,
+      colors: ['#FF9999', '#66B2FF', '#99FF99', '#FFCC99', '#C299FF'],
+      chartArea: {
+        width: '90%',
+        height: '90%',
+      },
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById(chartId));
+    chart.draw(dataTable, options);
+  }
+
+  private drawMostPurchasedCutsChart(chartId: string, orders: Order[], title: string) {
+    const cutCounts = this.statsService.getMostPurchasedCuts(orders);
+    const chartData: [string, number][] = Object.entries(cutCounts);
+
+    const dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Tipo de Corte');
+    dataTable.addColumn('number', 'Cantidad Vendida');
+    chartData.forEach(([cut, count]) => {
+      dataTable.addRow([cut, count]);
+    });
+
+    const options = {
+      title: title,
+      pieHole: 0.4,
+      colors: ['#FF9999', '#66B2FF', '#99FF99'],
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById(chartId));
+    chart.draw(dataTable, options);
+  }
 }

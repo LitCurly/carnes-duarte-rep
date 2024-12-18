@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth-service.service';
 
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private toastr: ToastrService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -37,22 +35,30 @@ export class LoginComponent implements OnInit {
 
       try {
         await this.authService.loginWithEmailAndPassword(email, password);
-        // No se requiere redirección aquí, se maneja en el servicio AuthService
+        this.toastr.success('Inicio de sesión exitoso', '¡Bienvenido!');
       } catch (error) {
         // @ts-ignore
         if (error.code === 'auth/wrong-password') {
           this.incorrectPassword = true;
+          this.toastr.error('La contraseña ingresada es incorrecta.', 'Error de autenticación');
+          // @ts-ignore
+        } else if (error.code === 'auth/user-not-found') {
+          this.toastr.error('No se encontró una cuenta con este correo electrónico.', 'Error de autenticación');
+          // @ts-ignore
+        } else if (error.code === 'auth/too-many-requests') {
+          this.toastr.warning('Se han hecho demasiados intentos de inicio de sesión. Inténtalo más tarde.', 'Advertencia');
         } else {
-          this.toastr.error('Error al iniciar sesión', 'Error');
-          console.error('Error al iniciar sesión:', error);
+          this.toastr.error('Error al iniciar sesión. Por favor, intenta nuevamente.', 'Error');
         }
+        console.error('Error al iniciar sesión:', error);
       } finally {
         this.loading = false;
       }
     } else {
-      this.toastr.warning('Por favor completa todos los campos', 'Atención');
+      this.toastr.warning('Por favor completa todos los campos correctamente.', 'Atención');
     }
   }
+
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
