@@ -1,37 +1,67 @@
-<div class="container">
-  <div class="row mb-0">
-    <div class="col text-center">
-      <h1>Catálogo de Productos</h1>
-    </div>
+<section class="mt-12 mb-12">
+  <div class="mx-auto lg:text-center px-6">
+    <h2
+      class="text-7xl font-semibold text-gray-900 mb-10 text-center"
+      style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7)"
+    >
+      Catálogo de Productos
+    </h2>
+    <p
+      class="mt-2 text-pretty text-3xl font-semibold tracking-tight text-gray-800 sm:text-4xl lg:text-5xl whitespace-nowrap w-full text-center"
+      style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7)"
+    >
+      Disfrute de nuestra variada selección de cortes
+    </p>
   </div>
-  <div class="row mt-2">
-    <div class="col text-center">
-      <h2>Disfrute nuestra variada selección de cortes de:</h2>
-    </div>
+  <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
+    <ul
+      role="list"
+      class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"
+    >
+      <li
+        routerLink="/home/productos/vacuno"
+        class="rounded-2xl bg-red-950 px-8 py-10 cursor-pointer hover:bg-red-800 hover:shadow-lg transition duration-300"
+      >
+        <img
+          class="mx-auto size-48 rounded-full md:size-56"
+          src="../../../assets/img/img-duarte/vacuno2.png"
+          alt="Cortes de vacuno"
+        />
+        <h3 class="mt-6 text-xl font-bold tracking-tight text-white">------ Vacuno ------</h3>
+        <p class="text-sm/6 font-semibold text-gray-300">
+          Nuestros cortes de novillo de categoría V, ofrecen una carne de alta calidad, conocida por su
+          terneza y jugosidad.
+        </p>
+      </li>
+      <li
+        routerLink="/home/productos/pollo"
+        class="rounded-2xl bg-red-950 px-8 py-10 cursor-pointer hover:bg-red-800 hover:shadow-lg transition duration-300"
+      >
+        <img
+          class="mx-auto size-48 rounded-full md:size-56"
+          src="../../../assets/img/img-duarte/pollo.png"
+          alt="Cortes de pollo"
+        />
+        <h3 class="mt-6 text-xl font-bold tracking-tight text-white">------ Pollo ------</h3>
+        <p class="text-sm/6 font-semibold text-gray-300">
+          El Pollo es una opción versátil y saludable, con un sabor suave que se adapta a diversas
+          preparaciones.
+        </p>
+      </li>
+      <li
+        routerLink="/home/productos/cerdo"
+        class="rounded-2xl bg-red-950 px-8 py-10 cursor-pointer hover:bg-red-800 hover:shadow-lg transition duration-300"
+      >
+        <img
+          class="mx-auto size-48 rounded-full md:size-56"
+          src="../../../assets/img/img-duarte/cerdo.png"
+          alt="Cortes de cerdo"
+        />
+        <h3 class="mt-6 text-xl font-bold tracking-tight text-white">------ Cerdo ------</h3>
+        <p class="text-sm/6 font-semibold text-gray-300">
+          La carne de Cerdo es una delicia culinaria, muy conocida por su sabor suculento y versatilidad.
+        </p>
+      </li>
+    </ul>
   </div>
-  <section>
-    <div class="articles-container">
-      <article routerLink="/home/productos/vacuno">
-        <h2>Vacuno</h2>
-        <img src="../../../assets/img/img-duarte/vacuno2.png" width="400" />
-        <p class="mb-0">Nuestros cortes de novillo de categoría V</p>
-        <p class="mt-0 mb-0">ofrecen una carne de alta calidad,</p>
-        <p class="mt-0 mb-0">conocida por su terneza y jugosidad.</p>
-      </article>
-      <article routerLink="/home/productos/pollo">
-        <h2>Pollo</h2>
-        <img src="../../../assets/img/img-duarte/pollo.png" width="400" />
-        <p class="mb-0">El Pollo es una opción versátil y saludable,</p>
-        <p class="mt-0 mb-0">con un sabor suave que se adapta a</p>
-        <p class="mt-0 mb-0">diversas preparaciones.</p>
-      </article>
-      <article routerLink="/home/productos/cerdo">
-        <h2>Cerdo</h2>
-        <img src="../../../assets/img/img-duarte/cerdo.png" width="400" />
-        <p class="mb-0">La carne de Cerdo es una delicia culinaria,</p>
-        <p class="mt-0 mb-0">muy conocida por su sabor suculento y</p>
-        <p class="mt-0 mb-0">versatilidad.</p>
-      </article>
-    </div>
-  </section>
-</div>
+</section>
