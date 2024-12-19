@@ -9,43 +9,79 @@
           <div class="custom-container">
             <div class="custom-content">
               <form (ngSubmit)="agregarCorte()" #productoForm="ngForm" class="form">
-
                 <div class="form-group">
                   <label for="tipoCarne">Tipo de Carne</label>
-                  <select id="tipoCarne" name="tipoCarne" [(ngModel)]="seleccionTipoCarne" class="form-control" required>
+                  <select
+                    id="tipoCarne"
+                    name="tipoCarne"
+                    [(ngModel)]="seleccionTipoCarne"
+                    class="form-control"
+                    required
+                  >
                     <option value="" disabled>Seleccione un tipo de carne</option>
-                    <option *ngFor="let tipo of tiposCarne" [value]="tipo">{{ capitalizeFirstLetter(tipo) }}</option>
+                    <option *ngFor="let tipo of tiposCarne" [value]="tipo">
+                      {{ capitalizeFirstLetter(tipo) }}
+                    </option>
                   </select>
                 </div>
 
                 <div class="form-group">
                   <label for="nombre">Nombre del corte (*)</label>
-                  <input type="text" id="nombre" name="nombre" [(ngModel)]="nuevoCorte.nombre" class="form-control" placeholder="Ingrese nombre" required>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    [(ngModel)]="nuevoCorte.nombre"
+                    class="form-control"
+                    placeholder="Ingrese nombre"
+                    required
+                  />
                 </div>
 
                 <div class="form-group">
                   <label for="precio">Precio por kilo (*)</label>
-                  <input type="number" id="precio" name="precio" [(ngModel)]="nuevoCorte.precioPorKilo" class="form-control" min="0.01" step="0.01" placeholder="Ingrese precio" required
-                         (focus)="clearPrice()" (blur)="restorePrice()">
+                  <input
+                    type="number"
+                    id="precio"
+                    name="precio"
+                    [(ngModel)]="nuevoCorte.precioPorKilo"
+                    class="form-control"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Ingrese precio"
+                    required
+                    (focus)="clearPrice()"
+                    (blur)="restorePrice()"
+                  />
                 </div>
 
                 <div class="form-group">
                   <label>Preparaciones</label>
                   <div>
-                    <button type="button" class="preparacion-btn"
-                            *ngFor="let preparacion of opcionesPreparaciones"
-                            [class.active]="nuevoCorte.preparaciones?.includes(preparacion)"
-                            (click)="togglePreparacion(preparacion)">
+                    <button
+                      type="button"
+                      class="preparacion-btn"
+                      *ngFor="let preparacion of opcionesPreparaciones"
+                      [class.active]="nuevoCorte.preparaciones?.includes(preparacion)"
+                      (click)="togglePreparacion(preparacion)"
+                    >
                       {{ preparacion }}
                     </button>
                   </div>
                 </div>
                 <div class="modal-buttons">
-                  <button type="button" class="btn btn-secondary" (click)="closeModalDialog()">Cancelar</button>
-                  <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid || seleccionTipoCarne === '' || isLoading">Agregar Corte</button>
+                  <button type="button" class="btn btn-secondary" (click)="closeModalDialog()">
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="productoForm.invalid || seleccionTipoCarne === '' || isLoading"
+                  >
+                    Agregar Corte
+                  </button>
                 </div>
-                <div *ngIf="productoForm.submitted && productoForm.valid">
-                </div>
+                <div *ngIf="productoForm.submitted && productoForm.valid"></div>
               </form>
             </div>
           </div>

@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { VerPedidosComponent } from './ver-pedidos.component';
+import { VerPedidosComponent } from './ver-pedidos.component'
 
 describe('VerPedidosComponent', () => {
-  let component: VerPedidosComponent;
-  let fixture: ComponentFixture<VerPedidosComponent>;
+  let component: VerPedidosComponent
+  let fixture: ComponentFixture<VerPedidosComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VerPedidosComponent]
-    });
-    fixture = TestBed.createComponent(VerPedidosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      declarations: [VerPedidosComponent],
+    })
+    fixture = TestBed.createComponent(VerPedidosComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

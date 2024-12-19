@@ -41,7 +41,7 @@ p {
 }
 
 .signup-link:hover {
-  color:  #b20808;
+  color: #b20808;
 }
 
 .form-group {
@@ -83,7 +83,7 @@ p {
 }
 
 .btn:hover {
-  background-color:  #b20808;
+  background-color: #b20808;
 }
 
 .spinner {
@@ -133,7 +133,6 @@ p {
   }
 }
 
-
 .login-footer {
   margin-top: 2rem;
   text-align: center;
@@ -146,8 +145,9 @@ p {
   color: #ffffff;
 }
 
-.separator::before, .separator::after {
-  content: "";
+.separator::before,
+.separator::after {
+  content: '';
   flex: 1;
   border-bottom: 1px solid #d1d5db;
 }

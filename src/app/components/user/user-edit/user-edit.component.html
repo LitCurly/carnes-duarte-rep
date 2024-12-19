@@ -4,21 +4,27 @@
       <h3>Editar Perfil</h3>
     </div>
     <div class="nav-route">
-      <a class="nav-button" routerLink="/home/perfil" >Volver</a>
+      <a class="nav-button" routerLink="/home/perfil">Volver</a>
     </div>
   </div>
 
-  <div  class="card">
+  <div class="card">
     <div class="card-body">
       <div class="custom-container">
         <div class="custom-header">
-          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
+          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
           <div>
             <h3 class="custom-title">Información del usuario</h3>
             <p class="custom-description">Datos personales</p>
           </div>
           <div class="custom-avatar">
-            <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" id="fileInput">
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              style="display: none"
+              id="fileInput"
+            />
             <button class="update-button" (click)="openFileInput()">Actualizar Foto</button>
           </div>
           <div class="custom-password">
@@ -33,49 +39,65 @@
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="nombre">Nombre</label>
-                <input class="custom-input" id="nombre" [(ngModel)]="nombre" name="nombre">
+                <input class="custom-input" id="nombre" [(ngModel)]="nombre" name="nombre" />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="segundoNombre">Segundo nombre</label>
-                <input class="custom-input" id="segundoNombre" [(ngModel)]="segundoNombre" name="segundoNombre">
+                <input
+                  class="custom-input"
+                  id="segundoNombre"
+                  [(ngModel)]="segundoNombre"
+                  name="segundoNombre"
+                />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="apellido">Primer Apellido</label>
-                <input class="custom-input" id="apellido" [(ngModel)]="apellido" name="apellido">
+                <input class="custom-input" id="apellido" [(ngModel)]="apellido" name="apellido" />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="segundoApellido">Segundo Apellido</label>
-                <input class="custom-input" id="segundoApellido" [(ngModel)]="segundoApellido" name="segundoApellido">
+                <input
+                  class="custom-input"
+                  id="segundoApellido"
+                  [(ngModel)]="segundoApellido"
+                  name="segundoApellido"
+                />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="email">Correo</label>
-                <input class="custom-input" id="email" [(ngModel)]="email" name="email" disabled >
+                <input class="custom-input" id="email" [(ngModel)]="email" name="email" disabled />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="direccion">Dirección</label>
-                <input class="custom-input" id="direccion" [(ngModel)]="direccion" name="direccion" >
+                <input class="custom-input" id="direccion" [(ngModel)]="direccion" name="direccion" />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="telefono">Teléfono</label>
-                <input class="custom-input" id="telefono" [(ngModel)]="telefono" name="telefono">
+                <input class="custom-input" id="telefono" [(ngModel)]="telefono" name="telefono" />
               </div>
             </div>
             <div class="custom-row">
               <div class="custom-column">
                 <label class="custom-label" for="rut">RUT</label>
-                <input class="custom-input" id="rut" [(ngModel)]="rut" name="rut" (input)="onRutInput($event)">
+                <input
+                  class="custom-input"
+                  id="rut"
+                  [(ngModel)]="rut"
+                  name="rut"
+                  (input)="onRutInput($event)"
+                />
               </div>
             </div>
             <div class="custom-row">

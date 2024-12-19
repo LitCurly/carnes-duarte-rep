@@ -10,11 +10,13 @@
 
   <div class="card">
     <div>
-      <input [(ngModel)]="searchQuery" placeholder="Buscar por nombre..." (keyup.enter)="onSearch()">
+      <input [(ngModel)]="searchQuery" placeholder="Buscar por nombre..." (keyup.enter)="onSearch()" />
       <select [(ngModel)]="selectedCarne" (change)="onCarneChange()">
         <option [ngValue]="''" disabled selected>Seleccionar tipo de carne</option>
         <option [ngValue]="'all'">Mostrar todo</option>
-        <option *ngFor="let carne of carnes" [ngValue]="carne.tipo">{{ capitalizeFirstLetter(carne.tipo) }}</option>
+        <option *ngFor="let carne of carnes" [ngValue]="carne.tipo">
+          {{ capitalizeFirstLetter(carne.tipo) }}
+        </option>
       </select>
       <select [(ngModel)]="selectedPreparation" [disabled]="!selectedCarne && selectedCarne !== 'all'">
         <option [ngValue]="''" disabled selected>Seleccionar preparación</option>
@@ -29,34 +31,33 @@
     <div class="table-container">
       <table class="props-table">
         <thead>
-        <tr>
-          <th class="center">#</th>
-          <th style="width: 30%;">Nombre</th>
-          <th style="width: 15%;">Tipo de Carne</th>
-          <th style="width: 15%;">Precio por Kilo</th>
-          <th style="width: 30%;">Preparaciones</th>
-          <th style="width: 5%;"></th>
-        </tr>
+          <tr>
+            <th class="center">#</th>
+            <th style="width: 30%">Nombre</th>
+            <th style="width: 15%">Tipo de Carne</th>
+            <th style="width: 15%">Precio por Kilo</th>
+            <th style="width: 30%">Preparaciones</th>
+            <th style="width: 5%"></th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let corte of paginatedCortes; let i = index">
-          <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>
-            <a class="detail-button" (click)="editarCorte(corte)" title="Editar este corte">
-              {{ corte.nombre }}
-            </a>
-          </td>
+          <tr *ngFor="let corte of paginatedCortes; let i = index">
+            <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>
+              <a class="detail-button" (click)="editarCorte(corte)" title="Editar este corte">
+                {{ corte.nombre }}
+              </a>
+            </td>
 
-          <td>{{ capitalizeFirstLetter(corte.carne) }}</td>
-          <td>{{ corte.precioPorKilo | currency :'$ ':'symbol':'1.0-0' }}</td>
-          <td>{{ corte.preparaciones ? corte.preparaciones.join(', ') : '-' }}</td>
-          <td style="text-align: center">
-            <button class="remove-button" (click)="eliminarCorte(corte)">
-              <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem">
-            </button>
-          </td>
-
-        </tr>
+            <td>{{ capitalizeFirstLetter(corte.carne) }}</td>
+            <td>{{ corte.precioPorKilo | currency: '$ ' : 'symbol' : '1.0-0' }}</td>
+            <td>{{ corte.preparaciones ? corte.preparaciones.join(', ') : '-' }}</td>
+            <td style="text-align: center">
+              <button class="remove-button" (click)="eliminarCorte(corte)">
+                <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem" />
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -70,4 +71,3 @@
 </div>
 
 <agregar-productos *ngIf="showModal" (closeModal)="closeModal()"></agregar-productos>
-

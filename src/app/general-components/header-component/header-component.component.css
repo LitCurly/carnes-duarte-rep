@@ -5,7 +5,7 @@ header {
 
 .nav-link {
   color: whitesmoke;
-  text-shadow: 0px 8px 10px rgba(0,0,0,0.8);
+  text-shadow: 0px 8px 10px rgba(0, 0, 0, 0.8);
   transition: color 0.3s ease;
 }
 
@@ -40,7 +40,6 @@ header {
   background-color: white;
   border-color: transparent;
   padding: 6px 10px;
-
 }
 
 .icon-png {

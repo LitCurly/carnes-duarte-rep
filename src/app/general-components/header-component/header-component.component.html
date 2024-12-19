@@ -1,50 +1,194 @@
-<header class="d-flex flex-wrap align-items-center justify-content-around py-0 mb-0 border-bottom">
-  <div class="col-md-3 mb-2 justify-content-center">
-    <a href="/inicio" class="d-inline-flex link-body-emphasis text-decoration-none">
-      <img class="logo-duarte-letras" src="../../../assets/img/logo-duarte-letras.png" alt="logo-duarte-letras">
-    </a>
-  </div>
+<header class="bg-carnesDuarteRed">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8" aria-label="Global">
+    <div class="flex lg:flex-1">
+      <a href="/home/inicio" class="-m-1.5 p-1.5">
+        <span class="sr-only">Carnes Duarte</span>
+        <img
+          class="h-14 w-auto"
+          src="../../../assets/img/logo-duarte-letras.png"
+          alt="logo-carnes-duarte-header"
+        />
+      </a>
+    </div>
 
-  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li><a routerLink="/home/inicio" class="nav-link px-2">Inicio</a></li>
-    <li><a routerLink="/home/productos" class="nav-link px-2">Productos</a></li>
-    <li><a routerLink="/home/mis-pedidos" class="nav-link px-2">Mis Pedidos</a></li>
-    <li><a routerLink="/home/sobre-nosotros" class="nav-link px-2">Sobre Nosotros</a></li>
-    <li><a routerLink="/home/perfil" class="nav-link px-2">Perfil</a></li>
-  </ul>
+    <div
+      class="hidden lg:flex lg:flex-row lg:gap-x-12 lg:text-white lg:mr-20 lg:flex-wrap text-white overflow-x-auto"
+      style="text-shadow: 0px 8px 10px rgba(0, 0, 0, 0.8); transition: color 0.3s ease; color: whitesmoke"
+    >
+      <a routerLink="/home/inicio" class="nav-link hover:opacity-70">Inicio</a>
+      <a routerLink="/home/productos" class="nav-link hover:opacity-70">Productos</a>
+      <a routerLink="/home/mis-pedidos" class="nav-link hover:opacity-70">Mis Pedidos</a>
+      <a routerLink="/home/sobre-nosotros" class="nav-link hover:opacity-70">Sobre Nosotros</a>
+      <a routerLink="/home/perfil" class="nav-link hover:opacity-70">Perfil</a>
+    </div>
 
-  <div class="col-md-3 text-end mb-2 header-right-section">
-    <ng-container *ngIf="isLoggedIn">
-      <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center me-3">
+    <div class="flex lg:flex-1">
+      <div *ngIf="!isLoggedIn" class="flex flex-1 items-center justify-end gap-x-6 lg:flex hidden">
+        <a routerLink="/login" class="text-sm font-semibold text-gray-50">Iniciar Sesión</a>
+        <a
+          routerLink="/registrarse"
+          class="rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Registrarse
+        </a>
+      </div>
 
-          <a [routerLink]="['/home/perfil']" class="admin-link">
-            <span class="admin-text">{{ userName }} {{ userLastName }}</span>
-          </a>
-          <a [routerLink]="['/home/perfil']" class="admin-link">
-            <div class="admin-image">
-              <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
+      <div *ngIf="isLoggedIn" class="flex flex-1 items-center justify-end gap-x-6 lg:flex hidden">
+        <div class="flex items-center justify-between me-3">
+          <div class="flex-1">
+            <span class="inline px-2.5 py-1 rounded text-white mr-2">{{ userName }} {{ userLastName }}</span>
+          </div>
+          <div class="ml-2 no-underline text-inherit">
+            <div class="w-9 h-9 rounded-full overflow-hidden mr-2">
+              <img
+                class="w-full h-full object-cover"
+                [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"
+                alt="Usuario"
+              />
             </div>
-          </a>
+          </div>
         </div>
-        <button type="button" class="btn btn-outline-primary me-2 carrito-button" (click)="openCartModal()">
-          <img src="assets/icons/carrito-de-compras.png" class="icon-png" alt="Carrito de Compra">
+
+        <button type="button" (click)="openCartModal()">
+          <img src="assets/icons/carrito-de-compras.webp" class="max-w-8 h-auto" alt="Carrito de Compra" />
         </button>
-        <button type="button" class="btn btn-outline-primary" (click)="logout()">
+
+        <button
+          type="button"
+          class="text-sm font-semibold text-gray-50 lg:block hidden whitespace-nowrap"
+          (click)="logout()"
+        >
           Cerrar Sesión
         </button>
       </div>
-    </ng-container>
+    </div>
 
-    <ng-container *ngIf="!isLoggedIn">
-      <button type="button" class="btn btn-outline-primary me-2" routerLink="/login">
-        Iniciar Sesión
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-50"
+        (click)="toggleMobileMenu()"
+      >
+        <span class="sr-only">Abrir menú</span>
+        <svg
+          class="size-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+          data-slot="icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
       </button>
-      <button type="button" class="btn btn-outline-primary" routerLink="/registrarse">
-        Registrarse
-      </button>
-    </ng-container>
+    </div>
+  </nav>
+
+  <div *ngIf="isMobileMenuOpen" class="lg:hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-hidden sm:max-w-sm sm:ring-gray-900/10">
+      <div class="bg-carnesDuarteRed px-6 py-6 rounded-t-lg">
+        <div class="flex items-center gap-x-6">
+          <a href="/home/inicio" class="-m-1.5 p-1.5">
+            <span class="sr-only">Carnes Duarte</span>
+            <img
+              class="h-14 w-auto"
+              src="../../../assets/img/logo-duarte-letras.png"
+              alt="logo-carnes-duarte-header"
+            />
+          </a>
+          <button
+            type="button"
+            class="-m-2.5 rounded-md p-2.5 text-gray-50 ml-auto"
+            (click)="toggleMobileMenu()"
+          >
+            <span class="sr-only">Cerrar menú</span>
+            <svg
+              class="size-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="bg-white px-6 py-6">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            <a
+              routerLink="/home/inicio"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              (click)="toggleMobileMenu()"
+              >Inicio</a
+            >
+            <a
+              routerLink="/home/productos"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              (click)="toggleMobileMenu()"
+              >Productos</a
+            >
+            <a
+              routerLink="/home/mis-pedidos"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              (click)="toggleMobileMenu()"
+              >Mis Pedidos</a
+            >
+            <a
+              routerLink="/home/sobre-nosotros"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              (click)="toggleMobileMenu()"
+              >Sobre Nosotros</a
+            >
+            <a
+              routerLink="/home/perfil"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              (click)="toggleMobileMenu()"
+              >Perfil</a
+            >
+          </div>
+          <div class="py-6" *ngIf="!isLoggedIn">
+            <a
+              routerLink="/login"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Iniciar Sesión</a
+            >
+            <a
+              routerLink="/registrarse"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Registrarse</a
+            >
+          </div>
+          <div class="py-6" *ngIf="isLoggedIn">
+            <div
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 font-bold hover:bg-gray-50"
+            >
+              {{ userName }} {{ userLastName }}
+            </div>
+            <div
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 cursor-pointer"
+              (click)="openCartAndToggleMenu()"
+            >
+              Carrito
+            </div>
+            <div
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 cursor-pointer"
+              (click)="logout()"
+            >
+              Cerrar Sesión
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
 
-<carrito *ngIf="showCartModal" (closeModal)="closeCartModal()"></carrito>
+  <carrito *ngIf="showCartModal" (closeModal)="closeCartModal()"></carrito>
+</header>

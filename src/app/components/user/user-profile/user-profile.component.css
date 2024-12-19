@@ -35,10 +35,12 @@
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.nav-button:hover{
+.nav-button:hover {
   background-color: #edf2f7;
   color: #3e4348;
   border-color: #cbd5e0;
@@ -88,7 +90,7 @@
 .custom-content {
   border-top: 1px solid #e2e8f0;
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr;
 }
 
 .custom-row {
@@ -123,7 +125,10 @@
   font-weight: 500;
   color: #4a5568;
   background-color: #ffffff;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .custom-button:hover {
@@ -191,7 +196,7 @@
   padding: 1.5rem;
 }
 
-.notLoginProfile{
+.notLoginProfile {
   max-width: 112rem;
   margin: 0 auto;
   text-align: center;

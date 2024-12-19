@@ -36,7 +36,9 @@
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-button:hover {
@@ -205,19 +207,19 @@ tbody tr:nth-child(even) {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 20px;
 }
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 14px;
   width: 14px;
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -254,4 +256,3 @@ input:checked + .slider:before {
   text-align: center;
   vertical-align: middle; /* Esto asegura que el contenido también se alinee verticalmente al centro */
 }
-

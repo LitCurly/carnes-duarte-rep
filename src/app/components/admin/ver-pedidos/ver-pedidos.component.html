@@ -24,64 +24,64 @@
 
       <table *ngIf="paginatedUsers.length > 0">
         <thead>
-        <tr>
-          <th class="center">#</th>
-          <th>Cliente</th>
-          <th>Correo</th>
-          <th>Teléfono</th>
-          <th>Dirección</th>
-          <th>Datos de la compra</th>
-          <th>Estado del pedido</th>
-          <th>Url del Pedido PDF</th>
-        </tr>
+          <tr>
+            <th class="center">#</th>
+            <th>Cliente</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Datos de la compra</th>
+            <th>Estado del pedido</th>
+            <th>Url del Pedido PDF</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let userOrder of paginatedUsers; let i = index">
-          <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ capitalizeFirstLetter(userOrder.nombre) }} {{ capitalizeFirstLetter(userOrder.apellido) }}</td>
-          <td>{{ capitalizeFirstLetter(userOrder.email) }} </td>
-          <td>{{ capitalizeFirstLetter(userOrder.telefono) }} </td>
-          <td>{{ capitalizeFirstLetter(userOrder.direccion) }} </td>
-          <td>
-            <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
-            <strong>Productos:</strong>
-            <ul>
-              <li *ngFor="let item of userOrder.order.items">
-                {{ capitalizeFirstLetter(item.nombre) }} ({{ capitalizeFirstLetter(item.tipo) }}):
-                {{ item.cantidad }} x {{ item.precioPorKilo | currency: '$' : 'symbol' : '1.0-0' }} =
-                {{ item.subtotal | currency: '$' : 'symbol' : '1.0-0' }}
-              </li>
-            </ul>
-            <strong>Monto total:</strong> {{ userOrder.order.total | currency: '$' : 'symbol' : '1.0-0' }}
-          </td>
-          <td>
-            <div class="switch-container">
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  [checked]="userOrder.order.status === 'Finalizada'"
-                  (change)="toggleOrderStatus(userOrder)"
-                />
-                <span class="slider round"></span>
-              </label>
-              <span class="status-text">
-                {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
-               </span>
-            </div>
-          </td>
-          <td>
-            <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
-              <a [href]="userOrder.order.boletaURL" target="_blank">
-                {{ userOrder.order.boletaURL | truncate:15 }}
-              </a>
-            </ng-container>
-            <ng-template #noBoleta>
-              <span>No existe pdf para este pedido</span>
-            </ng-template>
-          </td>
-
-
-        </tr>
+          <tr *ngFor="let userOrder of paginatedUsers; let i = index">
+            <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>
+              {{ capitalizeFirstLetter(userOrder.nombre) }} {{ capitalizeFirstLetter(userOrder.apellido) }}
+            </td>
+            <td>{{ capitalizeFirstLetter(userOrder.email) }}</td>
+            <td>{{ capitalizeFirstLetter(userOrder.telefono) }}</td>
+            <td>{{ capitalizeFirstLetter(userOrder.direccion) }}</td>
+            <td>
+              <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
+              <strong>Productos:</strong>
+              <ul>
+                <li *ngFor="let item of userOrder.order.items">
+                  {{ capitalizeFirstLetter(item.nombre) }} ({{ capitalizeFirstLetter(item.tipo) }}):
+                  {{ item.cantidad }} x {{ item.precioPorKilo | currency: '$' : 'symbol' : '1.0-0' }} =
+                  {{ item.subtotal | currency: '$' : 'symbol' : '1.0-0' }}
+                </li>
+              </ul>
+              <strong>Monto total:</strong> {{ userOrder.order.total | currency: '$' : 'symbol' : '1.0-0' }}
+            </td>
+            <td>
+              <div class="switch-container">
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    [checked]="userOrder.order.status === 'Finalizada'"
+                    (change)="toggleOrderStatus(userOrder)"
+                  />
+                  <span class="slider round"></span>
+                </label>
+                <span class="status-text">
+                  {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
+                </span>
+              </div>
+            </td>
+            <td>
+              <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
+                <a [href]="userOrder.order.boletaURL" target="_blank">
+                  {{ userOrder.order.boletaURL | truncate: 15 }}
+                </a>
+              </ng-container>
+              <ng-template #noBoleta>
+                <span>No existe pdf para este pedido</span>
+              </ng-template>
+            </td>
+          </tr>
         </tbody>
       </table>
 

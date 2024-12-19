@@ -1,13 +1,23 @@
 <div class="team-section">
   <div class="team-header">
     <h1 class="team-title">Nuestros Cortes de Pollo</h1>
-    <p class="team-description">Explore nuestra variedad de cortes de Pollo y sus preparaciones recomendadas.</p>
+    <p class="team-description">
+      Explore nuestra variedad de cortes de Pollo y sus preparaciones recomendadas.
+    </p>
   </div>
 
-  <box className="filters" [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5rem' }">
+  <box
+    className="filters"
+    [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5rem' }"
+  >
     <box [styles]="{ display: 'flex', gap: '15px', width: '100%' }">
       <div class="filter-item">
-        <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por nombre de corte..." class="filter-input">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Buscar por nombre de corte..."
+          class="filter-input"
+        />
       </div>
       <div class="filter-item">
         <select [(ngModel)]="selectedPreparation" class="filter-select">
@@ -18,12 +28,14 @@
           <option value="Sarten">Sarten</option>
         </select>
       </div>
-      <div  [style]="{ display: 'flex', alignItems: 'end', paddingBottom: '24px' }">
+      <div [style]="{ display: 'flex', alignItems: 'end', paddingBottom: '24px' }">
         <button (click)="onSearch()" class="filter-button search-button primary-button">Buscar</button>
       </div>
     </box>
     <box [styles]="{ display: 'flex', gap: '5px', justifyContent: 'flex-end', marginBlockStart: 'auto' }">
-      <button (click)="goBack()" class="filter-button search-button primary-button">Volver a los Productos</button>
+      <button (click)="goBack()" class="filter-button search-button primary-button">
+        Volver a los Productos
+      </button>
     </box>
   </box>
 
@@ -31,43 +43,53 @@
     <div class="table-wrapper">
       <table class="user-table">
         <thead>
-        <tr>
-          <th [style.width.%]="columnWidths.nombre">Nombre</th>
-          <th [style.width.%]="columnWidths.preparaciones">Preparaciones</th>
-          <th [style.width.%]="columnWidths.precioPorKilo">Precio por kg</th>
-          <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">Cantidad (kg)</th>
-          <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">Acciones</th>
-        </tr>
+          <tr>
+            <th [style.width.%]="columnWidths.nombre">Nombre</th>
+            <th [style.width.%]="columnWidths.preparaciones">Preparaciones</th>
+            <th [style.width.%]="columnWidths.precioPorKilo">Precio por kg</th>
+            <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">Cantidad (kg)</th>
+            <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">Acciones</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let corte of paginatedCortes">
-          <td [style.width.%]="columnWidths.nombre">{{ corte.nombre }}</td>
-          <td [style.width.%]="columnWidths.preparaciones">
-            <div class="preparation-list">
-              <span *ngIf="corte.preparaciones?.includes('Cacerola')" class="preparation-item">Cacerola</span>
-              <span *ngIf="corte.preparaciones?.includes('Horno')" class="preparation-item">Horno</span>
-              <span *ngIf="corte.preparaciones?.includes('Parrilla')" class="preparation-item">Parrilla</span>
-              <span *ngIf="corte.preparaciones?.includes('Sartén')" class="preparation-item">Sartén</span>
-            </div>
-          </td>
-          <td [style.width.%]="columnWidths.precioPorKilo">{{ corte.precioPorKilo | currency: 'CLP ':'symbol':'1.0-0' }}</td>
-          <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">
-            <button (click)="decrementQuantity(corte)">-</button>
-            {{ quantities[corte.nombre] }}
-            <button (click)="incrementQuantity(corte)">+</button>
-          </td>
-          <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">
-            <button (click)="addToCart(corte)" class="add-to-cart-button">Agregar al Carrito</button>
-          </td>
-        </tr>
+          <tr *ngFor="let corte of paginatedCortes">
+            <td [style.width.%]="columnWidths.nombre">{{ corte.nombre }}</td>
+            <td [style.width.%]="columnWidths.preparaciones">
+              <div class="preparation-list">
+                <span *ngIf="corte.preparaciones?.includes('Cacerola')" class="preparation-item"
+                  >Cacerola</span
+                >
+                <span *ngIf="corte.preparaciones?.includes('Horno')" class="preparation-item">Horno</span>
+                <span *ngIf="corte.preparaciones?.includes('Parrilla')" class="preparation-item"
+                  >Parrilla</span
+                >
+                <span *ngIf="corte.preparaciones?.includes('Sartén')" class="preparation-item">Sartén</span>
+              </div>
+            </td>
+            <td [style.width.%]="columnWidths.precioPorKilo">
+              {{ corte.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
+            </td>
+            <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">
+              <button (click)="decrementQuantity(corte)">-</button>
+              {{ quantities[corte.nombre] }}
+              <button (click)="incrementQuantity(corte)">+</button>
+            </td>
+            <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">
+              <button (click)="addToCart(corte)" class="add-to-cart-button">Agregar al Carrito</button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div class="pagination-container">
-      <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
+      <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+        Anterior
+      </button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+        Siguiente
+      </button>
     </div>
   </div>
 
@@ -78,4 +100,3 @@
     <p>Cargando productos...</p>
   </div>
 </div>
-

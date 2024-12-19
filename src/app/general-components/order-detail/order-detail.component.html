@@ -9,7 +9,9 @@
   <div *ngIf="order" class="receipt">
     <div class="receipt-header">
       <h2 class="receipt-title">Detalle de pedido</h2>
-      <p class="receipt-date">Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</p>
+      <p class="receipt-date">
+        Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}
+      </p>
       <p class="organization-name">{{ organization.nombre }}</p>
       <p class="userData" *ngIf="userRut !== undefined">Cliente: {{ nombre }} {{ apellido }}</p>
       <p class="userData">Dirección: {{ direccion }}</p>
@@ -22,31 +24,30 @@
     <div class="receipt-content">
       <table class="receipt-items">
         <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tipo</th>
-          <th>Cantidad</th>
-          <th>Precio por Kilo</th>
-          <th>Subtotal</th>
-        </tr>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Precio por Kilo</th>
+            <th>Subtotal</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of order.items">
-          <td>{{capitalizeFirstLetter(item.tipo) }}</td>
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.cantidad }}</td>
-          <td>{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
-          <td>{{ item.subtotal | currency:'CLP ':'symbol':'1.0-0' }}</td>
-        </tr>
+          <tr *ngFor="let item of order.items">
+            <td>{{ capitalizeFirstLetter(item.tipo) }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+            <td>{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+          </tr>
         </tbody>
         <tfoot>
-        <tr>
-          <td colspan="4" style="text-align: right; font-weight: bold;"><strong>Total:</strong></td>
-          <td>{{ order.total | currency:'CLP ':'symbol':'1.0-0' }}</td>
-        </tr>
+          <tr>
+            <td colspan="4" style="text-align: right; font-weight: bold"><strong>Total:</strong></td>
+            <td>{{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+          </tr>
         </tfoot>
       </table>
     </div>
   </div>
 </div>
-

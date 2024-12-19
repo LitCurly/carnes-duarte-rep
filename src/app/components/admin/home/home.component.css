@@ -55,7 +55,6 @@
   margin-left: 60px; /* Ajusta el margen izquierdo cuando el sidebar está cerrado */
 }
 
-
 .header {
   height: 70px; /* Altura de la barra superior */
   background-color: rgba(0, 0, 0, 0.7); /* Color de fondo similar al del sidebar */
@@ -84,7 +83,6 @@
 .header img {
   width: 150px; /* Ajusta el tamaño del logo si es necesario */
 }
-
 
 .logo-upper {
   text-align: center;
@@ -177,7 +175,7 @@
 
 .separator::before,
 .separator::after {
-  content: "";
+  content: '';
   flex: 1;
   border-bottom: 1px solid #d1d5db;
 }
@@ -295,7 +293,6 @@
   display: flex;
   padding-right: 30px;
 }
-
 
 .admin-button.active .admin-dropdown {
   display: flex;

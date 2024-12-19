@@ -4,37 +4,56 @@
       <h3>Editar producto</h3>
     </div>
     <div class="nav-route">
-      <a class="nav-button" routerLink="/admin/home/gestionar-productos" >Volver</a>
+      <a class="nav-button" routerLink="/admin/home/gestionar-productos">Volver</a>
     </div>
   </div>
 
   <div class="card">
     <div class="dashboard-content">
-  <form (ngSubmit)="actualizarCorte()">
-    <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" [(ngModel)]="corte.nombre" name="nombre" class="form-control" required>
-    </div>
+      <form (ngSubmit)="actualizarCorte()">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            [(ngModel)]="corte.nombre"
+            name="nombre"
+            class="form-control"
+            required
+          />
+        </div>
 
-    <div class="form-group">
-      <label for="precioPorKilo">Precio por Kilo</label>
-      <input type="number" id="precioPorKilo" [(ngModel)]="corte.precioPorKilo" name="precioPorKilo" class="form-control" required min="0">
-    </div>
+        <div class="form-group">
+          <label for="precioPorKilo">Precio por Kilo</label>
+          <input
+            type="number"
+            id="precioPorKilo"
+            [(ngModel)]="corte.precioPorKilo"
+            name="precioPorKilo"
+            class="form-control"
+            required
+            min="0"
+          />
+        </div>
 
-    <div class="form-group">
-      <label>Preparaciones</label>
-      <div *ngFor="let opcion of opcionesPreparaciones">
-        <input type="checkbox" [checked]="corte.preparaciones?.includes(opcion)" (change)="togglePreparacion(opcion)"> {{ opcion }}
+        <div class="form-group">
+          <label>Preparaciones</label>
+          <div *ngFor="let opcion of opcionesPreparaciones">
+            <input
+              type="checkbox"
+              [checked]="corte.preparaciones?.includes(opcion)"
+              (change)="togglePreparacion(opcion)"
+            />
+            {{ opcion }}
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">Actualizar Corte</button>
+      </form>
+
+      <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
-
-    <button type="submit" class="btn btn-primary" [disabled]="isLoading">Actualizar Corte</button>
-  </form>
-
-  <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
-   <span class="sr-only">Loading...</span>
-  </div>
-</div>
-
   </div>
 </div>

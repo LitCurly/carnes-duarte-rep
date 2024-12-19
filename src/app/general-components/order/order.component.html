@@ -4,7 +4,9 @@
     <div *ngIf="!isLoggedIn && !isLoading" class="auth-message">
       <p class="orders-description">Inicia sesión para ver tus pedidos realizados.</p>
     </div>
-    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">No has realizado ningún pedido aún.</p>
+    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">
+      No has realizado ningún pedido aún.
+    </p>
     <p *ngIf="paginatedOrders.length > 0" class="orders-description">Revisa tus pedidos realizados.</p>
   </div>
 
@@ -12,40 +14,44 @@
     <div class="table-wrapper">
       <table *ngIf="paginatedOrders.length > 0" class="orders-table">
         <thead>
-        <tr>
-          <th>Fecha de Emisión</th>
-          <th>Productos</th>
-          <th>Valor</th>
-          <th>Acciones</th>
-        </tr>
+          <tr>
+            <th>Fecha de Emisión</th>
+            <th>Productos</th>
+            <th>Valor</th>
+            <th>Acciones</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let order of paginatedOrders">
-          <td>{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
-          <td>
-            <div class="corte-list" matTooltip="{{ getCorteNames(order) }}">
-              {{ getShortCorteNames(order) }}
-            </div>
-          </td>
-          <td>{{ order.total | currency: 'CLP ': 'symbol':'1.0-0' }}</td>
-          <td>
-            <a [routerLink]="'/home/mis-pedidos/' + order.id + '/detalle-del-pedido'" class="detail-button">
-              Ver Detalle
-            </a>
-          </td>
-        </tr>
+          <tr *ngFor="let order of paginatedOrders">
+            <td>{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
+            <td>
+              <div class="corte-list" matTooltip="{{ getCorteNames(order) }}">
+                {{ getShortCorteNames(order) }}
+              </div>
+            </td>
+            <td>{{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+            <td>
+              <a [routerLink]="'/home/mis-pedidos/' + order.id + '/detalle-del-pedido'" class="detail-button">
+                Ver Detalle
+              </a>
+            </td>
+          </tr>
         </tbody>
       </table>
       <div class="image-container" *ngIf="paginatedOrders.length === 0">
-        <img src="assets/img/img-duarte/nodata.webp" alt="No Data" class="no-data-image">
+        <img src="assets/img/img-duarte/nodata.webp" alt="No Data" class="no-data-image" />
       </div>
     </div>
   </div>
 
   <div class="pagination-container" *ngIf="paginatedOrders.length > 0 && !isLoading && isLoggedIn">
-    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">Anterior</button>
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
+      Anterior
+    </button>
     <span>Página {{ currentPage }} de {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">Siguiente</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+      Siguiente
+    </button>
   </div>
 
   <div class="spinner-container" *ngIf="isLoading && isLoggedIn">

@@ -57,7 +57,8 @@
   margin-top: 10px;
 }
 
-.receipt-items th, .receipt-items td {
+.receipt-items th,
+.receipt-items td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #dddddd;
@@ -85,4 +86,3 @@
   height: 100px; /* Ajusta según sea necesario */
   margin-bottom: 12.9rem;
 }
-

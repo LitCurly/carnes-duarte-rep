@@ -36,7 +36,9 @@
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-button:hover {
@@ -79,7 +81,7 @@ form {
   border-radius: 4px;
 }
 
-.form-group input[type="number"] {
+.form-group input[type='number'] {
   width: 100%;
 }
 
@@ -89,7 +91,7 @@ form {
   flex-wrap: wrap;
 }
 
-.form-group input[type="checkbox"] {
+.form-group input[type='checkbox'] {
   margin-right: 5px;
 }
 

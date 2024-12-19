@@ -1,7 +1,7 @@
 <div class="dashboard">
-  <div  *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
+  <div *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
     <h2 class="profileHeader">Inicia sesión para acceder a tu perfil.</h2>
-    <div  class="auth-message">
+    <div class="auth-message">
       <p class="profileDescription">
         ¿No posee una cuenta?
         <a routerLink="/registrarse" class="register-link">Regístrese aquí</a>
@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div *ngIf="isLoggedIn"class="dashboard-header">
+  <div *ngIf="isLoggedIn" class="dashboard-header">
     <div>
       <h3>Mi Perfil</h3>
     </div>
@@ -18,24 +18,26 @@
     </div>
   </div>
 
-  <div *ngIf="isLoggedIn"class="card">
+  <div *ngIf="isLoggedIn" class="card">
     <div class="card-body">
       <div class="custom-container">
         <div class="custom-header">
-          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
+          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
           <div>
             <h3 class="custom-title">Información del usuario</h3>
             <p class="custom-description">Datos personales</p>
           </div>
         </div>
 
-
-
         <div class="custom-content">
           <div class="custom-row">
             <div class="custom-column">
               <span class="custom-label">Nombre</span>
-              <span class="custom-value">{{ capitalizeFirstLetter(userName) }} {{ capitalizeFirstLetter(userSecondName) }} {{ capitalizeFirstLetter(userLastName) }} {{ capitalizeFirstLetter(userSecondLastName) }}</span>
+              <span class="custom-value"
+                >{{ capitalizeFirstLetter(userName) }} {{ capitalizeFirstLetter(userSecondName) }}
+                {{ capitalizeFirstLetter(userLastName) }}
+                {{ capitalizeFirstLetter(userSecondLastName) }}</span
+              >
             </div>
           </div>
           <div class="custom-row">

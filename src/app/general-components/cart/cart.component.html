@@ -10,39 +10,47 @@
             <div class="table-wrapper">
               <table class="user-table">
                 <thead>
-                <tr>
-                  <th class="fixed-width-column-type">Tipo</th>
-                  <th class="fixed-width-column-name">Nombre</th>
-                  <th class="fixed-width-column-value">Valor</th>
-                  <th class="fixed-width-column-amount">Cantidad</th>
-                  <th class="action-column">Quitar productos</th>
-                  <th>SubTotal</th>
-                </tr>
+                  <tr>
+                    <th class="fixed-width-column-type">Tipo</th>
+                    <th class="fixed-width-column-name">Nombre</th>
+                    <th class="fixed-width-column-value">Valor</th>
+                    <th class="fixed-width-column-amount">Cantidad</th>
+                    <th class="action-column">Quitar productos</th>
+                    <th>SubTotal</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of cart.items">
-                  <td class="fixed-width-column-type">{{ item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1) }}</td>
-                  <td class="fixed-width-column-name">{{ item.nombre }}</td>
-                  <td class="fixed-width-column-value">{{ item.precioPorKilo | currency:'CLP ':'symbol':'1.0-0' }}</td>
-                  <td>{{ item.cantidad }}</td>
-                  <td class="action-column">
-                    <div class="action-buttons">
-                      <button (click)="decrementQuantity(item)">-</button>
-                      <span>{{ quantities[item.nombre] }}</span>
-                      <button (click)="incrementQuantity(item)">+</button>
-                      <button (click)="removeFromCart(item)" class="remove-from-cart-button">
-                        <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem">
-                      </button>
-                    </div>
-                  </td>
-                  <td>{{ item.subtotal | currency:'CLP ':'symbol':'1.0-0' }}</td>
-                </tr>
+                  <tr *ngFor="let item of cart.items">
+                    <td class="fixed-width-column-type">
+                      {{ item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1) }}
+                    </td>
+                    <td class="fixed-width-column-name">{{ item.nombre }}</td>
+                    <td class="fixed-width-column-value">
+                      {{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
+                    </td>
+                    <td>{{ item.cantidad }}</td>
+                    <td class="action-column">
+                      <div class="action-buttons">
+                        <button (click)="decrementQuantity(item)">-</button>
+                        <span>{{ quantities[item.nombre] }}</span>
+                        <button (click)="incrementQuantity(item)">+</button>
+                        <button (click)="removeFromCart(item)" class="remove-from-cart-button">
+                          <img
+                            src="assets/img/img-duarte/eliminar.webp"
+                            class="delete-webp"
+                            alt="Eliminar ítem"
+                          />
+                        </button>
+                      </div>
+                    </td>
+                    <td>{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                  </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                  <td colspan="5" style="text-align: right; font-weight: bold;">Total:</td>
-                  <td>{{ cart.total | currency:'CLP ':'symbol':'1.0-0' }}</td>
-                </tr>
+                  <tr>
+                    <td colspan="5" style="text-align: right; font-weight: bold">Total:</td>
+                    <td>{{ cart.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                  </tr>
                 </tfoot>
               </table>
             </div>
@@ -50,7 +58,7 @@
         </div>
         <ng-template #emptyCart>
           <div class="empty-cart">
-            <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío">
+            <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío" />
             <p>Tu carrito está vacío</p>
             <button class="modal-button cancel" (click)="closeModalDialog()">Cerrar</button>
           </div>

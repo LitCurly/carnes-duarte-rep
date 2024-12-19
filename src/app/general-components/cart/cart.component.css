@@ -52,8 +52,6 @@
   width: 100px; /* Ancho fijo para la columna de tipo */
 }
 
-
-
 .user-table .action-column {
   width: 200px; /* Ancho fijo para la columna de acciones */
 }
@@ -100,7 +98,9 @@
   height: 80%; /* Ajustar el alto vertical */
   max-height: 600px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: hidden; /* Ocultar el overflow para el modal */
 }
 
@@ -171,7 +171,6 @@
 .modal-button.cancel:hover {
   background-color: #bd2130;
 }
-
 
 .modal-button.accept {
   background-color: #007bff;

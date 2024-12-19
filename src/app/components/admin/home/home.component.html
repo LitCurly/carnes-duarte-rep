@@ -1,16 +1,15 @@
 <div class="header">
-  <div class="user-info">
-  </div>
+  <div class="user-info"></div>
 
-  <div class="admin-button" [ngClass]="{ 'active': showDropdown }" (click)="toggleDropdown()">
+  <div class="admin-button" [ngClass]="{ active: showDropdown }" (click)="toggleDropdown()">
     <span class="admin-text">{{ userName }} {{ userLastName }}</span>
     <div class="admin-image">
-      <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"/>
+      <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
     </div>
     <div class="admin-dropdown">
       <ul>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a routerLink="/admin/home/profile" >Perfil</a>
+          <a routerLink="/admin/home/profile">Perfil</a>
         </li>
         <li (click)="logout()">Cerrar sesión</li>
       </ul>
@@ -18,10 +17,9 @@
   </div>
 </div>
 
-
 <div class="sidebar" [style.width.px]="sidebarWidth" [class.closed]="sidebarClosed">
   <div class="logo-upper" (click)="toggleSidebar()">
-    <img src="./assets/img/logo-duarte-letras.png" alt="CarnesDuarteUpper">
+    <img src="./assets/img/logo-duarte-letras.png" alt="CarnesDuarteUpper" />
   </div>
 
   <ul class="menu">
@@ -41,15 +39,14 @@
       <a routerLink="/admin/home/revisar-pedidos" *ngIf="!sidebarClosed">Pedidos</a>
       <span *ngIf="sidebarClosed" routerLink="/admin/home/revisar-pedidos">P..</span>
     </li>
-
   </ul>
   <div class="separator"></div>
   <button class="logout-button">
     <span *ngIf="!sidebarClosed" (click)="logout()">Cerrar sesión</span>
-    <img *ngIf="sidebarClosed" (click)="logout()" src="./assets/img/logout.png" alt="LogOut">
+    <img *ngIf="sidebarClosed" (click)="logout()" src="./assets/img/logout.png" alt="LogOut" />
   </button>
   <div class="logo-lower">
-    <img src="./assets/img/logo-duarte-circ.png" alt="CarnesDuarteLower">
+    <img src="./assets/img/logo-duarte-circ.png" alt="CarnesDuarteLower" />
   </div>
 </div>
 

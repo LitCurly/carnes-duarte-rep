@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -110,8 +111,9 @@ p {
   color: #ffffff;
 }
 
-.separator::before, .separator::after {
-  content: "";
+.separator::before,
+.separator::after {
+  content: '';
   flex: 1;
   border-bottom: 1px solid #d1d5db;
 }
@@ -221,4 +223,3 @@ p {
   height: 1.5rem;
   color: #fff; /* Color del spinner */
 }
-

@@ -36,7 +36,9 @@
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-button:hover {
@@ -197,5 +199,3 @@ tbody tr:nth-child(even) {
   text-align: center;
   vertical-align: middle; /* Esto asegura que el contenido también se alinee verticalmente al centro */
 }
-
-
