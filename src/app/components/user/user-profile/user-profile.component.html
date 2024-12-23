@@ -1,15 +1,16 @@
-<div class="dashboard">
-  <div *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
-    <h2 class="profileHeader">Inicia sesión para acceder a tu perfil.</h2>
-    <div class="auth-message">
-      <p class="profileDescription">
-        ¿No posee una cuenta?
-        <a routerLink="/registrarse" class="register-link">Regístrese aquí</a>
-      </p>
-    </div>
-  </div>
 
-  <div *ngIf="isLoggedIn" class="dashboard-header">
+<section>
+<div *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
+  <h2 class="profileHeader">Inicia sesión para acceder a tu perfil.</h2>
+  <div class="auth-message">
+    <p class="profileDescription">
+      ¿No posee una cuenta?
+      <a routerLink="/registrarse" class="register-link">Regístrese aquí</a>
+    </p>
+  </div>
+</div>
+<div *ngIf="isLoggedIn" class="overflow-hidden rounded-lg bg-white shadow">
+  <div class="px-4 py-5 sm:px-6">
     <div>
       <h3>Mi Perfil</h3>
     </div>
@@ -17,51 +18,52 @@
       <a class="nav-button" routerLink="/home/perfil/editar">Editar perfil</a>
     </div>
   </div>
-
-  <div *ngIf="isLoggedIn" class="card">
-    <div class="card-body">
-      <div class="custom-container">
-        <div class="custom-header">
-          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
-          <div>
-            <h3 class="custom-title">Información del usuario</h3>
-            <p class="custom-description">Datos personales</p>
+  <div class="bg-gray-50 px-4 py-5 sm:p-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="custom-container">
+          <div class="custom-header">
+            <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
+            <div>
+              <h3 class="custom-title">Información del usuario</h3>
+              <p class="custom-description">Datos personales</p>
+            </div>
           </div>
-        </div>
 
-        <div class="custom-content">
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Nombre</span>
-              <span class="custom-value"
+          <div class="custom-content">
+            <div class="custom-row">
+              <div class="custom-column">
+                <span class="custom-label">Nombre</span>
+                <span class="custom-value"
                 >{{ capitalizeFirstLetter(userName) }} {{ capitalizeFirstLetter(userSecondName) }}
-                {{ capitalizeFirstLetter(userLastName) }}
-                {{ capitalizeFirstLetter(userSecondLastName) }}</span
-              >
+                  {{ capitalizeFirstLetter(userLastName) }}
+                  {{ capitalizeFirstLetter(userSecondLastName) }}</span
+                >
+              </div>
             </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Rut</span>
-              <span class="custom-value">{{ formatRutUserData(rut) }}</span>
+            <div class="custom-row">
+              <div class="custom-column">
+                <span class="custom-label">Rut</span>
+                <span class="custom-value">{{ formatRutUserData(rut) }}</span>
+              </div>
             </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Teléfono</span>
-              <span class="custom-value">{{ phone }}</span>
+            <div class="custom-row">
+              <div class="custom-column">
+                <span class="custom-label">Teléfono</span>
+                <span class="custom-value">{{ phone }}</span>
+              </div>
             </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Dirección</span>
-              <span class="custom-value">{{ capitalizeFirstLetter(address) }}</span>
+            <div class="custom-row">
+              <div class="custom-column">
+                <span class="custom-label">Dirección</span>
+                <span class="custom-value">{{ capitalizeFirstLetter(address) }}</span>
+              </div>
             </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Correo</span>
-              <span class="custom-value">{{ email }}</span>
+            <div class="custom-row">
+              <div class="custom-column">
+                <span class="custom-label">Correo</span>
+                <span class="custom-value">{{ email }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -69,3 +71,4 @@
     </div>
   </div>
 </div>
+</section>
