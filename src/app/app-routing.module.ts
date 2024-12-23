@@ -13,7 +13,6 @@ import { VacunoComponent } from './components/productos/vacuno/vacuno.component'
 import { FooterComponentComponent } from './general-components/footer-component/footer-component.component'
 import { HeaderComponentComponent } from './general-components/header-component/header-component.component'
 import { CartComponent } from './general-components/cart/cart.component'
-import { OrderComponent } from './general-components/order/order.component'
 import { OrderDetailComponent } from './general-components/order-detail/order-detail.component'
 import { LoginComponent } from './general-components/login/login.component'
 import { RegisterComponent } from './general-components/register/register.component'
@@ -23,7 +22,6 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { HomeComponent } from './components/admin/home/home.component'
 import { ProfileComponent } from './components/admin/profile/profile.component'
 import { EditComponent } from './components/admin/profile/edit/edit.component'
-import { ChangePasswordComponent } from './general-components/change-password/change-password.component'
 import { AgregarProductosComponent } from './general-components/agregar-productos/agregar-productos.component'
 import { HomeUserComponent } from './components/user/home-user/home-user.component'
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component'
@@ -40,7 +38,6 @@ const routes: Routes = [
   { path: 'footer-component', component: FooterComponentComponent },
   { path: 'header-component', component: HeaderComponentComponent },
   { path: 'carrito', component: CartComponent },
-  { path: 'order', component: OrderComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegisterComponent },
   { path: 'recuperar-contraseña', component: ForgotPasswordComponent },

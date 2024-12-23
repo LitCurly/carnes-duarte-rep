@@ -36,7 +36,6 @@ import { FooterComponentComponent } from './general-components/footer-component/
 import { HeaderComponentComponent } from './general-components/header-component/header-component.component'
 import { BoxComponent } from './general-components/box/box.component'
 import { CartComponent } from './general-components/cart/cart.component'
-import { OrderComponent } from './general-components/order/order.component'
 import { OrderDetailComponent } from './general-components/order-detail/order-detail.component'
 import { RegisterComponent } from './general-components/register/register.component'
 import { ForgotPasswordComponent } from './general-components/forgot-password/forgot-password.component'
@@ -74,7 +73,6 @@ import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
     HeaderComponentComponent,
     BoxComponent,
     CartComponent,
-    OrderComponent,
     OrderDetailComponent,
     LoginComponent,
     RegisterComponent,

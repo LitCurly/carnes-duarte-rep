@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
 import { CartService } from '../../services/cart.service'
 import { Order } from '../../models/order'
 import { AuthService } from '../../services/auth-service.service'

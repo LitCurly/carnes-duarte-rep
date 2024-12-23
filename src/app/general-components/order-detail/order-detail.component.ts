@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Order } from '../../models/order'
 import { CartService } from '../../services/cart.service'
-
+import { AuthService } from '../../services/auth-service.service'
 import { ToastrService } from 'ngx-toastr'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/storage'
 import 'firebase/compat/firestore'
-import { AuthService } from '../../services/auth-service.service'
 
 @Component({
   selector: 'app-order-detail',
@@ -25,26 +24,38 @@ export class OrderDetailComponent implements OnInit {
   telefono?: string
   direccion?: string
   email?: string
+  isLoggedIn = false
   isLoading = true
 
   constructor(
     private route: ActivatedRoute,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.orderId = this.route.snapshot.paramMap.get('id')
     if (this.orderId) {
+      this.isLoading = true
       this.cartService.getOrderById(this.orderId).subscribe((order) => {
+        console.log('Order data:', order)
         this.order = order
         if (order) {
           this.loadOrganizationData()
         }
-        this.isLoading = false
+        this.isLoading = false // Cambiar a false una vez que los datos estén listos
       })
       this.loadUserRut()
+    } else {
+      this.toastr.error('No se encontró la orden.')
     }
+    this.authService.getUserObservable().subscribe((user) => {
+      this.isLoggedIn = !!user
+      if (!this.isLoggedIn) {
+        this.isLoading = false
+      }
+    })
   }
 
   loadOrganizationData(): void {
@@ -84,6 +95,7 @@ export class OrderDetailComponent implements OnInit {
               this.userRut = doc.data()?.['rut']
               console.log('RUT del usuario:', this.userRut)
             } else {
+              console.error('No se encontró el documento del usuario.')
             }
           })
           .catch((error) => {

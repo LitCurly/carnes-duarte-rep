@@ -1,53 +1,76 @@
-<div class="spinner-container" *ngIf="isLoading">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Cargando...</span>
-  </div>
-  <p>Cargando detalle de orden...</p>
-</div>
+<section *ngIf="order && organization">
+  <div class="mt-20 sm:mt-12">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <!-- Indicador de carga -->
+        <div *ngIf="isLoading" class="flex items-center justify-center space-x-4 p-8">
+          <div class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-primary rounded-full animate-spin"></div>
+          <p class="text-xl text-gray-700 font-semibold">Cargando pedidos...</p>
+        </div>
 
-<div class="container" *ngIf="!loading">
-  <div *ngIf="order" class="receipt">
-    <div class="receipt-header">
-      <h2 class="receipt-title">Detalle de pedido</h2>
-      <p class="receipt-date">
-        Fecha de Emisión: {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}
-      </p>
-      <p class="organization-name">{{ organization.nombre }}</p>
-      <p class="userData" *ngIf="userRut !== undefined">Cliente: {{ nombre }} {{ apellido }}</p>
-      <p class="userData">Dirección: {{ direccion }}</p>
-      <p class="userData">Contacto: {{ telefono }}</p>
-      <p class="userData">Correo: {{ email }}</p>
-      <p class="userData" *ngIf="userRut !== undefined">RUT: {{ formatRutUserData(userRut) }}</p>
-      <p class="userData" *ngIf="userRut === undefined">RUT: N/A</p>
-    </div>
+        <!-- Contenido de la orden -->
+        <div *ngIf="!isLoading">
+          <!-- Título centrado -->
+          <div class="text-center">
+            <p class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+              Detalle de pedido
+            </p>
+          </div>
 
-    <div class="receipt-content">
-      <table class="receipt-items">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Cantidad</th>
-            <th>Precio por Kilo</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of order.items">
-            <td>{{ capitalizeFirstLetter(item.tipo) }}</td>
-            <td>{{ item.nombre }}</td>
-            <td>{{ item.cantidad }}</td>
-            <td>{{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-            <td>{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="4" style="text-align: right; font-weight: bold"><strong>Total:</strong></td>
-            <td>{{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-          </tr>
-        </tfoot>
-      </table>
+          <!-- Información del pedido -->
+          <div class="mt-8 space-y-4 text-center">
+            <div class="text-lg text-gray-600">
+              <p>
+                <strong>Fecha de Emisión:</strong> {{ formatDate(order.createdAt) }} <strong>Hora:</strong>
+                {{ formatTime(order.createdAt) }}
+              </p>
+              <p><strong>Organización:</strong> {{ organization.nombre }}</p>
+              <p><strong>Cliente:</strong> {{ nombre }} {{ apellido }}</p>
+              <p><strong>Dirección:</strong> {{ direccion }}</p>
+              <p><strong>Contacto:</strong> {{ telefono }}</p>
+              <p><strong>Correo:</strong> {{ email }}</p>
+              <p *ngIf="userRut"><strong>RUT:</strong> {{ formatRutUserData(userRut) }}</p>
+              <p *ngIf="!userRut"><strong>RUT:</strong> N/A</p>
+            </div>
+          </div>
+
+          <!-- Detalles de la orden -->
+          <div class="p-10 sm:p-10 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                    <tr>
+                      <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre</th>
+                      <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
+                      <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cantidad</th>
+                      <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio por Kilo</th>
+                      <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                    <tr *ngFor="let item of order.items" class="even:bg-gray-50">
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ capitalizeFirstLetter(item.tipo) }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.nombre }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.cantidad }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <td colspan="4" style="text-align: right; font-weight: bold"><strong>Total:</strong></td>
+                      <td>{{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
