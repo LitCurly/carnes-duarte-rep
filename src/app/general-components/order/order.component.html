@@ -1,41 +1,71 @@
-<div class="orders-section">
-  <div class="orders-header">
-    <h2 class="orders-title">Lista de Pedidos</h2>
-    <div *ngIf="!isLoggedIn && !isLoading" class="auth-message">
-      <p class="orders-description">Inicia sesión para ver tus pedidos realizados.</p>
+<section>
+  <div class="mt-20 sm:mt-12">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl sm:text-center">
+        <p
+          class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-balance sm:text-5xl"
+        >
+          Lista de Pedidos
+        </p>
+        <p *ngIf="paginatedOrders.length > 0" class="mt-6 text-lg/8 text-gray-600">
+          Revisa tus pedidos realizados.
+        </p>
+        <p
+          *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn"
+          class="mt-6 text-lg/8 text-gray-600"
+        >
+          No has realizado ningún pedido aún.
+        </p>
+        <p *ngIf="!isLoggedIn && !isLoading" class="mt-6 text-lg/8 text-gray-600">
+          Inicia sesión para ver tus pedidos realizados.
+        </p>
+      </div>
     </div>
-    <p *ngIf="paginatedOrders.length === 0 && !isLoading && isLoggedIn" class="orders-description">
-      No has realizado ningún pedido aún.
-    </p>
-    <p *ngIf="paginatedOrders.length > 0" class="orders-description">Revisa tus pedidos realizados.</p>
   </div>
 
-  <div class="px-4 sm:px-6 lg:px-8 mt-10 mb-10">
-    <div class="mt-8 flow-root">
-      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
           <table *ngIf="paginatedOrders.length > 0" class="min-w-full divide-y divide-gray-300">
-            <thead>
-            <tr>
-              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Fecha de emisión</th>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Productos</th>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
-              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                <span class="sr-only">Ver Detalle</span>
-              </th>
-            </tr>
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                >
+                  Fecha de emisión
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  Productos
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
+                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                  <span class="sr-only">Ver Detalle</span>
+                </th>
+              </tr>
             </thead>
-            <tbody class="bg-white">
-            <tr *ngFor="let order of paginatedOrders" class="even:bg-gray-50" >
-              <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}</td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> <div matTooltip="{{ getCorteNames(order) }}">
-                {{ getShortCorteNames(order) }}
-              </div></td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-              <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                <a [routerLink]="'/home/mis-pedidos/' + order.id + '/detalle-del-pedido'" class="text-carnesDuarteRed hover:text-red-800">Ver Detalle</a>
-              </td>
-            </tr>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <tr *ngFor="let order of paginatedOrders" class="even:bg-gray-50">
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                  {{ formatDate(order.createdAt) }} Hora: {{ formatTime(order.createdAt) }}
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <div matTooltip="{{ getCorteNames(order) }}">
+                    {{ getShortCorteNames(order) }}
+                  </div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {{ order.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}
+                </td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                  <a
+                    [routerLink]="'/home/mis-pedidos/' + order.id + '/detalle-del-pedido'"
+                    class="text-carnesDuarteRed hover:text-red-800"
+                    >Ver Detalle</a
+                  >
+                </td>
+              </tr>
             </tbody>
           </table>
           <div class="image-container" *ngIf="paginatedOrders.length === 0">
@@ -44,16 +74,38 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="pagination-container" *ngIf="paginatedOrders.length > 0 && !isLoading && isLoggedIn">
-    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
-      Anterior
-    </button>
-    <span>Página {{ currentPage }} de {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
-      Siguiente
-    </button>
+    <nav
+      class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+      aria-label="Pagination"
+    >
+      <div class="hidden sm:block">
+        <p class="text-sm text-gray-700">
+          Mostrando
+          <span class="font-medium">1</span>
+          a
+          <span class="font-medium">10</span>
+          de
+          <span class="font-medium">20</span>
+          resultados
+        </p>
+      </div>
+      <div class="flex flex-1 justify-between sm:justify-end">
+        <button
+          class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+        <button
+          class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          Siguiente
+        </button>
+      </div>
+    </nav>
   </div>
 
   <div class="spinner-container" *ngIf="isLoading && isLoggedIn">
@@ -62,25 +114,4 @@
     </div>
     <p>Cargando órdenes...</p>
   </div>
-</div>
-
-
-
-<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
-  <div class="hidden sm:block">
-    <p class="text-sm text-gray-700">
-      Showing
-      <span class="font-medium">1</span>
-      to
-      <span class="font-medium">10</span>
-      of
-      <span class="font-medium">20</span>
-      results
-    </p>
-  </div>
-  <div class="flex flex-1 justify-between sm:justify-end">
-    <a href="#" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</a>
-    <a href="#" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</a>
-  </div>
-</nav>
-
+</section>
