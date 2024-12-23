@@ -51,6 +51,8 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { UserEditComponent } from './components/user/user-edit/user-edit.component'
 import { CarouselComponentComponent } from './general-components/carousel-component/carousel-component.component'
 import { EditarProductosComponent } from './general-components/editar-productos/editar-productos.component'
+import { NgxPaginationModule } from 'ngx-pagination'
+import { MatLegacyTooltipModule } from '@angular/material/legacy-tooltip'
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import { EditarProductosComponent } from './general-components/editar-productos/
     FormsModule,
     MatTooltipModule,
     HttpClientModule,
+    NgxPaginationModule,
+    MatLegacyTooltipModule,
   ],
   providers: [CartService, AuthService],
   bootstrap: [AppComponent],
