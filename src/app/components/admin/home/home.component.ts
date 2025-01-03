@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   userLastName?: string
   avatarImg?: string
   showDropdown = false
+  isMobileMenuOpen: boolean = true
 
   constructor(
     private userService: UserService,
@@ -34,9 +35,8 @@ export class HomeComponent implements OnInit {
     this.loadUserNameAndLastName()
   }
 
-  toggleSidebar(): void {
-    this.sidebarClosed = !this.sidebarClosed
-    this.sidebarWidth = this.sidebarClosed ? 65 : 250
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen
   }
 
   toggleDropdown(): void {

@@ -1,73 +1,225 @@
-<div class="dashboard">
-  <div class="dashboard-header">
-    <div>
-      <h3>Lista de Productos</h3>
-    </div>
-    <div class="nav-route">
-      <a class="nav-button" (click)="openModal()">Agregar Productos</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div>
-      <input [(ngModel)]="searchQuery" placeholder="Buscar por nombre..." (keyup.enter)="onSearch()" />
-      <select [(ngModel)]="selectedCarne" (change)="onCarneChange()">
-        <option [ngValue]="''" disabled selected>Seleccionar tipo de carne</option>
-        <option [ngValue]="'all'">Mostrar todo</option>
-        <option *ngFor="let carne of carnes" [ngValue]="carne.tipo">
-          {{ capitalizeFirstLetter(carne.tipo) }}
-        </option>
-      </select>
-      <select [(ngModel)]="selectedPreparation" [disabled]="!selectedCarne && selectedCarne !== 'all'">
-        <option [ngValue]="''" disabled selected>Seleccionar preparación</option>
-        <option [ngValue]="'all'">Mostrar todo</option>
-        <option value="sin-preparaciones">Sin preparaciones</option>
-        <option *ngFor="let preparation of getPreparations()">{{ preparation }}</option>
-      </select>
-
-      <button class="button-search" (click)="onSearch()">Buscar</button>
-    </div>
-
-    <div class="table-container">
-      <table class="props-table">
-        <thead>
-          <tr>
-            <th class="center">#</th>
-            <th style="width: 30%">Nombre</th>
-            <th style="width: 15%">Tipo de Carne</th>
-            <th style="width: 15%">Precio por Kilo</th>
-            <th style="width: 30%">Preparaciones</th>
-            <th style="width: 5%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let corte of paginatedCortes; let i = index">
-            <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-            <td>
-              <a class="detail-button" (click)="editarCorte(corte)" title="Editar este corte">
-                {{ corte.nombre }}
-              </a>
-            </td>
-
-            <td>{{ capitalizeFirstLetter(corte.carne) }}</td>
-            <td>{{ corte.precioPorKilo | currency: '$ ' : 'symbol' : '1.0-0' }}</td>
-            <td>{{ corte.preparaciones ? corte.preparaciones.join(', ') : '-' }}</td>
-            <td style="text-align: center">
-              <button class="remove-button" (click)="eliminarCorte(corte)">
-                <img src="assets/img/img-duarte/eliminar.webp" class="delete-webp" alt="Eliminar ítem" />
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="pagination">
-        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-        <p>Página {{ currentPage }} de {{ totalPages }}</p>
+<div class="bg-white shadow">
+  <div class="px-4 sm:px-4 lg:px-4">
+    <div class="py-6 md:flex md:items-center md:justify-between">
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center">
+          <div>
+            <div class="flex items-center">
+              <h1 class="ml-3 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-2xl/9">
+                Lista de productos
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 flex space-x-3 md:ml-4 md:mt-0">
+        <button
+          (click)="openModal()"
+          type="button"
+          class="inline-flex items-center rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+        >
+          Agregar Productos
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+<div class="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 overflow-hidden">
+  <section class="mt-10 mb-10">
+    <div class="mx-10 flex flex-col sm:flex-row sm:gap-6 sm:justify-between">
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <div class="flex-1">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Buscar por nombre..."
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            (keyup.enter)="onSearch()"
+          />
+        </div>
+        <div class="flex-1">
+          <select
+            [(ngModel)]="selectedCarne"
+            (change)="onCarneChange()"
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            <option [ngValue]="''" disabled selected>Seleccionar tipo de carne</option>
+            <option [ngValue]="'all'">Mostrar todo</option>
+            <option *ngFor="let carne of carnes" [ngValue]="carne.tipo">
+              {{ capitalizeFirstLetter(carne.tipo) }}
+            </option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <select
+            [(ngModel)]="selectedPreparation"
+            [disabled]="!selectedCarne && selectedCarne !== 'all'"
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            <option [ngValue]="''" disabled selected>Seleccionar tipo de carne</option>
+            <option [ngValue]="'all'">Mostrar todo</option>
+            <option value="sin-preparaciones">Sin preparaciones</option>
+            <option *ngFor="let preparation of getPreparations()">
+              {{ preparation }}
+            </option>
+          </select>
+        </div>
+        <div class="flex items-end sm:pb-0">
+          <button
+            (click)="onSearch()"
+            class="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 focus:outline-none"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 p-10 sm:p-10 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+            <div class="flex items-center justify-center space-x-4 p-8" *ngIf="isLoading">
+              <div
+                class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-primary rounded-full animate-spin"
+              ></div>
+              <p class="text-xl text-gray-700 font-semibold">Cargando productos...</p>
+            </div>
+            <table *ngIf="!isLoading" class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    #
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Nombre
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Tipo de carne
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Precio por Kilo
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Preparaciones
+                  </th>
+
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr *ngFor="let corte of paginatedCortes; let i = index" class="even:bg-gray-50">
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    {{ (currentPage - 1) * itemsPerPage + i + 1 }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                    (click)="editarCorte(corte)"
+                  >
+                    {{ corte.nombre }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    {{ capitalizeFirstLetter(corte.carne) }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    {{ corte.precioPorKilo | currency: '$ ' : 'symbol' : '1.0-0' }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
+                  >
+                    <ng-container
+                      *ngIf="corte.preparaciones && corte.preparaciones.length > 0; else sinPreparaciones"
+                    >
+                      {{ corte.preparaciones.join(', ') }}
+                    </ng-container>
+                    <ng-template #sinPreparaciones>
+                      <span
+                        class="inline-block px-2 py-1 text-xs font-semibold text-gray-700 bg-gray-100 rounded"
+                      >
+                        Sin preparaciones
+                      </span>
+                    </ng-template>
+                  </td>
+
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
+                  >
+                    <button (click)="eliminarCorte(corte)">
+                      <img src="assets/img/img-duarte/eliminar.webp" class="h-4 w-4" alt="Eliminar ítem" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              *ngIf="paginatedCortes.length === 0 && !isLoading"
+              class="bg-white flex justify-center items-center w-full h-full"
+            >
+              <img
+                src="assets/img/img-duarte/nodata.webp"
+                alt="No Data"
+                class="no-data-image max-w-xs sm:max-w-md object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav
+        *ngIf="paginatedCortes.length > 0"
+        class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+        aria-label="Pagination"
+      >
+        <div class="hidden sm:block">
+          <p class="text-sm text-gray-700">
+            Mostrando
+            <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+            a
+            <span class="font-medium">{{
+              currentPage * itemsPerPage < cortes.length ? currentPage * itemsPerPage : cortes.length
+            }}</span>
+            de
+            <span class="font-medium">{{ cortes.length }}</span>
+            resultados
+          </p>
+        </div>
+        <div class="flex flex-1 justify-between sm:justify-end">
+          <button
+            class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          <button
+            class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
+        </div>
+      </nav>
+    </div>
+  </section>
 </div>
 
 <agregar-productos *ngIf="showModal" (closeModal)="closeModal()"></agregar-productos>
