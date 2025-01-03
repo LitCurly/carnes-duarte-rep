@@ -1,101 +1,205 @@
-<div class="team-section">
-  <div class="team-header">
-    <h1 class="team-title">Nuestros Cortes de Cerdo</h1>
-    <p class="team-description">
-      Explore nuestra variedad de cortes de Cerdo y sus preparaciones recomendadas.
-    </p>
-  </div>
-
-  <box
-    className="filters"
-    [styles]="{ display: 'flex', gap: '25px', justifyContent: 'space-between', marginBottom: '0.5rem' }"
-  >
-    <box [styles]="{ display: 'flex', gap: '15px', width: '100%' }">
-      <div class="filter-item">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          placeholder="Buscar por nombre de corte..."
-          class="filter-input"
-        />
-      </div>
-      <div class="filter-item">
-        <select [(ngModel)]="selectedPreparation" class="filter-select">
-          <option value="">Mostrar Todo</option>
-          <option value="Cacerola">Cacerola</option>
-          <option value="Horno">Horno</option>
-          <option value="Parrilla">Parrilla</option>
-          <option value="Sarten">Sarten</option>
-        </select>
-      </div>
-      <div [style]="{ display: 'flex', alignItems: 'end', paddingBottom: '24px' }">
-        <button (click)="onSearch()" class="filter-button search-button primary-button">Buscar</button>
-      </div>
-    </box>
-    <box [styles]="{ display: 'flex', gap: '5px', justifyContent: 'flex-end', marginBlockStart: 'auto' }">
-      <button (click)="goBack()" class="filter-button search-button primary-button">
-        Volver a los Productos
-      </button>
-    </box>
-  </box>
-  <div class="table-container" *ngIf="!isLoading">
-    <div class="table-wrapper">
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th [style.width.%]="columnWidths.nombre">Nombre</th>
-            <th [style.width.%]="columnWidths.preparaciones">Preparaciones</th>
-            <th [style.width.%]="columnWidths.precioPorKilo">Precio por kg</th>
-            <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">Cantidad (kg)</th>
-            <th *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let corte of paginatedCortes">
-            <td [style.width.%]="columnWidths.nombre">{{ corte.nombre }}</td>
-            <td [style.width.%]="columnWidths.preparaciones">
-              <div class="preparation-list">
-                <span *ngIf="corte.preparaciones?.includes('Cacerola')" class="preparation-item"
-                  >Cacerola</span
-                >
-                <span *ngIf="corte.preparaciones?.includes('Horno')" class="preparation-item">Horno</span>
-                <span *ngIf="corte.preparaciones?.includes('Parrilla')" class="preparation-item"
-                  >Parrilla</span
-                >
-                <span *ngIf="corte.preparaciones?.includes('Sartén')" class="preparation-item">Sartén</span>
-              </div>
-            </td>
-            <td [style.width.%]="columnWidths.precioPorKilo">
-              {{ corte.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
-            </td>
-            <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.cantidad">
-              <button (click)="decrementQuantity(corte)">-</button>
-              {{ quantities[corte.nombre] }}
-              <button (click)="incrementQuantity(corte)">+</button>
-            </td>
-            <td *ngIf="isLoggedIn" [style.width.%]="columnWidths.acciones">
-              <button (click)="addToCart(corte)" class="add-to-cart-button">Agregar al Carrito</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 overflow-hidden">
+  <section class="mt-10 mb-10">
+    <div class="mb-10 mx-auto lg:text-center px-6">
+      <h2
+        class="text-5xl text-gray-900 mb-10 text-center"
+        style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7)"
+      >
+        Nuestros Cortes de Cerdo
+      </h2>
+      <p
+        class="mt-2 text-pretty text-lg tracking-tight text-gray-800 sm:text-4xl lg:text-2xl whitespace-nowrap w-full text-center"
+        style="text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7)"
+      >
+        Explore nuestra variedad de cortes de Cerdo y sus preparaciones recomendadas
+      </p>
     </div>
 
-    <div class="pagination-container">
-      <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-button">
-        Anterior
-      </button>
-      <span>Página {{ currentPage }} de {{ totalPages }}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
-        Siguiente
-      </button>
-    </div>
-  </div>
+    <div class="mx-10 flex flex-col sm:flex-row sm:gap-6 mb-4 sm:justify-between">
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <div class="flex-1">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Buscar por corte..."
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+        </div>
+        <div class="flex-1">
+          <select
+            [(ngModel)]="selectedPreparation"
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            <option value="">Mostrar Todo</option>
+            <option value="Cacerola">Cacerola</option>
+            <option value="Horno">Horno</option>
+            <option value="Parrilla">Parrilla</option>
+            <option value="Sarten">Sarten</option>
+          </select>
+        </div>
+        <div class="flex items-end sm:pb-0">
+          <button
+            (click)="onSearch()"
+            class="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 focus:outline-none"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
 
-  <div class="spinner-container" *ngIf="isLoading">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Cargando...</span>
+      <div class="flex sm:gap-4 justify-start sm:justify-start items-center mt-4 sm:mt-0">
+        <button
+          (click)="goBack()"
+          class="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 focus:outline-none"
+        >
+          Volver a los Productos
+        </button>
+      </div>
     </div>
-    <p>Cargando productos...</p>
-  </div>
+
+    <div class="mt-8 p-10 sm:p-10 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+            <div class="flex items-center justify-center space-x-4 p-8" *ngIf="isLoading">
+              <div
+                class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-primary rounded-full animate-spin"
+              ></div>
+              <p class="text-xl text-gray-700 font-semibold">Cargando productos...</p>
+            </div>
+            <table *ngIf="!isLoading" class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Nombre
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Preparaciones
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Precio por kg
+                  </th>
+                  <th
+                    *ngIf="isLoggedIn"
+                    scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Cantidad (kg)
+                  </th>
+                  <th *ngIf="isLoggedIn" scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only">Acciones</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr *ngFor="let corte of paginatedCortes" class="even:bg-gray-50">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    {{ corte.nombre }}
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <div
+                      *ngIf="!corte.preparaciones || corte.preparaciones.length === 0"
+                      class="inline-block px-3 py-1 m-1 bg-gray-300 text-black text-sm rounded-full"
+                    >
+                      Sin preparación
+                    </div>
+
+                    <span
+                      *ngIf="corte.preparaciones?.includes('Cacerola')"
+                      class="inline-block px-3 py-1 m-1 bg-red-500 text-white text-sm rounded-full"
+                    >
+                      Cacerola
+                    </span>
+                    <span
+                      *ngIf="corte.preparaciones?.includes('Horno')"
+                      class="inline-block px-3 py-1 m-1 bg-yellow-500 text-white text-sm rounded-full"
+                    >
+                      Horno
+                    </span>
+                    <span
+                      *ngIf="corte.preparaciones?.includes('Parrilla')"
+                      class="inline-block px-3 py-1 m-1 bg-green-500 text-white text-sm rounded-full"
+                    >
+                      Parrilla
+                    </span>
+                    <span
+                      *ngIf="corte.preparaciones?.includes('Sartén')"
+                      class="inline-block px-3 py-1 m-1 bg-blue-500 text-white text-sm rounded-full"
+                    >
+                      Sartén
+                    </span>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    {{ corte.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
+                  </td>
+                  <td *ngIf="isLoggedIn" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <button (click)="decrementQuantity(corte)">-</button>
+                    {{ quantities[corte.nombre] }}
+                    <button (click)="incrementQuantity(corte)">+</button>
+                  </td>
+                  <td
+                    *ngIf="isLoggedIn"
+                    class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                  >
+                    <button (click)="addToCart(corte)" class="text-carnesDuarteRed hover:text-red-800">
+                      Agregar al Carrito
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              *ngIf="paginatedCortes.length === 0 && !isLoading"
+              class="bg-white flex justify-center items-center w-full h-full"
+            >
+              <img
+                src="assets/img/img-duarte/nodata.webp"
+                alt="No Data"
+                class="no-data-image max-w-xs sm:max-w-md object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav
+        *ngIf="paginatedCortes.length > 0"
+        class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+        aria-label="Pagination"
+      >
+        <div class="hidden sm:block">
+          <p class="text-sm text-gray-700">
+            Mostrando
+            <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+            a
+            <span class="font-medium">{{
+              currentPage * itemsPerPage < cortes.length ? currentPage * itemsPerPage : cortes.length
+            }}</span>
+            de
+            <span class="font-medium">{{ cortes.length }}</span>
+            resultados
+          </p>
+        </div>
+        <div class="flex flex-1 justify-between sm:justify-end">
+          <button
+            class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          <button
+            class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
+        </div>
+      </nav>
+    </div>
+  </section>
 </div>

@@ -43,10 +43,9 @@ export class UserEditComponent implements OnInit {
         this.userId = user?.uid
         this.loadDataUser()
       } else {
-        // Redirigir al perfil si no está autenticado
-        this.router.navigate(['/login'])
+        this.isLoading = false
       }
-      this.isLoading = false // Ocultar el spinner después de verificar autenticación
+      this.isLoading = false
     })
   }
 
@@ -160,12 +159,9 @@ export class UserEditComponent implements OnInit {
           avatarImg: this.avatarImg,
         }
         this.userService.setUserData(userData)
-
-        // Redirigir al perfil
         this.router.navigate(['/home/perfil'])
       })
       .catch((error) => {
-        console.error('Error al actualizar la información del usuario:', error)
         this.toastr.error('Error al actualizar la información del usuario. Por favor, inténtelo de nuevo.')
       })
       .finally(() => {
@@ -181,31 +177,66 @@ export class UserEditComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0]
+    const file = event.target.files[0]
     if (file) {
-      const storageRef = firebase.storage().ref()
-      const fileRef = storageRef.child(`avatar/${this.userId}/${file.name}`)
-      fileRef
-        .put(file)
-        .then(() => {
-          fileRef.getDownloadURL().then((url) => {
-            this.avatarImg = url
-            this.toastr.success('Foto de perfil actualizada con éxito.')
-          })
-        })
-        .catch((error) => {
-          console.error('Error al subir la foto de perfil:', error)
-          this.toastr.error('Error al subir la foto de perfil. Por favor, inténtelo de nuevo.')
-        })
+      this.uploadImage(file)
     }
+  }
+
+  uploadImage(file: File): void {
+    const storageRef = firebase.storage().ref()
+    const uploadTask = storageRef.child(`avatars/${this.userId}/${file.name}`).put(file)
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {},
+      (error) => {
+        this.toastr.error('Hubo un error al cargar la imagen.')
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          this.updateAvatarURL(downloadURL)
+        })
+      }
+    )
+  }
+
+  updateAvatarURL(downloadURL: string): void {
+    if (!this.userId) return
+
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(this.userId)
+      .update({
+        avatarImg: downloadURL,
+      })
+      .then(() => {
+        this.toastr.success('Foto actualizada correctamente')
+        this.avatarImg = downloadURL
+        location.reload()
+      })
+      .catch((error) => {
+        this.toastr.error('Hubo un error al actualizar la foto.')
+      })
   }
 
   onRutInput(event: any): void {
     const input = event.target as HTMLInputElement
-    let value = input.value.replace(/\D/g, '') // Remover todos los caracteres no numéricos
-    if (value.length > 1) {
-      value = `${value.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} - ${value.slice(-1)}` // Formatear el RUT
+    let value = input.value.replace(/\D/g, '')
+
+    if (value.length > 9) {
+      value = value.slice(0, 9)
     }
+
+    if (value.length > 3 && value.length <= 6) {
+      value = `${value.slice(0, 3)}.${value.slice(3)}`
+    } else if (value.length > 6 && value.length <= 8) {
+      value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`
+    } else if (value.length === 9) {
+      value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 8)}-${value.slice(8, 9)}`
+    }
+
     this.rut = value
   }
 }

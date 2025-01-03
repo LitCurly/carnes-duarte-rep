@@ -1,74 +1,122 @@
-
 <section>
-<div *ngIf="!isLoggedIn && !isLoading" class="notLoginProfile">
-  <h2 class="profileHeader">Inicia sesión para acceder a tu perfil.</h2>
-  <div class="auth-message">
-    <p class="profileDescription">
-      ¿No posee una cuenta?
-      <a routerLink="/registrarse" class="register-link">Regístrese aquí</a>
-    </p>
-  </div>
-</div>
-<div *ngIf="isLoggedIn" class="overflow-hidden rounded-lg bg-white shadow">
-  <div class="px-4 py-5 sm:px-6">
-    <div>
-      <h3>Mi Perfil</h3>
-    </div>
-    <div class="nav-route">
-      <a class="nav-button" routerLink="/home/perfil/editar">Editar perfil</a>
-    </div>
-  </div>
-  <div class="bg-gray-50 px-4 py-5 sm:p-6">
-    <div class="card">
-      <div class="card-body">
-        <div class="custom-container">
-          <div class="custom-header">
-            <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
-            <div>
-              <h3 class="custom-title">Información del usuario</h3>
-              <p class="custom-description">Datos personales</p>
-            </div>
-          </div>
-
-          <div class="custom-content">
-            <div class="custom-row">
-              <div class="custom-column">
-                <span class="custom-label">Nombre</span>
-                <span class="custom-value"
-                >{{ capitalizeFirstLetter(userName) }} {{ capitalizeFirstLetter(userSecondName) }}
-                  {{ capitalizeFirstLetter(userLastName) }}
-                  {{ capitalizeFirstLetter(userSecondLastName) }}</span
-                >
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <span class="custom-label">Rut</span>
-                <span class="custom-value">{{ formatRutUserData(rut) }}</span>
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <span class="custom-label">Teléfono</span>
-                <span class="custom-value">{{ phone }}</span>
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <span class="custom-label">Dirección</span>
-                <span class="custom-value">{{ capitalizeFirstLetter(address) }}</span>
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <span class="custom-label">Correo</span>
-                <span class="custom-value">{{ email }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div
+    *ngIf="!isLoggedIn && !isLoading"
+    class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-red-50 via-red-50 to-white-50 p-6"
+  >
+    <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-center ">
+      <div class="flex justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-16 h-16 text-blue-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-9A2.25 2.25 0 002.25 5.25v13.5A2.25 2.25 0 004.5 21h9a2.25 2.25 0 002.25-2.25V15M21 12H7.5m3-3l-3 3m3 3l-3-3"
+          />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800">Inicia sesión para acceder a tu perfil</h2>
+      <p class="text-gray-600">
+        Accede a tu perfil para disfrutar de todas las funcionalidades.
+      </p>
+      <div class="text-sm">
+        <p class="text-gray-500">
+          ¿No tienes cuenta?
+          <a
+            routerLink="/registrarse"
+            class="text-blue-600 font-medium hover:underline hover:text-blue-500 transition duration-200"
+          >
+            Regístrate aquí
+          </a>
+        </p>
       </div>
     </div>
   </div>
-</div>
+
+  <div *ngIf="isLoggedIn" class="overflow-hidden rounded-lg bg-white shadow-md">
+    <div class=" mx-auto p-4 bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 rounded-t-lg shadow-inner">
+    <div class="flex items-center justify-between border-b border-gray-300 pb-4">
+        <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Mi perfil</h2>
+        <a
+          routerLink="/home/perfil/editar"
+          class="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-gray-700 transition duration-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.862 3.487a2.25 2.25 0 011.13-.937c.78-.312 1.663.07 2.007.85.38.866.366 1.921-.046 2.848a9.042 9.042 0 01-1.741 2.362L9.41 20.435a2.25 2.25 0 01-.843.51l-4.205 1.221a.75.75 0 01-.939-.94l1.22-4.205a2.25 2.25 0 01.51-.842l8.803-8.804a9.042 9.042 0 012.362-1.742z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.729 6.728l-.728-.728m-3.186 7.52l-5.025-5.026m4.847 4.847l.354-.353a1.125 1.125 0 10-1.591-1.591l-.353.354m1.59 1.59l-.353.354m.354-.354l-.354.354"
+            />
+          </svg>
+          Editar Perfil
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mx-5 sm:mx-8 lg:mx-16 my-8">
+      <div class="mt-4 flex justify-between items-center mb-4 mx-4">
+        <div>
+          <h2 class="text-base font-semibold text-gray-900">Información del usuario</h2>
+          <p class="mt-1 text-sm text-gray-600">Datos personales</p>
+        </div>
+        <div class="flex items-center">
+          <img class="avatar rounded-full w-12 h-12 object-cover border-2 border-black" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
+        </div>
+      </div>
+      <div class="mt-6">
+        <dl class="grid grid-cols-1 sm:grid-cols-2">
+          <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+              {{ capitalizeFirstLetter(userName) }}
+              {{ capitalizeFirstLetter(userSecondName) }}
+              {{ capitalizeFirstLetter(userLastName) }}
+              {{ capitalizeFirstLetter(userSecondLastName) }}
+            </dd>
+          </div>
+          <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Rut</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+              {{ formatRutUserData(rut) }}
+            </dd>
+          </div>
+          <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Dirección</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+              {{ capitalizeFirstLetter(address) }}
+            </dd>
+          </div>
+          <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Teléfono</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+              {{ phone }}
+            </dd>
+          </div>
+          <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Correo</dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+              {{ email }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
 </section>

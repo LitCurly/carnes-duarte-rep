@@ -1,115 +1,208 @@
 <div *ngIf="isLoggedIn" class="dashboard">
-  <div class="dashboard-header">
-    <div>
-      <h3>Editar Perfil</h3>
-    </div>
-    <div class="nav-route">
-      <a class="nav-button" routerLink="/home/perfil">Volver</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <div class="custom-container">
-        <div class="custom-header">
-          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
-          <div>
-            <h3 class="custom-title">Información del usuario</h3>
-            <p class="custom-description">Datos personales</p>
-          </div>
-          <div class="custom-avatar">
-            <input
-              type="file"
-              accept="image/*"
-              (change)="onFileSelected($event)"
-              style="display: none"
-              id="fileInput"
-            />
-            <button class="update-button" (click)="openFileInput()">Actualizar Foto</button>
-          </div>
-          <div class="custom-password">
-            <button class="update-button" (click)="openPasswordModal()">Cambiar Contraseña</button>
-          </div>
-        </div>
-        <form (ngSubmit)="saveUserData()">
-          <div class="custom-content">
-            <div *ngIf="savingData" class="spinner-overlay">
-              <div class="spinner"></div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="nombre">Nombre</label>
-                <input class="custom-input" id="nombre" [(ngModel)]="nombre" name="nombre" />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="segundoNombre">Segundo nombre</label>
-                <input
-                  class="custom-input"
-                  id="segundoNombre"
-                  [(ngModel)]="segundoNombre"
-                  name="segundoNombre"
-                />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="apellido">Primer Apellido</label>
-                <input class="custom-input" id="apellido" [(ngModel)]="apellido" name="apellido" />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="segundoApellido">Segundo Apellido</label>
-                <input
-                  class="custom-input"
-                  id="segundoApellido"
-                  [(ngModel)]="segundoApellido"
-                  name="segundoApellido"
-                />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="email">Correo</label>
-                <input class="custom-input" id="email" [(ngModel)]="email" name="email" disabled />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="direccion">Dirección</label>
-                <input class="custom-input" id="direccion" [(ngModel)]="direccion" name="direccion" />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="telefono">Teléfono</label>
-                <input class="custom-input" id="telefono" [(ngModel)]="telefono" name="telefono" />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <label class="custom-label" for="rut">RUT</label>
-                <input
-                  class="custom-input"
-                  id="rut"
-                  [(ngModel)]="rut"
-                  name="rut"
-                  (input)="onRutInput($event)"
-                />
-              </div>
-            </div>
-            <div class="custom-row">
-              <div class="custom-column">
-                <button class="save-data" type="submit">Guardar</button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+  <div
+    class="mx-auto p-4 bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 rounded-t-lg shadow-inner"
+  >
+    <div class="flex items-center justify-between border-b border-gray-300 pb-4">
+      <h2 class="text-2xl font-semibold text-gray-900 tracking-tight">Editar perfil</h2>
+      <a
+        routerLink="/home/perfil"
+        class="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-gray-700 transition duration-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.862 3.487a2.25 2.25 0 011.13-.937c.78-.312 1.663.07 2.007.85.38.866.366 1.921-.046 2.848a9.042 9.042 0 01-1.741 2.362L9.41 20.435a2.25 2.25 0 01-.843.51l-4.205 1.221a.75.75 0 01-.939-.94l1.22-4.205a2.25 2.25 0 01.51-.842l8.803-8.804a9.042 9.042 0 012.362-1.742z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.729 6.728l-.728-.728m-3.186 7.52l-5.025-5.026m4.847 4.847l.354-.353a1.125 1.125 0 10-1.591-1.591l-.353.354m1.59 1.59l-.353.354m.354-.354l-.354.354"
+          />
+        </svg>
+        Volver
+      </a>
     </div>
   </div>
 </div>
+
+<div class="mt-4 flex justify-between items-center mb-4 mx-5">
+  <div>
+    <h2 class="text-base font-semibold text-gray-900">Información del usuario</h2>
+    <p class="mt-1 text-sm text-gray-600">Datos personales</p>
+  </div>
+  <div class="flex items-center">
+    <img
+      class="avatar rounded-full w-12 h-12 object-cover border-2 border-black"
+      [src]="avatarImg && avatarImg !== '' ? avatarImg : '../../../../assets/img/usuario-black.png'"
+    />
+  </div>
+</div>
+
+<div class="mt-4 flex justify-end items-center gap-4 mx-4">
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    style="display: none"
+    id="fileInput"
+  />
+  <div class="flex gap-4">
+    <button
+      class="update-button rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white hover:bg-red-800"
+      (click)="openFileInput()"
+    >
+      Actualizar Foto
+    </button>
+    <button
+      class="update-button rounded-md bg-gray-600 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800"
+      (click)="openPasswordModal()"
+    >
+      Cambiar Contraseña
+    </button>
+  </div>
+</div>
+
+<form
+  (ngSubmit)="saveUserData()"
+  #profileForm="ngForm"
+  class="mt-5 w-full max-w-full p-6 bg-white shadow-lg rounded-lg border-t border-gray-300"
+>
+  <div *ngIf="savingData" class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+  <div class="space-y-12">
+    <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <div class="sm:col-span-3">
+        <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+        <div class="mt-2">
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            [(ngModel)]="nombre"
+            required
+            autocomplete="given-name"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+      <div class="sm:col-span-3">
+        <label for="segundoNombre" class="block text-sm font-medium text-gray-900">Segundo nombre</label>
+        <div class="mt-2">
+          <input
+            type="text"
+            name="segundoNombre"
+            id="segundoNombre"
+            [(ngModel)]="segundoNombre"
+            autocomplete="family-name"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+      <div class="sm:col-span-3">
+        <label for="apellido" class="block text-sm font-medium text-gray-900">Apellido Paterno</label>
+        <div class="mt-2">
+          <input
+            id="apellido"
+            name="apellido"
+            type="text"
+            [(ngModel)]="apellido"
+            required
+            autocomplete="apellido"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+      <div class="sm:col-span-3">
+        <label for="segundoApellido" class="block text-sm font-medium text-gray-900">Apellido Materno</label>
+        <div class="mt-2">
+          <input
+            id="segundoApellido"
+            name="segundoApellido"
+            type="text"
+            [(ngModel)]="segundoApellido"
+            autocomplete="segundoApellido"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="rut" class="block text-sm font-medium text-gray-900">Rut</label>
+        <div class="mt-2">
+          <input
+            id="rut"
+            name="rut"
+            type="text"
+            [(ngModel)]="rut"
+            (input)="onRutInput($event)"
+            required
+            autocomplete="rut"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+
+
+      <div class="sm:col-span-2">
+        <label for="direccion" class="block text-sm font-medium text-gray-900">Dirección</label>
+        <div class="mt-2">
+          <input
+            id="direccion"
+            name="direccion"
+            type="text"
+            [(ngModel)]="direccion"
+            required
+            autocomplete="direccion"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="telefono" class="block text-sm font-medium text-gray-900">Teléfono</label>
+        <div class="mt-2">
+          <input
+            id="telefono"
+            name="telefono"
+            type="text"
+            [(ngModel)]="telefono"
+            autocomplete="telefono"
+            class="block w-full rounded-md bg-white px-4 py-2 text-base text-gray-900 border border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder:text-gray-400 sm:text-sm"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-x-6 mt-6">
+    <button
+      type="button"
+      class="text-sm font-semibold text-gray-900 hover:text-gray-600"
+      [routerLink]="['/home/perfil']">
+      Cancelar
+    </button>
+
+    <button
+      type="submit"
+      [disabled]="savingData"
+      class="rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    >
+      Guardar
+    </button>
+  </div>
+</form>
 
 <change-password *ngIf="showChangePasswordModal" (closeModal)="closePasswordModal()"></change-password>
