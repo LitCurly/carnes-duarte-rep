@@ -1,77 +1,98 @@
-<div class="modal-overlay" *ngIf="modalOpen">
-  <div class="modal-container">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Detalle de Pedido</h2>
-      </div>
-      <div class="modal-body">
-        <div *ngIf="cart.items && cart.items.length > 0; else emptyCart">
-          <div class="table-container">
-            <div class="table-wrapper">
-              <table class="user-table">
-                <thead>
-                  <tr>
-                    <th class="fixed-width-column-type">Tipo</th>
-                    <th class="fixed-width-column-name">Nombre</th>
-                    <th class="fixed-width-column-value">Valor</th>
-                    <th class="fixed-width-column-amount">Cantidad</th>
-                    <th class="action-column">Quitar productos</th>
-                    <th>SubTotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of cart.items">
-                    <td class="fixed-width-column-type">
-                      {{ item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1) }}
-                    </td>
-                    <td class="fixed-width-column-name">{{ item.nombre }}</td>
-                    <td class="fixed-width-column-value">
-                      {{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
-                    </td>
-                    <td>{{ item.cantidad }}</td>
-                    <td class="action-column">
-                      <div class="action-buttons">
-                        <button (click)="decrementQuantity(item)">-</button>
-                        <span>{{ quantities[item.nombre] }}</span>
-                        <button (click)="incrementQuantity(item)">+</button>
-                        <button (click)="removeFromCart(item)" class="remove-from-cart-button">
-                          <img
-                            src="assets/img/img-duarte/eliminar.webp"
-                            class="delete-webp"
-                            alt="Eliminar ítem"
-                          />
-                        </button>
-                      </div>
-                    </td>
-                    <td>{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="5" style="text-align: right; font-weight: bold">Total:</td>
-                    <td>{{ cart.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75" *ngIf="modalOpen">
+  <div class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6">
+    <div class="modal-header mb-4">
+      <h2 class="text-xl font-semibold">Detalle de Pedido</h2>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="cart.items && cart.items.length > 0; else emptyCart" class="overflow-x-auto">
+        <div class="inline-block min-w-full py-2 align-middle">
+          <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Tipo</th>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nombre</th>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cantidad</th>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Quitar productos</th>
+                  <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">SubTotal</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr *ngFor="let item of cart.items" class="even:bg-gray-50">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    {{ item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1) }}
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.nombre }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    {{ item.precioPorKilo | currency: 'CLP ' : 'symbol' : '1.0-0' }}
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.cantidad }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <div class="flex items-center space-x-2">
+                      <button (click)="decrementQuantity(item)" class="px-2 py-1 bg-gray-200 rounded">
+                        -
+                      </button>
+                      <span>{{ quantities[item.nombre] }}</span>
+                      <button (click)="incrementQuantity(item)" class="px-2 py-1 bg-gray-200 rounded">
+                        +
+                      </button>
+                      <button (click)="removeFromCart(item)" class="px-2 py-1 text-white rounded">
+                        <img src="assets/img/img-duarte/eliminar.webp" alt="Eliminar ítem" class="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                  <td>{{ item.subtotal | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="text-right font-bold">Total:</td>
+                  <td>{{ cart.total | currency: 'CLP ' : 'symbol' : '1.0-0' }}</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
-        <ng-template #emptyCart>
-          <div class="empty-cart">
-            <img src="assets/img/img-duarte/empty-cart.webp" alt="Carrito Vacío" />
-            <p>Tu carrito está vacío</p>
-            <button class="modal-button cancel" (click)="closeModalDialog()">Cerrar</button>
-          </div>
-        </ng-template>
       </div>
-      <div class="modal-buttons" *ngIf="cart.items && cart.items.length > 0">
-        <button class="modal-button deleteAll" (click)="clearCart()">Limpiar carrito</button>
-        <button class="modal-button cancel" (click)="closeModalDialog()">Cancelar</button>
-        <button class="modal-button accept" (click)="confirmOrderCart()">Confirmar Pedido</button>
-      </div>
+      <ng-template #emptyCart>
+        <div class="bg-white flex justify-center items-center w-full h-full">
+          <img
+            src="assets/img/img-duarte/nodata.webp"
+            alt="No Data"
+            class="max-w-xs sm:max-w-md object-contain"
+          />
+        </div>
+      </ng-template>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-end space-y-4 sm:space-x-4 mt-6 sm:space-y-0">
+      <button
+        class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 w-full sm:w-auto"
+        (click)="clearCart()"
+      >
+        Limpiar carrito
+      </button>
+      <button
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 w-full sm:w-auto"
+        (click)="closeModalDialog()"
+      >
+        Cancelar
+      </button>
+      <button
+        class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 w-full sm:w-auto"
+        (click)="confirmOrderCart()"
+      >
+        Confirmar Pedido
+      </button>
     </div>
   </div>
-  <div *ngIf="showSpinner" class="spinner-overlay">
-    <div class="spinner"></div>
-  </div>
+</div>
+
+<div
+  *ngIf="showSpinner"
+  class="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex justify-center items-center"
+>
+  <div
+    class="w-16 h-16 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"
+  ></div>
 </div>
