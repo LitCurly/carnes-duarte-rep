@@ -21,11 +21,13 @@
               type="text"
               id="nombre"
               formControlName="nombre"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su nombre"
               required
             />
-            <div *ngIf="nombre?.errors?.['required']" class="text-red-500 text-sm mt-1">El nombre es requerido.</div>
+            <div *ngIf="nombre?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              El nombre es requerido.
+            </div>
           </div>
 
           <div>
@@ -34,7 +36,7 @@
               type="text"
               id="segundoNombre"
               formControlName="segundoNombre"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su segundo nombre"
             />
           </div>
@@ -45,11 +47,13 @@
               type="text"
               id="apellido"
               formControlName="apellido"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su primer apellido"
               required
             />
-            <div *ngIf="apellido?.errors?.['required']" class="text-red-500 text-sm mt-1">El apellido es requerido.</div>
+            <div *ngIf="apellido?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              El apellido es requerido.
+            </div>
           </div>
 
           <div>
@@ -58,7 +62,7 @@
               type="text"
               id="segundoApellido"
               formControlName="segundoApellido"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su segundo apellido"
             />
           </div>
@@ -69,11 +73,13 @@
               type="text"
               id="rut"
               formControlName="rut"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su RUT"
               required
             />
-            <div *ngIf="rut?.errors?.['required']" class="text-red-500 text-sm mt-1">El RUT es requerido.</div>
+            <div *ngIf="rut?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              El RUT es requerido.
+            </div>
           </div>
 
           <div>
@@ -82,11 +88,13 @@
               type="tel"
               id="telefono"
               formControlName="telefono"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su teléfono"
               required
             />
-            <div *ngIf="telefono?.errors?.['required']" class="text-red-500 text-sm mt-1">El teléfono es requerido.</div>
+            <div *ngIf="telefono?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              El teléfono es requerido.
+            </div>
           </div>
 
           <div>
@@ -95,7 +103,7 @@
               type="text"
               id="direccion"
               formControlName="direccion"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su dirección"
             />
           </div>
@@ -106,12 +114,16 @@
               type="email"
               id="email"
               formControlName="email"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su correo electrónico"
               required
             />
-            <div *ngIf="email?.errors?.['required']" class="text-red-500 text-sm mt-1">El correo electrónico es requerido.</div>
-            <div *ngIf="email?.errors?.['email']" class="text-red-500 text-sm mt-1">El correo electrónico no es válido.</div>
+            <div *ngIf="email?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              El correo electrónico es requerido.
+            </div>
+            <div *ngIf="email?.errors?.['email']" class="text-red-500 text-sm mt-1">
+              El correo electrónico no es válido.
+            </div>
           </div>
 
           <div>
@@ -120,12 +132,16 @@
               type="password"
               id="password"
               formControlName="password"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Ingrese su contraseña"
               required
             />
-            <div *ngIf="password?.errors?.['required']" class="text-red-500 text-sm mt-1">La contraseña es requerida.</div>
-            <div *ngIf="password?.errors?.['minlength']" class="text-red-500 text-sm mt-1">La contraseña debe tener al menos 6 caracteres.</div>
+            <div *ngIf="password?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              La contraseña es requerida.
+            </div>
+            <div *ngIf="password?.errors?.['minlength']" class="text-red-500 text-sm mt-1">
+              La contraseña debe tener al menos 6 caracteres.
+            </div>
           </div>
 
           <div>
@@ -134,19 +150,32 @@
               type="password"
               id="confirmPassword"
               formControlName="confirmPassword"
-              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="mt-1 block w-full px-4 py-1.5 border border-gray-300 text-gray-950 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               placeholder="Confirme su contraseña"
               required
             />
-            <div *ngIf="confirmPassword?.errors?.['required']" class="text-red-500 text-sm mt-1">La confirmación de la contraseña es requerida.</div>
-            <div *ngIf="registerForm.errors?.['passwordMismatch']" class="text-red-500 text-sm mt-1">Las contraseñas no coinciden.</div>
+            <div *ngIf="confirmPassword?.errors?.['required']" class="text-red-500 text-sm mt-1">
+              La confirmación de la contraseña es requerida.
+            </div>
+            <div *ngIf="registerForm.errors?.['passwordMismatch']" class="text-red-500 text-sm mt-1">
+              Las contraseñas no coinciden.
+            </div>
           </div>
         </div>
 
         <div class="mt-6">
-          <button type="submit" class="w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none" [disabled]="loading">
+          <button
+            type="submit"
+            class="w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none"
+            [disabled]="loading"
+          >
             <span *ngIf="!loading">Registrarse</span>
-            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span
+              *ngIf="loading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
           </button>
         </div>
       </form>
@@ -154,5 +183,11 @@
   </div>
 
   <!-- Register Image Section -->
-  <div class="hidden sm:block sm:w-1/2 bg-cover bg-center h-full bg-no-repeat" style="background-image: url('./assets/img/img-duarte/carnesduarte-tradicionfamiliar.png'); min-height: 100vh;"></div>
+  <div
+    class="hidden sm:block sm:w-1/2 bg-cover bg-center h-full bg-no-repeat"
+    style="
+      background-image: url('./assets/img/img-duarte/carnesduarte-tradicionfamiliar.png');
+      min-height: 100vh;
+    "
+  ></div>
 </div>
