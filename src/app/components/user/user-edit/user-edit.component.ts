@@ -190,9 +190,6 @@ export class UserEditComponent implements OnInit {
     uploadTask.on(
       'state_changed',
       (snapshot) => {},
-      (error) => {
-        this.toastr.error('Hubo un error al cargar la imagen.')
-      },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           this.updateAvatarURL(downloadURL)

@@ -114,8 +114,8 @@
                     Preparaciones
                   </th>
 
-                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span class="sr-only"></span>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                   Eliminar productos de la lista
                   </th>
                 </tr>
               </thead>
@@ -147,7 +147,7 @@
                     {{ corte.precioPorKilo | currency: '$ ' : 'symbol' : '1.0-0' }}
                   </td>
                   <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
                     <ng-container
                       *ngIf="corte.preparaciones && corte.preparaciones.length > 0; else sinPreparaciones"
@@ -164,7 +164,7 @@
                   </td>
 
                   <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
                     <button (click)="eliminarCorte(corte)">
                       <img src="assets/img/img-duarte/eliminar.webp" class="h-4 w-4" alt="Eliminar ítem" />

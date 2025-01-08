@@ -16,7 +16,6 @@ import 'firebase/compat/firestore'
 export class OrderDetailComponent implements OnInit {
   order: Order | undefined
   orderId: string | null = null
-  loading: boolean = false
   organization: any = {}
   userRut: string | undefined
   nombre?: string | undefined
@@ -35,24 +34,30 @@ export class OrderDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orderId = this.route.snapshot.paramMap.get('id')
-    if (this.orderId) {
-      this.isLoading = true
-      this.cartService.getOrderById(this.orderId).subscribe((order) => {
-        console.log('Order data:', order)
-        this.order = order
-        if (order) {
-          this.loadOrganizationData()
-        }
-        this.isLoading = false // Cambiar a false una vez que los datos estén listos
-      })
-      this.loadUserRut()
-    } else {
-      this.toastr.error('No se encontró la orden.')
-    }
     this.authService.getUserObservable().subscribe((user) => {
       this.isLoggedIn = !!user
-      if (!this.isLoggedIn) {
+      if (this.isLoggedIn) {
+        this.orderId = this.route.snapshot.paramMap.get('id')
+        if (this.orderId) {
+          this.isLoading = true
+          this.cartService.getOrderById(this.orderId).subscribe(
+            (order) => {
+              this.order = order
+              if (order) {
+                this.loadOrganizationData()
+              }
+              this.isLoading = false
+            },
+            (error) => {
+              this.toastr.error('Error al obtener la orden.')
+              this.isLoading = false
+            }
+          )
+          this.loadUserRut()
+        } else {
+          this.toastr.error('No se encontró la orden.')
+        }
+      } else {
         this.isLoading = false
       }
     })
@@ -67,13 +72,7 @@ export class OrderDetailComponent implements OnInit {
       .then((doc) => {
         if (doc.exists) {
           this.organization = doc.data()
-          console.log('Datos de la organización:', this.organization)
-        } else {
-          console.error('No se encontró el documento de la organización.')
         }
-      })
-      .catch((error) => {
-        console.error('Error al obtener datos de la organización:', error)
       })
   }
 
@@ -93,16 +92,8 @@ export class OrderDetailComponent implements OnInit {
               this.direccion = doc.data()?.['direccion']
               this.email = doc.data()?.['email']
               this.userRut = doc.data()?.['rut']
-              console.log('RUT del usuario:', this.userRut)
-            } else {
-              console.error('No se encontró el documento del usuario.')
             }
           })
-          .catch((error) => {
-            console.error('Error al obtener el RUT del usuario:', error)
-          })
-      } else {
-        console.error('Usuario no autenticado.')
       }
     })
   }

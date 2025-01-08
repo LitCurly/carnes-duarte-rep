@@ -30,7 +30,6 @@ export class GestionarUsuariosComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.currentPage = +params['page'] || 1
       this.searchQuery = params['search']?.trim() || ''
-      const querySearch = params['search'] || ''
 
       this.loadUsers()
     })
@@ -50,32 +49,22 @@ export class GestionarUsuariosComponent implements OnInit {
 
   loadUsers(): void {
     this.isLoading = true
-    this.userService.getUsers().subscribe(
-      (users) => {
-        // Filtrar usuarios por rol
-        const filteredUsers = users.filter((user) => ['usuario', 'administrador'].includes(user.rol))
+    this.userService.getUsers().subscribe((users) => {
+      const filteredUsers = users.filter((user) => ['usuario', 'administrador'].includes(user.rol))
 
-        // Filtrar por búsqueda
-        const searchResults = this.searchQuery
-          ? filteredUsers.filter((user) =>
-              `${user.nombre} ${user.apellido}`.toLowerCase().includes(this.searchQuery.toLowerCase())
-            )
-          : filteredUsers
+      const searchResults = this.searchQuery
+        ? filteredUsers.filter((user) =>
+            `${user.nombre} ${user.apellido}`.toLowerCase().includes(this.searchQuery.toLowerCase())
+          )
+        : filteredUsers
 
-        // Total de usuarios tras la búsqueda y filtrado
-        this.users = searchResults
+      this.users = searchResults
 
-        // Configuración de paginación
-        this.totalPages = Math.ceil(this.users.length / this.itemsPerPage)
-        this.paginatedUsers = this.paginate(this.users, this.currentPage, this.itemsPerPage)
+      this.totalPages = Math.ceil(this.users.length / this.itemsPerPage)
+      this.paginatedUsers = this.paginate(this.users, this.currentPage, this.itemsPerPage)
 
-        this.isLoading = false
-      },
-      (error) => {
-        this.toastr.error('Error al cargar los usuarios', 'Error')
-        this.isLoading = false
-      }
-    )
+      this.isLoading = false
+    })
   }
 
   paginate(array: any[], page: number, perPage: number): any[] {

@@ -81,39 +81,40 @@
               ></div>
               <p class="text-xl text-gray-700 font-semibold">Cargando pedidos...</p>
             </div>
-            <table *ngIf="!isLoading" class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-50">
+            <div class="overflow-x-auto">
+              <table *ngIf="!isLoading" class="min-w-full divide-y divide-gray-300 text-sm">
+                <thead class="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
-                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 "  style="width: 5%"
                   >
                     #
                   </th>
                   <th
                     scope="col"
-                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 " style="width: 15%"
                   >
                     Cliente
                   </th>
                   <th
                     scope="col"
-                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" style="width: 30%"
                   >
                     Contacto
                   </th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" style="width: 30%">
                     Datos de la compra
                   </th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" style="width: 10%">
                     Estado del pedido
                   </th>
-                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span class="sr-only"></span>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" style="width: 10%">
+                    Revisar detalle del Pdf
                   </th>
                 </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200 bg-white">
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
                 <tr *ngFor="let userOrder of paginatedUsers; let i = index" class="even:bg-gray-50">
                   <td
                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
@@ -121,19 +122,19 @@
                     {{ (currentPage - 1) * itemsPerPage + i + 1 }}
                   </td>
                   <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
                     {{ capitalizeFirstLetter(userOrder.nombre) }}
                     {{ capitalizeFirstLetter(userOrder.apellido) }}
                   </td>
                   <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
                     <strong>Correo: </strong> {{ capitalizeFirstLetter(userOrder.email) }}<br />
                     <strong>Teléfono:</strong> {{ capitalizeFirstLetter(userOrder.telefono) }}<br />
                     <strong>Dirección:</strong> {{ capitalizeFirstLetter(userOrder.direccion) }}<br />
                   </td>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm  text-gray-900 sm:pl-6 center">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center">
                     <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
                     <strong>Productos:</strong>
                     <ul>
@@ -148,9 +149,9 @@
                   </td>
 
                   <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
-                    <div class="switch-container flex flex-col items-center">
+                    <div class="switch-container flex flex-col">
                       <label class="relative inline-flex items-center cursor-pointer">
                         <input
                           type="checkbox"
@@ -165,26 +166,26 @@
                           class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform duration-200 ease-in-out"
                         ></div>
                       </label>
-                        <span class="mt-2 text-sm font-medium text-gray-700">
-                          {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
-                        </span>
+                      <span class="mt-2 text-sm font-medium text-gray-700">
+                            {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
+                          </span>
                     </div>
                   </td>
-                  <td
-                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
-                  >
-                    <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
-                      <a [href]="userOrder.order.boletaURL" target="_blank" aria-label="Ver PDF">
-                        <img src="assets/icons/pdf-icon.webp" alt="PDF Icon" class="h-12 w-12" />
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center sm:min-w-[120px]">
+                    <div *ngIf="userOrder.order.boletaURL" class="flex justify-center">
+                      <a [href]="userOrder.order.boletaURL" target="_blank" aria-label="Ver PDF" class="block">
+                        <img
+                          src="assets/icons/pdf-icon.webp"
+                          alt="PDF Icon"
+                          class="h-12 w-12 sm:h-16 sm:w-16 md:h-12 md:w-12"
+                        />
                       </a>
-                    </ng-container>
-                    <ng-template #noBoleta>
-                      <span>No existe PDF para este pedido</span>
-                    </ng-template>
+                    </div>
                   </td>
                 </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
             <div
               *ngIf="paginatedUsers.length === 0 && !isLoading"
               class="bg-white flex justify-center items-center w-full h-full"
@@ -210,10 +211,10 @@
             <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
             a
             <span class="font-medium">{{
-              currentPage * itemsPerPage < usersWithOrders.length
-                ? currentPage * itemsPerPage
-                : usersWithOrders.length
-            }}</span>
+                currentPage * itemsPerPage < usersWithOrders.length
+                  ? currentPage * itemsPerPage
+                  : usersWithOrders.length
+              }}</span>
             de
             <span class="font-medium">{{ usersWithOrders.length }}</span>
             resultados

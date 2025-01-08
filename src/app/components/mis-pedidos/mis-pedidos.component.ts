@@ -40,9 +40,7 @@ export class MisPedidosComponent implements OnInit {
       .getAllOrders()
       .pipe(
         map((orders: Order[]) => {
-          return orders.sort((a, b) => {
-            return b.createdAt.getTime() - a.createdAt.getTime()
-          })
+          return orders.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
         })
       )
       .subscribe(
