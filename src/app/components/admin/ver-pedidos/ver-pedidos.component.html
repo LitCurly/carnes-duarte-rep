@@ -1,99 +1,241 @@
-<div class="dashboard">
-  <div class="dashboard-header">
-    <div>
-      <h3>Lista de Pedidos</h3>
-    </div>
-  </div>
-  <div class="card">
-    <div class="dashboard-content">
-      <div class="filter-container">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          placeholder="Buscar por nombre de usuario..."
-          class="filter-input"
-          (input)="onSearch()"
-        />
-
-        <select [(ngModel)]="selectedStatus" (change)="onStatusChange()" class="filter-input">
-          <option value="">Mostrar todos</option>
-          <option value="Pendiente">Pendiente</option>
-          <option value="Finalizada">Finalizada</option>
-        </select>
-      </div>
-
-      <table *ngIf="paginatedUsers.length > 0">
-        <thead>
-          <tr>
-            <th class="center">#</th>
-            <th>Cliente</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Datos de la compra</th>
-            <th>Estado del pedido</th>
-            <th>Url del Pedido PDF</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let userOrder of paginatedUsers; let i = index">
-            <td class="center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-            <td>
-              {{ capitalizeFirstLetter(userOrder.nombre) }} {{ capitalizeFirstLetter(userOrder.apellido) }}
-            </td>
-            <td>{{ capitalizeFirstLetter(userOrder.email) }}</td>
-            <td>{{ capitalizeFirstLetter(userOrder.telefono) }}</td>
-            <td>{{ capitalizeFirstLetter(userOrder.direccion) }}</td>
-            <td>
-              <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
-              <strong>Productos:</strong>
-              <ul>
-                <li *ngFor="let item of userOrder.order.items">
-                  {{ capitalizeFirstLetter(item.nombre) }} ({{ capitalizeFirstLetter(item.tipo) }}):
-                  {{ item.cantidad }} x {{ item.precioPorKilo | currency: '$' : 'symbol' : '1.0-0' }} =
-                  {{ item.subtotal | currency: '$' : 'symbol' : '1.0-0' }}
-                </li>
-              </ul>
-              <strong>Monto total:</strong> {{ userOrder.order.total | currency: '$' : 'symbol' : '1.0-0' }}
-            </td>
-            <td>
-              <div class="switch-container">
-                <label class="switch">
-                  <input
-                    type="checkbox"
-                    [checked]="userOrder.order.status === 'Finalizada'"
-                    (change)="toggleOrderStatus(userOrder)"
-                  />
-                  <span class="slider round"></span>
-                </label>
-                <span class="status-text">
-                  {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
-                </span>
-              </div>
-            </td>
-            <td>
-              <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
-                <a [href]="userOrder.order.boletaURL" target="_blank">
-                  {{ userOrder.order.boletaURL | truncate: 15 }}
-                </a>
-              </ng-container>
-              <ng-template #noBoleta>
-                <span>No existe pdf para este pedido</span>
-              </ng-template>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div *ngIf="paginatedUsers.length === 0" class="no-orders-message">
-        <p>Aún no existen pedidos realizados</p>
-      </div>
-
-      <div class="pagination">
-        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-        <p>Página {{ currentPage }} de {{ totalPages }}</p>
+<div class="bg-white shadow">
+  <div class="px-4 sm:px-4 lg:px-4">
+    <div class="py-6 md:flex md:items-center md:justify-between">
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center">
+          <div>
+            <div class="flex items-center">
+              <h1 class="ml-3 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-2xl/9">
+                Lista de pedidos
+              </h1>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 overflow-hidden">
+  <section class="mt-10">
+    <div class="mx-10 flex flex-col sm:flex-row sm:gap-6 sm:justify-between">
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <div class="flex-1">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Buscar por nombre..."
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            (input)="onSearch()"
+          />
+        </div>
+        <div class="flex-1">
+          <select
+            [(ngModel)]="selectedStatus"
+            (change)="onStatusChange()"
+            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            <option value="">Mostrar todos</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Finalizada">Finalizada</option>
+          </select>
+        </div>
+        <div class="flex items-end sm:pb-0">
+          <button
+            (click)="onSearch()"
+            class="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 focus:outline-none"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 mx-10 flex flex-col sm:flex-row sm:gap-6 sm:justify-between">
+      <div class="flex flex-col w-full sm:w-auto">
+        <span class="text-sm font-semibold text-gray-900">Estado del pedido:</span>
+        <div class="flex items-center justify-start space-x-4 mt-2">
+          <div class="flex items-center space-x-1">
+            <span class="text-sm text-gray-700">Pendiente</span>
+            <svg class="w-4 h-4 fill-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+              <path d="M6 0L0 12h12L6 0z"/>
+            </svg>
+          </div>
+          <div class="flex items-center space-x-1">
+            <span class="text-sm text-gray-700">Finalizada</span>
+            <svg class="w-4 h-4 fill-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+              <path d="M6 0L0 12h12L6 0z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-10 sm:p-10 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
+            <div class="flex items-center justify-center space-x-4 p-8" *ngIf="isLoading">
+              <div
+                class="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-primary rounded-full animate-spin"
+              ></div>
+              <p class="text-xl text-gray-700 font-semibold">Cargando pedidos...</p>
+            </div>
+            <table *ngIf="!isLoading" class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    #
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Cliente
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Contacto
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Datos de la compra
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Estado del pedido
+                  </th>
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <tr *ngFor="let userOrder of paginatedUsers; let i = index" class="even:bg-gray-50">
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    {{ (currentPage - 1) * itemsPerPage + i + 1 }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    {{ capitalizeFirstLetter(userOrder.nombre) }}
+                    {{ capitalizeFirstLetter(userOrder.apellido) }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    <strong>Correo: </strong> {{ capitalizeFirstLetter(userOrder.email) }}<br />
+                    <strong>Teléfono:</strong> {{ capitalizeFirstLetter(userOrder.telefono) }}<br />
+                    <strong>Dirección:</strong> {{ capitalizeFirstLetter(userOrder.direccion) }}<br />
+                  </td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm  text-gray-900 sm:pl-6 center">
+                    <strong>Fecha:</strong> {{ formatAndCapitalizeDate(userOrder.order.createdAt) }}<br />
+                    <strong>Productos:</strong>
+                    <ul>
+                      <li *ngFor="let item of userOrder.order.items">
+                        {{ capitalizeFirstLetter(item.nombre) }} ({{ capitalizeFirstLetter(item.tipo) }}):
+                        {{ item.cantidad }} x {{ item.precioPorKilo | currency: '$' : 'symbol' : '1.0-0' }} =
+                        {{ item.subtotal | currency: '$' : 'symbol' : '1.0-0' }}
+                      </li>
+                    </ul>
+                    <strong>Monto total:</strong>
+                    {{ userOrder.order.total | currency: '$' : 'symbol' : '1.0-0' }}
+                  </td>
+
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 center"
+                  >
+                    <div class="switch-container flex flex-col items-center">
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          class="sr-only peer"
+                          [checked]="userOrder.order.status === 'Finalizada'"
+                          (change)="toggleOrderStatus(userOrder)"
+                        />
+                        <div
+                          class="w-10 h-6 bg-gray-200 rounded-full peer-checked:bg-red-600 transition-colors duration-200 ease-in-out"
+                        ></div>
+                        <div
+                          class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform duration-200 ease-in-out"
+                        ></div>
+                      </label>
+                        <span class="mt-2 text-sm font-medium text-gray-700">
+                          {{ userOrder.order.status === 'Finalizada' ? 'Finalizada' : 'Pendiente' }}
+                        </span>
+                    </div>
+                  </td>
+                  <td
+                    class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 text-center"
+                  >
+                    <ng-container *ngIf="userOrder.order.boletaURL; else noBoleta">
+                      <a [href]="userOrder.order.boletaURL" target="_blank" aria-label="Ver PDF">
+                        <img src="assets/icons/pdf-icon.webp" alt="PDF Icon" class="h-12 w-12" />
+                      </a>
+                    </ng-container>
+                    <ng-template #noBoleta>
+                      <span>No existe PDF para este pedido</span>
+                    </ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+              *ngIf="paginatedUsers.length === 0 && !isLoading"
+              class="bg-white flex justify-center items-center w-full h-full"
+            >
+              <img
+                src="assets/img/img-duarte/nodata.webp"
+                alt="No Data"
+                class="no-data-image max-w-xs sm:max-w-md object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav
+        *ngIf="paginatedUsers.length > 0"
+        class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+        aria-label="Pagination"
+      >
+        <div class="hidden sm:block">
+          <p class="text-sm text-gray-700">
+            Mostrando
+            <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+            a
+            <span class="font-medium">{{
+              currentPage * itemsPerPage < usersWithOrders.length
+                ? currentPage * itemsPerPage
+                : usersWithOrders.length
+            }}</span>
+            de
+            <span class="font-medium">{{ usersWithOrders.length }}</span>
+            resultados
+          </p>
+        </div>
+        <div class="flex flex-1 justify-between sm:justify-end">
+          <button
+            class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          <button
+            class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
+        </div>
+      </nav>
+    </div>
+  </section>
 </div>

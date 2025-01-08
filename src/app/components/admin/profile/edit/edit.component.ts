@@ -142,7 +142,9 @@ export class EditComponent implements OnInit {
       .then(() => {
         this.toastr.success('Información del usuario actualizada con éxito.')
 
-        this.router.navigate(['/admin/home/profile'])
+        this.router.navigate(['/admin/home/perfil']).then(() => {
+          window.location.reload()
+        })
       })
       .catch((error) => {
         console.error('Error al actualizar la información del usuario:', error)

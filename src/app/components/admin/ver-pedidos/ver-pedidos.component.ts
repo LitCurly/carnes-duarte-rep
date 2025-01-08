@@ -17,6 +17,7 @@ export class VerPedidosComponent implements OnInit {
   totalPages = 1
   searchQuery: string = ''
   selectedStatus: string = ''
+  isLoading = true
 
   constructor(
     private userService: UserService,
@@ -37,6 +38,7 @@ export class VerPedidosComponent implements OnInit {
   }
 
   loadUsersWithOrders(): void {
+    this.isLoading = true
     this.usersWithOrders = []
     this.userService.getUsers().subscribe((users) => {
       const filteredUsers = users.filter((user) => user.rol === 'usuario' || user.rol === 'administrador')
@@ -86,6 +88,7 @@ export class VerPedidosComponent implements OnInit {
           }
         })
       })
+      this.isLoading = false
     })
   }
 

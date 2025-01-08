@@ -1,65 +1,93 @@
-<div class="dashboard">
-  <div class="dashboard-header">
-    <div>
-      <h3>Mi Perfil</h3>
-    </div>
-    <div class="nav-route">
-      <a class="nav-button" routerLink="/admin/home/profile/edit">Editar</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <div class="custom-container">
-        <div class="custom-header">
-          <img class="avatar" [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'" />
-          <div>
-            <h3 class="custom-title">Información del usuario</h3>
-            <p class="custom-description">Datos personales</p>
-          </div>
-        </div>
-        <div class="custom-content">
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Nombre</span>
-              <span class="custom-value"
-                >{{ nombre }} {{ segundoNombre }} {{ apellido }} {{ segundoApellido }}</span
-              >
+<div  class="overflow-hidden rounded-lg bg-white shadow-md">
+  <div
+    class="mx-auto p-4 bg-gradient-to-r from-yellow-50 via-yellow-100 to-yellow-50 rounded-t-lg shadow-inner"
+  >
+    <div class="bg-white shadow">
+      <div class="px-4 sm:px-6 lg:mx-auto lg:max-w-6xl lg:px-8">
+        <div class="py-6 md:flex md:items-center md:justify-between">
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center">
+              <img
+                class="hidden size-16 rounded-full sm:block"
+                [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"
+                alt="avatar"
+              />
+              <div>
+                <div class="flex items-center">
+                  <img
+                    class="size-16 rounded-full sm:hidden"
+                    [src]="avatarImg ? avatarImg : '../../../../assets/img/usuario-black.png'"
+                    alt="avatar"
+                  />
+                  <h1 class="ml-3 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-2xl/9">
+                    Información del usuario
+                  </h1>
+                </div>
+                <dl class="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
+                  <dd class="flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6">
+                    Datos personales
+                  </dd>
+                </dl>
+              </div>
             </div>
           </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Rut</span>
-              <span class="custom-value">{{ rut }}</span>
-            </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Teléfono</span>
-              <span class="custom-value">{{ telefono }} </span>
-            </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Correo</span>
-              <span class="custom-value">{{ email }}</span>
-            </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Dirección</span>
-              <span class="custom-value">{{ direccion }}</span>
-            </div>
-          </div>
-          <div class="custom-row">
-            <div class="custom-column">
-              <span class="custom-label">Rol</span>
-              <span class="custom-value">{{ rol }}</span>
-            </div>
+          <div class="mt-6 flex space-x-3 md:ml-4 md:mt-0">
+            <button
+              routerLink="/admin/home/perfil/editar"
+              type="button"
+              class="inline-flex items-center rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+            >
+              Editar perfil
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+  <div class="bg-white shadow-md rounded-lg p-6 mx-5 sm:mx-8 lg:mx-16 my-8">
+    <div class="mt-6">
+      <dl class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Nombre</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ nombre }}
+            {{ segundoNombre }}
+            {{ apellido }}
+            {{ segundoApellido }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Rut</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ rut }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Dirección</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ direccion }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Teléfono</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ telefono }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Correo</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ email }}
+          </dd>
+        </div>
+        <div class="border-t border-gray-300 px-4 py-6 sm:col-span-1 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Rol</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:mt-2">
+            {{ rol }}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

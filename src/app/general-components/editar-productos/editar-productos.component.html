@@ -1,59 +1,98 @@
-<div class="dashboard" *ngIf="!isLoading">
-  <div class="dashboard-header">
-    <div>
-      <h3>Editar producto</h3>
-    </div>
-    <div class="nav-route">
-      <a class="nav-button" routerLink="/admin/home/gestionar-productos">Volver</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="dashboard-content">
-      <form (ngSubmit)="actualizarCorte()">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            [(ngModel)]="corte.nombre"
-            name="nombre"
-            class="form-control"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="precioPorKilo">Precio por Kilo</label>
-          <input
-            type="number"
-            id="precioPorKilo"
-            [(ngModel)]="corte.precioPorKilo"
-            name="precioPorKilo"
-            class="form-control"
-            required
-            min="0"
-          />
-        </div>
-
-        <div class="form-group">
-          <label>Preparaciones</label>
-          <div *ngFor="let opcion of opcionesPreparaciones">
-            <input
-              type="checkbox"
-              [checked]="corte.preparaciones?.includes(opcion)"
-              (change)="togglePreparacion(opcion)"
-            />
-            {{ opcion }}
+<div *ngIf="!isLoading">
+  <div class="bg-white shadow">
+    <div class="px-4 sm:px-4 lg:px-4">
+      <div class="py-6 md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center">
+            <div>
+              <div class="flex items-center">
+                <h1 class="ml-3 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-2xl/9">
+                  Editar producto
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="isLoading">Actualizar Corte</button>
-      </form>
-
-      <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
+        <div class="mt-6 flex space-x-3 md:ml-4 md:mt-0">
+          <button
+            routerLink="/admin/home/gestionar-productos"
+            type="button"
+            class="inline-flex items-center rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+          >
+            Volver
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-2xl mt-6 border border-gray-200">
+    <form (ngSubmit)="actualizarCorte()">
+
+      <div class="mb-6">
+        <label for="nombre" class="block text-xl font-semibold text-gray-800 mb-2">Nombre del Producto</label>
+        <input
+          type="text"
+          id="nombre"
+          [(ngModel)]="corte.nombre"
+          name="nombre"
+          class="mt-2 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:ring-4"
+          placeholder="Ingrese el nombre del producto"
+          required
+        />
+      </div>
+
+
+      <div class="mb-6">
+        <label for="precioPorKilo" class="block text-xl font-semibold text-gray-800 mb-2">Precio por Kilo</label>
+        <input
+          type="number"
+          id="precioPorKilo"
+          [(ngModel)]="corte.precioPorKilo"
+          name="precioPorKilo"
+          class="mt-2 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:ring-4"
+          placeholder="Ingrese el precio por kilo"
+          required
+          min="0"
+        />
+      </div>
+
+
+      <div class="mb-6">
+        <label class="block text-xl font-semibold text-gray-800 mb-5">Preparaciones</label>
+        <div class="flex flex-wrap space-x-2">
+          <div *ngFor="let opcion of opcionesPreparaciones" class="mb-2">
+          <span
+            (click)="togglePreparacion(opcion)"
+            [ngClass]="{
+              'bg-red-700 text-white': corte.preparaciones?.includes(opcion),
+              'bg-gray-400 text-gray-100': !corte.preparaciones?.includes(opcion)
+            }"
+            class="cursor-pointer px-4 py-2 rounded-full text-lg transition-all duration-300 hover:bg-red-800 hover:text-white"
+          >
+            {{ opcion }}
+          </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-6">
+        <button
+          type="submit"
+          class="w-full py-3 px-6 bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:bg-red-800 transition duration-300 disabled:bg-gray-400"
+          [disabled]="isLoading"
+        >
+          Actualizar Corte
+        </button>
+      </div>
+    </form>
+
+
+    <div *ngIf="isLoading" class="flex justify-center items-center mt-6">
+      <div class="w-12 h-12 border-4 border-t-transparent border-blue-500 border-solid rounded-full animate-spin"></div>
+    </div>
+  </div>
+
+
 </div>

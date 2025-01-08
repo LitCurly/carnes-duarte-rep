@@ -1,95 +1,106 @@
-<div class="modal-overlay" *ngIf="modalOpen">
-  <div class="modal-container">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Agregar Producto</h2>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <div class="custom-container">
-            <div class="custom-content">
-              <form (ngSubmit)="agregarCorte()" #productoForm="ngForm" class="form">
-                <div class="form-group">
-                  <label for="tipoCarne">Tipo de Carne</label>
-                  <select
-                    id="tipoCarne"
-                    name="tipoCarne"
-                    [(ngModel)]="seleccionTipoCarne"
-                    class="form-control"
-                    required
-                  >
-                    <option value="" disabled>Seleccione un tipo de carne</option>
-                    <option *ngFor="let tipo of tiposCarne" [value]="tipo">
-                      {{ capitalizeFirstLetter(tipo) }}
-                    </option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="nombre">Nombre del corte (*)</label>
-                  <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    [(ngModel)]="nuevoCorte.nombre"
-                    class="form-control"
-                    placeholder="Ingrese nombre"
-                    required
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label for="precio">Precio por kilo (*)</label>
-                  <input
-                    type="number"
-                    id="precio"
-                    name="precio"
-                    [(ngModel)]="nuevoCorte.precioPorKilo"
-                    class="form-control"
-                    min="0.01"
-                    step="0.01"
-                    placeholder="Ingrese precio"
-                    required
-                    (focus)="clearPrice()"
-                    (blur)="restorePrice()"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label>Preparaciones</label>
-                  <div>
-                    <button
-                      type="button"
-                      class="preparacion-btn"
-                      *ngFor="let preparacion of opcionesPreparaciones"
-                      [class.active]="nuevoCorte.preparaciones?.includes(preparacion)"
-                      (click)="togglePreparacion(preparacion)"
-                    >
-                      {{ preparacion }}
-                    </button>
-                  </div>
-                </div>
-                <div class="modal-buttons">
-                  <button type="button" class="btn btn-secondary" (click)="closeModalDialog()">
-                    Cancelar
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    [disabled]="productoForm.invalid || seleccionTipoCarne === '' || isLoading"
-                  >
-                    Agregar Corte
-                  </button>
-                </div>
-                <div *ngIf="productoForm.submitted && productoForm.valid"></div>
-              </form>
+<div class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center" *ngIf="modalOpen">
+  <div class="bg-white rounded-lg w-full max-w-lg p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Agregar Producto</h2>
+    </div>
+    <div>
+      <div class="space-y-4">
+        <form (ngSubmit)="agregarCorte()" #productoForm="ngForm">
+          <div>
+            <label for="tipoCarne" class="mb-4 block text-sm font-medium text-gray-700">Tipo de Carne</label>
+            <select
+              id="tipoCarne"
+              name="tipoCarne"
+              [(ngModel)]="seleccionTipoCarne"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required
+              #tipoCarne="ngModel"
+            >
+              <option value="" disabled>Seleccione un tipo de carne</option>
+              <option *ngFor="let tipo of tiposCarne" [value]="tipo">
+                {{ capitalizeFirstLetter(tipo) }}
+              </option>
+            </select>
+            <div *ngIf="tipoCarne.invalid && tipoCarne.touched" class="text-red-500 text-sm">
+              Este campo es obligatorio.
             </div>
           </div>
-        </div>
+
+          <div>
+            <label for="nombre" class="mt-2 mb-2 block text-sm font-medium text-gray-700">Nombre del corte (*)</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              [(ngModel)]="nuevoCorte.nombre"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Ingrese nombre"
+              required
+              #nombre="ngModel"
+            />
+            <div *ngIf="nombre.invalid && nombre.touched" class="text-red-500 text-sm">
+              Este campo es obligatorio.
+            </div>
+          </div>
+
+          <div>
+            <label for="precio" class="mt-2 mb-2 block text-sm font-medium text-gray-700">Precio por kilo (*)</label>
+            <input
+              type="number"
+              id="precio"
+              name="precio"
+              [(ngModel)]="nuevoCorte.precioPorKilo"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              min="0.01"
+              step="0.01"
+              placeholder="Ingrese precio"
+              required
+              (focus)="clearPrice()"
+              (blur)="restorePrice()"
+              #precio="ngModel"
+            />
+            <div *ngIf="precio.invalid && precio.touched" class="text-red-500 text-sm">
+              Este campo es obligatorio.
+            </div>
+          </div>
+
+          <div>
+            <label class="mt-2 mb-2 block text-sm font-medium text-gray-700">Preparaciones</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-red-800 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
+                *ngFor="let preparacion of opcionesPreparaciones"
+                [class.bg-red-700]="nuevoCorte.preparaciones?.includes(preparacion)"
+                [class.text-white]="nuevoCorte.preparaciones?.includes(preparacion)"
+                (click)="togglePreparacion(preparacion)"
+              >
+                {{ preparacion }}
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-between mt-4">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-700 text-gray-100 rounded-md hover:bg-gray-800 focus:outline-none"
+              (click)="closeModalDialog()"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 focus:outline-none cursor-pointer"
+              [disabled]="productoForm.invalid || seleccionTipoCarne === '' || isLoading"
+            >
+              Agregar producto
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="spinner-overlay" *ngIf="isLoading">
-        <div class="spinner"></div>
-      </div>
+    </div>
+    <div class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-500" *ngIf="isLoading">
+      <div class="w-12 h-12 border-4 border-t-transparent border-indigo-600 border-solid rounded-full animate-spin"></div>
     </div>
   </div>
 </div>

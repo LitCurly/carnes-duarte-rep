@@ -57,7 +57,7 @@ export class GestionarProductosComponent implements OnInit {
         const createdAtB = b.createdAt ? new Date(b.createdAt).getTime() : 0
         return createdAtB - createdAtA // Ordenar por fecha de creación
       })
-      this.filterCortes() // Llama a filterCortes aquí para aplicar los filtros
+      this.filterCortes()
       this.isLoading = false
     })
   }

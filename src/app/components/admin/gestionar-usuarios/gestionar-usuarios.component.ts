@@ -16,6 +16,7 @@ export class GestionarUsuariosComponent implements OnInit {
   itemsPerPage = 10
   totalPages = 1
   searchQuery: string = ''
+  isLoading = true
 
   constructor(
     private userService: UserService,
@@ -28,8 +29,8 @@ export class GestionarUsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.currentPage = +params['page'] || 1
+      this.searchQuery = params['search']?.trim() || ''
       const querySearch = params['search'] || ''
-      this.searchQuery = querySearch.trim() ? querySearch : ''
 
       this.loadUsers()
     })
@@ -48,22 +49,39 @@ export class GestionarUsuariosComponent implements OnInit {
   }
 
   loadUsers(): void {
-    this.userService.getUsers().subscribe((users) => {
-      // Filter users based on role
-      const filteredUsers = users.filter((user) => user.rol === 'usuario' || user.rol === 'administrador')
+    this.isLoading = true
+    this.userService.getUsers().subscribe(
+      (users) => {
+        // Filtrar usuarios por rol
+        const filteredUsers = users.filter((user) => ['usuario', 'administrador'].includes(user.rol))
 
-      // Apply search query filter
-      let searchResults = filteredUsers.filter((user) =>
-        `${user.nombre} ${user.apellido}`.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+        // Filtrar por búsqueda
+        const searchResults = this.searchQuery
+          ? filteredUsers.filter((user) =>
+              `${user.nombre} ${user.apellido}`.toLowerCase().includes(this.searchQuery.toLowerCase())
+            )
+          : filteredUsers
 
-      this.totalPages = Math.ceil(searchResults.length / this.itemsPerPage)
-      this.paginatedUsers = this.paginate(searchResults, this.currentPage, this.itemsPerPage)
-    })
+        // Total de usuarios tras la búsqueda y filtrado
+        this.users = searchResults
+
+        // Configuración de paginación
+        this.totalPages = Math.ceil(this.users.length / this.itemsPerPage)
+        this.paginatedUsers = this.paginate(this.users, this.currentPage, this.itemsPerPage)
+
+        this.isLoading = false
+      },
+      (error) => {
+        this.toastr.error('Error al cargar los usuarios', 'Error')
+        this.isLoading = false
+      }
+    )
   }
 
   paginate(array: any[], page: number, perPage: number): any[] {
-    return array.slice((page - 1) * perPage, page * perPage)
+    const start = (page - 1) * perPage
+    const end = start + perPage
+    return array.slice(start, end)
   }
 
   previousPage(): void {
@@ -126,4 +144,6 @@ export class GestionarUsuariosComponent implements OnInit {
       }
     )
   }
+
+  protected readonly Math = Math
 }
